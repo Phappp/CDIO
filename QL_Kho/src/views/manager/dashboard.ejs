@@ -1,66 +1,85 @@
 <%- include('../partials/manager/header') %>
 
-    <div class="container">
-        <h1>Dashboard manager</h1>
-        <p>Xin chào, <%= user.username %>
-        </p>
+<link rel="stylesheet" href="/css/admin/dashboard.css">
 
-        <div class="stats">
-            <div class="stat-card active" id="total-products">
-                <h3>Tổng sản phẩm</h3>
-                <p>
-                    <%= stats.totalProducts || 0 %>
-                </p>
-            </div>
-            <div class="stat-card active" id="pending-reports">
-                <h3>Báo cáo chờ duyệt</h3>
-                <p style="color: red;">
-                    <%= stats.pendingReports || 0 %>
-                </p>
-            </div>
-            <div class="stat-card active" id="total-users">
-                <h3>Người dùng</h3>
-                <p>
-                    <%= stats.totalUsers || 0 %>
-                </p>
-            </div>
+<div class="container">
+    <div class="stats stats1">
+        <div class="stat-card" id="pending-reports">
+            <h3>Báo cáo chờ duyệt</h3>
+            <p>
+                <%= stats.pendingReports || 0 %>
+            </p>
         </div>
-
-        <!-- Thêm phần thống kê mới nếu cần -->
-        <div class="stats mt-4">
-            <div class="stat-card">
-                <h3>Sản phẩm sắp hết</h3>
-                <p>
-                    <%= stats.lowStockProducts || 0 %>
-                </p>
-            </div>
-            <div class="stat-card">
-                <h3>Báo cáo hôm nay</h3>
-                <p>
-                    <%= stats.todayReports || 0 %>
-                </p>
-            </div>
+        <div class="stat-card">
+            <h3>Sản phẩm sắp hết</h3>
+            <p>
+                <%= stats.lowStockProducts || 0 %>
+            </p>
+        </div>
+        <div class="stat-card" id="inventory-alerts">
+            <h3>Tồn kho</h3>
+            <p>
+                <%= stats.inventoryAlerts %>
+            </p>
         </div>
     </div>
+    <hr>
+    <div class="stats stats2">
+        <div class="stat-card" id="total-products">
+            <h3>Sản phẩm</h3>
+            <p>
+                <%= stats.totalProducts || 0 %>
+            </p>
+        </div>
+        <!-- <div class="stat-card" id="total-users">
+            <h3>Người dùng</h3>
+            <p>
+                <%= stats.totalUsers || 0 %>
+            </p>
+        </div> -->
+        <div class="stat-card">
+            <h3>Báo cáo hôm nay</h3>
+            <p>
+                <%= stats.todayReports || 0 %>
+            </p>
+        </div>
+    </div>
+</div>
+<script src="/js/darkmode/admin/dashboard.js"></script>
 
-    <%- include('../partials/admin/footer') %>
-        <script>
-            function callURL() {
-                const totalProducts = document.getElementById('total-products');
-                const pendingReports = document.getElementById('pending-reports');
-                const totalUsers = document.getElementById('total-users');
+<script>
+    function warning() {
+    const firstStats = document.querySelectorAll('.stats1 .stat-card');
+    firstStats.forEach((stat) => {
+        if (stat.querySelector('p').textContent.trim() === "0") {
+            stat.style.borderLeft = '12px solid green';
+        } else {
+            stat.style.borderLeft = '12px solid red';
+        }
+    });
+}
+warning();
 
-                pendingReports.onclick = function () {
-                    window.location.href = '/manager/reports/pending';
-                };
+function callURL() {
+    const totalProducts = document.getElementById('total-products');
+    const pendingReports = document.getElementById('pending-reports');
+    const totalUsers = document.getElementById('total-users');
+    const inventoryAlerts = document.getElementById('inventory-alerts');
 
-                totalProducts.onclick = function () {
-                    window.location.href = '/manager/products';
-                };
+    pendingReports.onclick = function () {
+        window.location.href = '/manager/reports/pending';
+    };
 
-                totalUsers.onclick = function () {
-                    window.location.href = '/manager/users';
-                };
-            }
-            callURL();
-        </script>
+    totalProducts.onclick = function () {
+        window.location.href = '/manager/products';
+    };
+
+   
+    inventoryAlerts.onclick = function () {
+        window.location.href = '/manager/inventory/alerts';
+    };
+
+}
+callURL();
+
+</script>

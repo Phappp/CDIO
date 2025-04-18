@@ -1,0 +1,75 @@
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #212529;
+    color: #eee;
+}
+
+.edit-user-container.dark-mode {
+    background-color: #343a40;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+h1.dark-mode {
+    color: #eee;
+}
+
+.error-alert.dark-mode {
+    border-color: #495057;
+    background-color: #721c24;
+    color: #f8d7da;
+}
+
+.form-label.dark-mode {
+    color: #ccc;
+}
+
+.form-input.dark-mode,
+.form-select.dark-mode,
+.form-textarea.dark-mode {
+    background-color: #495057;
+    color: #eee;
+    border-color: #495057;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.form-input.dark-mode:focus,
+.form-select.dark-mode:focus,
+.form-textarea.dark-mode:focus {
+    border-color: #007bff;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.primary-button.dark-mode,
+.secondary-button.dark-mode {
+    color: #fff;
+    border-color: #6c757d;
+    box-shadow: 0 2px 5px rgba(108, 117, 125, 0.4);
+}
+
+.primary-button.dark-mode {
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.4);
+}
+
+.primary-button.dark-mode:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.5);
+}
+
+.secondary-button.dark-mode {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    box-shadow: 0 2px 5px rgba(108, 117, 125, 0.4);
+}
+
+.secondary-button.dark-mode:hover {
+    background-color: #545b62;
+    border-color: #4e555b;
+    box-shadow: 0 2px 8px rgba(108, 117, 125, 0.5);
+}
+
+.form-checkbox.dark-mode .checkbox-label {
+    color: #ccc;
+}

@@ -1,52 +1,55 @@
 <%- include('../partials/manager/header') %>
 
-    <div class="container">
-        <h1>Quản lý sản phẩm</h1>
+<link rel="stylesheet" href="/css/admin/manageProducts.css">
+<a href="/manager/products/create" class="add-product-button"><i class="fa-solid fa-plus"></i>Thêm sản phẩm</a>
 
-        <a href="/manager/products/create" class="btn btn-primary mb-3">Thêm sản phẩm</a>
+<h1>Quản lý sản phẩm</h1>
 
-        <table class="table table-bordered">
-            <thead class="thead-dark">
+<div class="product-management-container">
+
+
+    <table >
+        <thead >
+            <tr>
+                <th>Mã SP</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn vị</th>
+                <th>Giá</th>
+                <th>Người tạo</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(product=> { %>
                 <tr>
-                    <th>Mã SP</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Đơn vị</th>
-                    <th>Giá</th>
-                    <th>Người tạo</th>
-                    <th>Hành động</th>
+                    <td>
+                        <%= product.product_code %>
+                    </td>
+                    <td>
+                        <%= product.name %>
+                    </td>
+                    <td>
+                        <%= product.quantity %>
+                    </td>
+                    <td>
+                        <%= product.unit %>
+                    </td>
+                    <td>
+                        <%= product.price.toLocaleString() %> VNĐ
+                    </td>
+                    <td>
+                        <%= product.created_by_name %>
+                    </td>
+                    <td class="action">
+                        <a href="/manager/products/<%= product.id %>/edit" class="edit-product-button">Sửa</a>
+                        <a href="/manager/products/<%= product.id %>/delete"
+                            class="delete-product-button delete-btn">Xóa</a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <% products.forEach(product=> { %>
-                    <tr>
-                        <td>
-                            <%= product.product_code %>
-                        </td>
-                        <td>
-                            <%= product.name %>
-                        </td>
-                        <td>
-                            <%= product.quantity %>
-                        </td>
-                        <td>
-                            <%= product.unit %>
-                        </td>
-                        <td>
-                            <%= product.price.toLocaleString() %> VNĐ
-                        </td>
-                        <td>
-                            <%= product.created_by_name %>
-                        </td>
-                        <td>
-                            <a href="/manager/products/<%= product.id %>/edit" class="btn btn-sm btn-info">Sửa</a>
-                            <a href="/manager/products/<%= product.id %>/delete"
-                                class="btn btn-sm btn-danger btn-delete">Xóa</a>
-                        </td>
-                    </tr>
-                    <% }) %>
-            </tbody>
-        </table>
-    </div>
+                <% }) %>
+        </tbody>
+    </table>
+</div>
 
     <%- include('../partials/admin/footer') %>

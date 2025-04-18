@@ -1,58 +1,60 @@
 <%- include('../partials/manager/header') %>
 
-    <div class="container">
-        <h1>Chỉnh sửa sản phẩm</h1>
+<link rel="stylesheet" href="/css/admin/editProduct.css">
 
-        <% if (error) { %>
-            <div class="alert alert-danger">
-                <%= error %>
-            </div>
-            <% } %>
+<div class="container">
+    <h1>Chỉnh sửa sản phẩm</h1>
 
-                <form method="POST" action="/manager/products/<%= product.id %>">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="product_code">Mã sản phẩm *</label>
-                            <input type="text" class="form-control" id="product_code" name="product_code"
-                                value="<%= product.product_code %>" required>
-                        </div>
+    <% if (error) { %>
+        <div class="alert alert-danger">
+            <%= error %>
+        </div>
+        <% } %>
 
-                        <div class="form-group col-md-6">
-                            <label for="name">Tên sản phẩm *</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<%= product.name %>"
-                                required>
-                        </div>
+            <form method="POST" action="/manager/products/<%= product.id %>">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="product_code">Mã sản phẩm *</label>
+                        <input type="text" class="form-control" id="product_code" name="product_code"
+                            value="<%= product.product_code %>" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="description">Mô tả</label>
-                        <textarea class="form-control" id="description" name="description"
-                            rows="3"><%= product.description || '' %></textarea>
+                    <div class="form-group col-md-6">
+                        <label for="name">Tên sản phẩm *</label>
+                        <input type="text" class="form-control" id="name" name="name" value="<%= product.name %>"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Mô tả</label>
+                    <textarea class="form-control" id="description" name="description"
+                        rows="3"><%= product.description || '' %></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="quantity">Số lượng *</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity"
+                            value="<%= product.quantity %>" min="0" required>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <label for="quantity">Số lượng *</label>
-                            <input type="number" class="form-control" id="quantity" name="quantity"
-                                value="<%= product.quantity %>" min="0" required>
-                        </div>
-
-                        <div class="form-group col-md-3">
-                            <label for="unit">Đơn vị *</label>
-                            <input type="text" class="form-control" id="unit" name="unit" value="<%= product.unit %>"
-                                required>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="price">Giá (VNĐ) *</label>
-                            <input type="number" class="form-control" id="price" name="price"
-                                value="<%= product.price %>" min="0" required>
-                        </div>
+                    <div class="form-group col-md-3">
+                        <label for="unit">Đơn vị *</label>
+                        <input type="text" class="form-control" id="unit" name="unit" value="<%= product.unit %>"
+                            required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Cập nhật</button>
-                    <a href="/manager/products" class="btn btn-secondary">Hủy bỏ</a>
-                </form>
-    </div>
+                    <div class="form-group col-md-6">
+                        <label for="price">Giá (VNĐ) *</label>
+                        <input type="number" class="form-control" id="price" name="price"
+                            value="<%= product.price %>" min="0" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                <a href="/manager/products" class="btn btn-secondary">Hủy bỏ</a>
+            </form>
+</div>
 
     <%- include('../partials/admin/footer') %>
