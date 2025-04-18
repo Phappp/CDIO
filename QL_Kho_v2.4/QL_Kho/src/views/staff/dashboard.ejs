@@ -1,0 +1,51 @@
+<%- include('../partials/staff/header') %>
+
+    <div class="container">
+        <h1>Dashboard Nhân viên</h1>
+        <p>Xin chào, <%= user.username %>
+        </p>
+
+
+
+
+        <div class="products-list">
+            <h2>Danh sách sản phẩm ( <%= stats.totalProducts %> )</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã Sản Phẩm</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Số Lượng</th>
+                        <th>Đơn Vị</th>
+                        <th>Giá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dữ liệu sản phẩm sẽ được lặp qua ở đây -->
+                    <% products.forEach(product=> { %>
+                        <tr>
+                            <td>
+                                <%= product.product_code %>
+                            </td>
+                            <td>
+                                <%= product.name %>
+                            </td>
+                            <td>
+                                <%= product.quantity %>
+                            </td>
+                            <td>
+                                <%= product.unit %>
+                            </td>
+                            <td>
+                                <%= product.price %>    
+                            </td>
+                        </tr>
+                        <% }) %>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- <%- include('../partials/admin/footer') %> -->

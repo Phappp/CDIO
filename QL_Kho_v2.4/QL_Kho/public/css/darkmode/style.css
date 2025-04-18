@@ -1,0 +1,30 @@
+body.dark-mode {
+    background-color: #072743;
+}
+
+label.dark-mode {
+    color: #eee;
+}
+
+input[type="text"].dark-mode,
+input[type="password"].dark-mode {
+    border-bottom: 2px solid #ccc;
+    color: #eee;
+}
+
+input[type="text"].dark-mode:focus,
+input[type="password"].dark-mode:focus {
+    border-bottom: 2px solid #eee;
+}
+
+.circle-effect.dark-mode a {
+    color: #eee;
+}
+
+.circle-effect.dark-mode::after {
+    border: 3px solid #ccc;
+}
+
+.password-toggle.dark-mode {
+    color: #eee;
+}

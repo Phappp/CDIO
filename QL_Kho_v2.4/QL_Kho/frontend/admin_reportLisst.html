@@ -1,0 +1,736 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/public/css/admin/header.css">
+<header class="admin-header">
+    <div class="header-right">
+        <img src="../public/images/logo.png" alt="">
+    </div>
+    <div class="header-left">
+        <div class="circle-effect">
+            <a href=""><i class="fa-solid fa-house"></i></a>
+        </div>
+        <div class="circle-effect">
+            <a href=""><i class="fa-solid fa-moon" id="darkModeToggle"></i></a>
+        </div>
+        <div class="circle-effect">
+            <a href=""><i class="fa-solid fa-chart-simple"></i></a>
+        </div>
+        <div class="circle-effect">
+            <a href=""><i class="fa-solid fa-user"></i></a>
+        </div>
+        <div class="circle-effect">
+            <a href=""><i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+
+    </div>
+</header>
+<main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container-fluid">
+        <!-- Filter Cards -->
+        <div class="reportList_header">
+            <div class="itemRow all active">
+                <div class="itemRow_content_bgr  "></div>
+                <a href="#" class=" <%= currentFilter === 'all' ? 'bg-light' : '' %>">
+                    <div class="itemRow_content">
+                        <div class="itemRow_content_top">
+                            Tổng báo cáo
+                        </div>
+                        <div class="itemRow_content_bot">
+                            8
+                            <!-- <%= Number(counts.approved_count) + Number(counts.rejected_count) %> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="itemRow approved">
+                <div class="itemRow_content_bgr "></div>
+                <a href="" class="<%= currentFilter === 'approved' ? 'bg-light' : '' %>">
+                    <div class="itemRow_content">
+                        <div class="itemRow_content_top">
+                            Chấp thuận
+                        </div>
+                        <div class="itemRow_content_bot">
+                            7
+                            <!-- <%= counts.approved_count %> -->
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="itemRow rejected">
+                <div class="itemRow_content_bgr "></div>
+                <a href="" class=" <%= currentFilter === 'rejected' ? 'bg-light' : '' %>">
+                    <div class="itemRow_content">
+                        <div class="itemRow_content_top">
+                            Từ chối
+                        </div>
+                        <div class="itemRow_content_bot">
+                            <!-- <%= counts.rejected_count %> -->
+                            1
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <form class="" method="GET" action="/admin/reports/processed">
+                <input type="hidden" name="status" value="<%= currentFilter %>">
+
+                <label class="">Ngày:</label>
+                <select class="" name="day">
+                    <option value="">Tất cả</option>
+                    <% for (let i=1; i <=31; i++) { %>
+                        <option value="<%= i %>" <%=Number(selectedDay)===i ? 'selected' : '' %>><%= i %>
+                        </option>
+                        <% } %>
+                </select>
+
+                <label class="">Tháng:</label>
+                <select class="" name="month">
+                    <option value="">Tất cả</option>
+                    <% for (let i=1; i <=12; i++) { %>
+                        <option value="<%= i %>" <%=Number(selectedMonth)===i ? 'selected' : '' %>><%= i %>
+                        </option>
+                        <% } %>
+                </select>
+
+                <label class="">Năm:</label>
+                <select class="" name="year">
+                    <option value="">Tất cả</option>
+                    <% for (let y=2022; y <=new Date().getFullYear(); y++) { %>
+                        <option value="<%= y %>" <%=Number(selectedYear)===y ? 'selected' : '' %>><%= y %>
+                        </option>
+                        <% } %>
+                </select>
+
+                <button type="submit" class="">Lọc</button>
+            </form>
+        </div>
+        <!-- Bộ lọc ngày/tháng/năm -->
+
+
+        <!-- Reports Table -->
+        <div class="reportList_body">
+            <div class="reportList_body_top">
+                <!-- <h6>Chi tiết báo cáo</h6> -->
+                <div class="dropdown">
+                    <div class="dropdown-menu" aria-labelledby="exportDropdown">
+                        <a class="dropdown-item excel"
+                            href="/admin/reports/export/excel?status=<%= currentFilter %>&day=<%= selectedDay %>&month=<%= selectedMonth %>&year=<%= selectedYear %>">
+                            <i class="fas fa-file-excel text-success " style="color: #2E7D32;"></i>Excel
+                        </a>
+                        <a class="dropdown-item pdf"
+                            href="/admin/reports/export/pdf?status=<%= currentFilter %>&day=<%= selectedDay %>&month=<%= selectedMonth %>&year=<%= selectedYear %>">
+                            <i class="fas fa-file-pdf text-danger " style="color: #E53935;"></i>PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="reportList_body_bot">
+
+
+                <div class="">
+                    <table class="" id="dataTable" width="100%" cellspacing="0">
+                        <thead class="">
+                            <tr>
+                                <th>Mã BC</th>
+                                <th>Loại</th>
+                                <th>Mã SP</th>
+                                <th>Tên SP</th>
+                                <th>SL</th>
+                                <th>Giá trị</th>
+                                <th>Trạng thái</th>
+                                <th>Người tạo</th>
+                                <th>Người xử lý</th>
+                                <th>Ngày tạo</th>
+                                <th>Ngày Xử lý</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- <% reports.forEach(report=> { %> -->
+                            <tr>
+                                <td>
+                                    <!-- <%= report.id %> -->123
+                                </td>
+                                <td>
+                                    <!-- <%= report.type==='import' ? 'Nhập' : 'Xuất' %> -->Nhập
+                                </td>
+                                <td>
+                                    <!-- <%= report.product_code %> -->qưdsaaaaaaaa
+                                </td>
+                                <td>
+                                    <!-- <%= report.product_name %> -->LapTop ABCVVDVVDádasdasd
+                                </td>
+                                <td>
+                                    <!-- <%= report.quantity %> -->10000
+                                </td>
+                                <td>
+                                    <!-- <%= helpers.calculateValue(report.quantity, report.price) %> VNĐ -->1000000 VNĐ
+                                </td>
+                                <td>
+                                    <span class="badge badge-<%= 
+                report.status === 'approved' ? 'success' : 
+                report.status === 'rejected' ? 'danger' : 'warning'
+              %>">
+                                        <!-- <%= report.status==='approved' ? 'Đã duyệt' : report.status==='rejected'
+                                                ? 'Từ chối' : 'Chờ xử lý' %> --> đã duyệt
+                                    </span>
+                                </td>
+                                <td>
+                                    <!-- <%= report.creator_name %> -->ppp
+                                </td>
+                                <td>
+                                    <!-- <%= report.processor_name || 'N/A' %> -->admin
+                                </td>
+                                <td>
+                                    <!-- <%= helpers.formatDate(report.created_at) %> -->22-10-2025
+                                </td>
+                                <td>
+                                    <!-- <%= helpers.formatDate(report.updated_at) %> -->22-10-2025
+                                </td>
+                                <td>
+                                    <!-- <% if (report.status==='pending' ) { %> -->
+                                    <form action="/admin/reports/<%= report.id %>/process" method="POST"
+                                        class="d-inline">
+                                        <input type="hidden" name="action" value="approve">
+                                        <button type="submit" class="">Duyệt</button>
+                                    </form>
+                                    <form action="/admin/reports/<%= report.id %>/process" method="POST"
+                                        class="d-inline ml-1">
+                                        <input type="hidden" name="action" value="reject">
+                                        <button type="submit" class="">Từ chối</button>
+                                    </form>
+                                    <!-- <% } else { %>
+                                                <span class="text-muted">Đã xử lý</span>
+                                                <% } %> -->
+                                </td>
+                            </tr>
+                            <!-- <% }) %> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const itemRows = document.querySelectorAll('.itemRow');
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentFilter = urlParams.get('status') || 'all';
+
+            // Set the initial active state based on the current filter
+            itemRows.forEach(row => {
+                if (row.querySelector('a').href.includes(currentFilter)) {
+                    row.classList.add('active');
+                } else {
+                    row.classList.remove('active');
+                }
+
+                // Add click event listener to each item row
+                row.addEventListener('click', function () {
+                    // Remove active class from all rows
+                    itemRows.forEach(item => item.classList.remove('active'));
+                    // Add active class to the clicked row
+                    row.classList.add('active');
+                });
+            });
+        });
+        const darkModeToggle = document.getElementById('darkModeToggle'); // Giả sử bạn có nút toggle với ID này
+        const body = document.body;
+        const containerFluid = document.querySelector('.container-fluid');
+        const reportListHeader = document.querySelector('.reportList_header');
+        const itemRows = document.querySelectorAll('.itemRow');
+        const itemRowContentsTop = document.querySelectorAll('.itemRow_content_top');
+        const hrs = document.querySelectorAll('hr');
+        const forms = document.querySelectorAll('form');
+        const labels = document.querySelectorAll('label');
+        const selects = document.querySelectorAll('select');
+        const buttons = document.querySelectorAll('button');
+        const reportListBody = document.querySelector('.reportList_body');
+        const dropdownLinks = document.querySelectorAll('.dropdown a');
+        const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+        const tables = document.querySelectorAll('table');
+        const ths = document.querySelectorAll('th');
+        const tds = document.querySelectorAll('td');
+        const badges = document.querySelectorAll('.badge');
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            containerFluid.classList.toggle('dark-mode');
+            reportListHeader.classList.toggle('dark-mode');
+            itemRows.forEach(row => row.classList.toggle('dark-mode'));
+            itemRowContentsTop.forEach(top => top.classList.toggle('dark-mode'));
+            hrs.forEach(hr => hr.classList.toggle('dark-mode'));
+            forms.forEach(form => form.classList.toggle('dark-mode'));
+            labels.forEach(label => label.classList.toggle('dark-mode'));
+            selects.forEach(select => select.classList.toggle('dark-mode'));
+            buttons.forEach(button => button.classList.toggle('dark-mode'));
+            reportListBody.classList.toggle('dark-mode');
+            dropdownLinks.forEach(link => link.classList.toggle('dark-mode'));
+            dropdownMenus.forEach(menu => menu.classList.toggle('dark-mode'));
+            tables.forEach(table => table.classList.toggle('dark-mode'));
+            ths.forEach(th => th.classList.toggle('dark-mode'));
+            tds.forEach(td => td.classList.toggle('dark-mode'));
+            badges.forEach(badge => badge.classList.toggle('dark-mode'));
+
+            // Lưu trạng thái vào localStorage (tùy chọn)
+            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+        });
+
+        // Kiểm tra trạng thái khi tải trang (tùy chọn)
+        if (localStorage.getItem('darkMode') === 'true') {
+            body.classList.add('dark-mode');
+            containerFluid.classList.add('dark-mode');
+            reportListHeader.classList.add('dark-mode');
+            itemRows.forEach(row => row.classList.add('dark-mode'));
+            itemRowContentsTop.forEach(top => top.classList.add('dark-mode'));
+            hrs.forEach(hr => hr.classList.add('dark-mode'));
+            forms.forEach(form => form.classList.add('dark-mode'));
+            labels.forEach(label => label.classList.add('dark-mode'));
+            selects.forEach(select => select.classList.add('dark-mode'));
+            buttons.forEach(button => button.classList.add('dark-mode'));
+            reportListBody.classList.add('dark-mode');
+            dropdownLinks.forEach(link => link.classList.add('dark-mode'));
+            dropdownMenus.forEach(menu => menu.classList.add('dark-mode'));
+            tables.forEach(table => table.classList.add('dark-mode'));
+            ths.forEach(th => th.classList.add('dark-mode'));
+            tds.forEach(td => td.classList.add('dark-mode'));
+            badges.forEach(badge => badge.classList.add('dark-mode'));
+        }
+
+
+    </script>
+    <style>
+        .container-fluid {
+            padding-top: 120px;
+            width: 90%;
+            justify-self: center;
+        }
+
+        .reportList_header {
+            display: flex;
+            gap: 20px;
+            position: relative;
+            padding-bottom: 120px;
+        }
+
+        .itemRow a {
+            text-decoration: none;
+            display: block;
+            height: 60px;
+            width: 200px;
+        }
+
+        .itemRow {
+            border: 2px solid #000;
+            padding: 4px 24px;
+            border-radius: 8px;
+            border-left: 12px solid #808080;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            max-width: 100px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, .9);
+        }
+
+        .itemRow .itemRow_content_bgr {
+            height: 100%;
+            top: 0;
+            left: 0;
+            position: absolute;
+            width: 0;
+            z-index: -10;
+            transition: width 0.5s;
+        }
+
+        .itemRow.active .itemRow_content_bgr {
+            width: 100%;
+        }
+
+        .itemRow.all.active .itemRow_content_bot {
+            color: #000;
+        }
+
+        .itemRow.approved.active .itemRow_content_bot {
+            color: #000;
+        }
+
+        .itemRow.rejected.active .itemRow_content_bot {
+            color: #000;
+        }
+
+
+        /* Các trạng thái */
+        .itemRow.all {
+            border-left: 12px solid #808080;
+        }
+
+        .itemRow.approved {
+            border-left: 12px solid green;
+        }
+
+        .itemRow.rejected {
+            border-left: 12px solid red;
+            color: red;
+        }
+
+        .itemRow.all .itemRow_content_bgr {
+            background-color: #808080;
+        }
+
+        .itemRow.approved .itemRow_content_bgr {
+            background-color: green;
+        }
+
+        .itemRow.rejected .itemRow_content_bgr {
+            background-color: red;
+        }
+
+        .itemRow.all .itemRow_content_bot {
+            color: #808080;
+        }
+
+        .itemRow.approved .itemRow_content_bot {
+            color: green;
+        }
+
+        .itemRow.rejected .itemRow_content_bot {
+            color: red;
+        }
+
+        .itemRow_content {
+            position: relative;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .itemRow_content_top {
+            color: #000;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .itemRow_content_bot {
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        hr {
+            color: #ddd;
+        }
+
+        /* FORM */
+        form {
+            display: flex;
+            position: absolute;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            right: 160px;
+            top: -20px;
+        }
+
+        label {
+            margin-right: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        select {
+            margin-right: 15px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            /* Đường viền */
+            border-radius: 8px;
+            /* Bo góc */
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            visibility: hidden;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            /* Màu khi hover */
+        }
+
+        /* BODY */
+        .reportList_body {
+            padding: 20px;
+            /* Khoảng cách bên trong */
+            background-color: #f9f9f9;
+            /* Màu nền */
+            border-radius: 8px;
+            /* Bo góc */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            /* Đổ bóng */
+        }
+
+        .reportList_body_top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1000;
+            justify-content: end;
+        }
+
+        .dropdown {
+            position: relative;
+            top: -20px;
+            width: 200px;
+            height: 40px;
+        }
+
+        .dropdown a {
+            text-decoration: none;
+            color: #000;
+            font-size: 20px;
+        }
+
+        .dropdown-menu {
+            display: flex;
+            position: absolute;
+            gap: 40px;
+        }
+
+        .dropdown-item.excel:hover {
+            color: #2E7D32;
+            transition: .2s;
+        }
+
+        .dropdown-item.pdf:hover {
+            color: #E53935;
+            transition: .2s;
+
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            /* Căn trái */
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: white;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .badge-success {
+            background-color: #28a745;
+        }
+
+        .badge-danger {
+            background-color: #dc3545;
+        }
+
+        .badge-warning {
+            background-color: #ffc107;
+        }
+
+        button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #000;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+
+        form {
+            display: inline;
+        }
+
+        /* DARKMODE */
+        /* dark-mode.css */
+        body.dark-mode {
+            background-color: #1e1e1e;
+            color: #f5f5f5;
+        }
+
+        .container-fluid.dark-mode {
+            /* Màu nền tối hơn nếu cần */
+        }
+
+        .reportList_header.dark-mode {
+            /* Màu nền tối hơn nếu cần */
+        }
+
+        .itemRow.dark-mode {
+            border-color: #444;
+            color: #eee;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
+        }
+
+        .itemRow.dark-mode a {
+            color: #eee;
+            /* Màu chữ cho link trong dark mode */
+        }
+
+        .itemRow.all.dark-mode {
+            border-left-color: #a9a9a9;
+            /* Xám đậm hơn cho dark mode */
+        }
+
+        .itemRow.approved.dark-mode {
+            border-left-color: #218838;
+            /* Xanh đậm hơn cho dark mode */
+            color: #218838;
+        }
+
+        .itemRow.rejected.dark-mode {
+            border-left-color: #c82333;
+            /* Đỏ đậm hơn cho dark mode */
+            color: #c82333;
+        }
+
+        .itemRow.all.dark-mode .itemRow_content_bot {
+            color: #a9a9a9;
+        }
+
+        .itemRow.approved.dark-mode .itemRow_content_bot {
+            color: #218838;
+        }
+
+        .itemRow.rejected.dark-mode .itemRow_content_bot {
+            color: #c82333;
+        }
+
+        .itemRow_content_top.dark-mode {
+            color: #eee;
+        }
+
+        hr.dark-mode {
+            color: #444;
+        }
+
+        form.dark-mode {
+            /* Màu nền tối hơn nếu cần */
+        }
+
+        label.dark-mode {
+            color: #eee;
+        }
+
+        select.dark-mode {
+            border-color: #666;
+            background-color: #333;
+            color: #eee;
+        }
+
+        button.dark-mode {
+            background-color: #333;
+            color: #eee;
+        }
+
+        button.dark-mode:hover {
+            background-color: #555;
+        }
+
+        .reportList_body.dark-mode {
+            background-color: #333;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .reportList_body_top.dark-mode {
+            /* Màu nền tối hơn nếu cần */
+        }
+
+        .dropdown.dark-mode a {
+            color: #eee;
+        }
+
+        .dropdown-menu.dark-mode {
+            /* Màu nền tối hơn nếu cần */
+        }
+
+        table.dark-mode {
+            /* Màu nền tối hơn nếu cần */
+        }
+
+        th.dark-mode {
+            background-color: #444;
+            color: #eee;
+        }
+
+        td.dark-mode {
+            background-color: #222;
+            color: #eee;
+        }
+
+        .badge.dark-mode {
+            color: #222;
+            /* Màu chữ badge trong dark mode */
+        }
+
+        .badge-success.dark-mode {
+            background-color: #5cb85c;
+            /* Xanh sáng hơn cho dark mode */
+            color: #222;
+        }
+
+        .badge-danger.dark-mode {
+            background-color: #d9534f;
+            /* Đỏ sáng hơn cho dark mode */
+            color: #222;
+        }
+
+        .badge-warning.dark-mode {
+            background-color: #f0ad4e;
+            /* Vàng sáng hơn cho dark mode */
+            color: #222;
+        }
+
+        button.dark-mode {
+            background-color: #555;
+            color: #eee;
+        }
+
+        button.dark-mode:hover {
+            background-color: #777;
+        }
+    </style>

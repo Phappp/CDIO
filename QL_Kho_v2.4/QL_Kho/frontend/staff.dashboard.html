@@ -1,0 +1,216 @@
+
+
+    <div class="container">
+        <h1>Dashboard Nhân viên</h1>
+        <p>Xin chào, <%= user.username %>
+        </p>
+
+
+
+
+        <div class="products-list">
+            <h2>Danh sách sản phẩm ( <%= stats.totalProducts %> )</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã Sản Phẩm</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Số Lượng</th>
+                        <th>Đơn Vị</th>
+                        <th>Giá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dữ liệu sản phẩm sẽ được lặp qua ở đây -->
+                    <% products.forEach(product=> { %>
+                        <tr>
+                            <td>
+                                <%= product.product_code %>
+                            </td>
+                            <td>
+                                <%= product.name %>
+                            </td>
+                            <td>
+                                <%= product.quantity %>
+                            </td>
+                            <td>
+                                <%= product.unit %>
+                            </td>
+                            <td>
+                                <%= product.price %>    
+                            </td>
+                        </tr>
+                        <% }) %>
+
+                </tbody>
+            </table>
+
+        </div>
+        <button id="darkModeToggle" class="add-user-btn">Toggle Dark Mode</button>
+    </div>
+<style>
+    /* ===== CSS bổ sung để giao diện giống ảnh ===== */
+    
+    .container {
+        padding: 100px 40px 40px;
+        text-align: center;
+    }
+    
+    /* Tiêu đề quản lý người dùng */
+    .container h1 {
+        font-size: 28px;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+    
+    /* Nút Thêm người dùng */
+    .add-user-btn {
+        display: inline-block;
+        background-color: #999;
+        color: white;
+        padding: 14px 28px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom: 30px;
+    }
+    
+    .add-user-btn:hover {
+        background-color: #7a7a7a;
+    }
+    
+    /* Bảng danh sách người dùng */
+    .products-list table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .products-list th, .products-list td {
+        padding: 12px 16px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+    
+    .products-list th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+    }
+    
+    /* Nút Sửa/Xóa */
+    .edit-btn,
+    .delete-btn {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .edit-btn {
+        background-color: #00bcd4;
+        margin-right: 6px;
+    }
+    
+    .edit-btn:hover {
+        background-color: #0195a5;
+    }
+    
+    .delete-btn {
+        background-color: #f44336;
+    }
+    
+    .delete-btn:hover {
+        background-color: #d32f2f;
+    }
+    
+    /* Dark Mode Styles */
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode .container {
+    padding: 100px 40px 40px;
+}
+
+.dark-mode .container h1 {
+    font-size: 28px;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #e0e0e0;
+}
+
+.dark-mode .add-user-btn {
+    background-color: #666;
+}
+
+.dark-mode .add-user-btn:hover {
+    background-color: #555;
+}
+
+.dark-mode .products-list table {
+    background-color: #333;
+    border-collapse: collapse;
+}
+
+.dark-mode .products-list th,
+.dark-mode .products-list td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #444;
+    text-align: center;
+    color: #e0e0e0;
+}
+
+.dark-mode .products-list th {
+    background-color: #444;
+    font-weight: bold;
+}
+
+.dark-mode .edit-btn {
+    background-color: #00bcd4;
+}
+
+.dark-mode .edit-btn:hover {
+    background-color: #0195a5;
+}
+
+.dark-mode .delete-btn {
+    background-color: #f44336;
+}
+
+.dark-mode .delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+    </style>
+
+    <!-- <%- include('../partials/admin/footer') %> -->
+    <script>
+        // Function to toggle dark mode
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        
+        // Check if dark mode is saved in localStorage
+        if(localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+        }
+    
+        // Event listener for toggle button
+        darkModeToggle.addEventListener('click', () => {
+            // Toggle the dark-mode class on the body element
+            document.body.classList.toggle('dark-mode');
+    
+            // Save the dark mode preference in localStorage
+            if(document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+    </script>

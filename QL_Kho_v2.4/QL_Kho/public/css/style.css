@@ -1,0 +1,200 @@
+body {
+    font-family: sans-serif;
+    background-color: #1168b4;
+    background-image: url('/images/index/Sale_bgr.png');
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    transition: background-color 0.3s ease;
+}
+
+.login-container {
+    position: absolute;
+    top: 200px;
+    left: 80px;
+    background-color: transparent;
+    padding: 40px;
+    text-align: center;
+    width: 350px;
+}
+
+h1 {
+    color: #fff;
+    position: absolute;
+    top: 40px;
+    left: 120px;
+    font-family: Playfair Display;
+    font-size: 64px;
+}
+
+.alert {
+    position: absolute;
+    background-color: transparent;
+    color: #d32f2f;
+    padding: 10px;
+    margin-bottom: 20px;
+    left: 16px;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 15px;
+    color: #222;
+    font-weight: bold;
+    font-size: 24px;
+    transition: background-color 0.3s ease;
+
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #000;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: transparent;
+    outline: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+
+}
+
+
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #000;
+    border-radius: 5px;
+    font-size: 18px;
+    background-color: transparent;
+    outline: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+
+}
+
+.btn {
+    position: absolute;
+    top: 300px;
+    left: 300px;
+    display: inline-block;
+    padding: 12px 24px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    font-size: 24px;
+    width: 180px;
+
+}
+
+.btn-primary {
+    background-color: #000;
+    color: #fff;
+    transition: .2s ease-in-out;
+
+}
+
+.btn-primary:hover {
+    border-radius: 10px 20px;
+}
+
+/* Styling for the profile icon (you'll need to add this to your HTML if you want it) */
+.profile-icon-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #bbdefb;
+    /* Light blue for the circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+}
+
+
+/* Styling for "Remember me" checkbox and label (you'll need to add this to your HTML) */
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Styling for the "Show password" toggle (you'll need to add this to your HTML) */
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #444;
+    transition: background-color 0.3s ease;
+
+}
+
+/* BTN DARK MODE */
+.circle-effect {
+    position: relative;
+    display: inline-block;
+    /* overflow: hidden; */
+    position: absolute;
+    bottom: -36px;
+    left: 20px;
+}
+
+.circle-effect a {
+    text-decoration: none;
+    color: #222;
+    font-size: 32px;
+    transition: background-color 0.3s ease;
+
+}
+
+.circle-effect::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+    z-index: 0;
+    border: 3px solid #444;
+
+}
+
+.circle-effect a {
+    position: relative;
+    z-index: 1;
+}
+
+.circle-effect:hover::after {
+    transform: translate(-50%, -50%) scale(1.1);
+
+}

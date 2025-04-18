@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản trị hệ thống</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/chart.css">
+
+</head>
+
+<body>
+    <header class="admin-header">
+        <div class="header-right">
+            <img src="../public/images/logo.png" alt="">
+        </div>
+        <div class="header-left">
+            <div class="circle-effect">
+                <a href=""><i class="fa-solid fa-house"></i></a>
+            </div>
+            <div class="circle-effect">
+                <a href=""><i class="fa-solid fa-moon" id="darkModeToggle"></i></a>
+            </div>
+            <div class="circle-effect">
+                <a href=""><i class="fa-solid fa-chart-simple"></i></a>
+            </div>
+            <div class="circle-effect">
+                <a href=""><i class="fa-solid fa-user"></i></a>
+            </div>
+            <div class="circle-effect">
+                <a href=""><i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
+
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="stats stats1">
+                <div class="stat-card" id="pending-reports">
+                    <h3>Báo cáo chờ duyệt</h3>
+                    <p>
+                        0
+                    </p>
+                </div>
+                <div class="stat-card">
+                    <h3>Sản phẩm sắp hết</h3>
+                    <p>
+                        1000000000
+                        <!-- <%= stats.lowStockProducts || 0 %> -->
+                    </p>
+                </div>
+                <div class="stat-card" id="inventory-alerts">
+                    <h3>Tồn kho</h3>
+                    <p>
+                        1000000000
+
+                        <!-- <%= stats.inventoryAlerts %> -->
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="stats stats2">
+                <div class="stat-card" id="total-products">
+                    <h3>Tổng sản phẩm</h3>
+                    <p>
+                        1000000000
+                        <!-- <%= stats.totalProducts || 0 %> -->
+                    </p>
+                </div>
+                <div class="stat-card" id="total-users">
+                    <h3>Người dùng</h3>
+                    <p>
+
+                        1000000000
+                        <!-- <%= stats.totalUsers || 0 %> -->
+                    </p>
+                </div>
+                <div class="stat-card">
+                    <h3>Báo cáo hôm nay</h3>
+                    <p>
+                        1000000000
+
+                        <!-- <%= stats.todayReports || 0 %> -->
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function warning() {
+                const firstStats = document.querySelectorAll('.stats1 .stat-card');
+                firstStats.forEach((stat) => {
+                    if (stat.querySelector('p').textContent.trim() === "0") {
+                        stat.style.borderLeft = '12px solid green';
+                    } else {
+                        stat.style.borderLeft = '12px solid red';
+                    }
+                });
+            }
+            // Dark Mode Toggle
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+
+            darkModeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                // Lưu trạng thái dark mode vào localStorage (tùy chọn)
+                localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+            });
+
+            // Kiểm tra trạng thái dark mode đã lưu khi tải trang (tùy chọn)
+            if (localStorage.getItem('darkMode') === 'true') {
+                body.classList.add('dark-mode');
+            }
+            warning();
+
+        </script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+
+            .container {
+                padding-top: 160px;
+                max-width: 800px;
+                margin: 0 auto;
+                display: flex;
+                gap: 40px;
+            }
+
+            .stats {
+                gap: 32px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .stat-card p {
+                font-size: 18px;
+                margin: 0;
+                float: right;
+            }
+
+            .stat-card {
+                padding: 20px 40px;
+                border: 2px solid #000;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, .8);
+                transition: all 0.3s ease;
+                cursor: pointer;
+                min-width: 320px;
+                max-width: 320px;
+            }
+
+            .stat-card:hover {
+                box-shadow: 0 8px 30px rgba(0, 0, 0, .9);
+                transform: scale(1.1);
+            }
+
+            .stats2 .stat-card {
+                border-left: 12px solid #808080;
+
+            }
+
+
+            /* HEADER */
+            .admin-header {
+                background-color: #151515;
+                color: white;
+                padding: 20px;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                display: flex;
+                justify-self: start;
+                justify-content: space-between;
+                align-items: center;
+                overflow: hidden;
+                max-height: 40px;
+            }
+
+            img {
+                position: relative;
+                left: -20px;
+                width: 200px;
+                cursor: pointer;
+            }
+
+            .header-left {
+                display: flex;
+                justify-content: center;
+                width: 700px;
+                gap: 80px;
+                float: right;
+                text-align: left;
+                padding-left: 20px;
+            }
+
+            .header-left a {
+                color: white;
+                text-decoration: none;
+                font-size: 20px;
+                padding: 10px;
+                cursor: pointer;
+            }
+
+            .circle-effect {
+                position: relative;
+                display: inline-block;
+                overflow: hidden;
+            }
+
+            .circle-effect a {
+                text-decoration: none;
+                color: #fff;
+                font-size: 24px;
+            }
+
+            .circle-effect::after {
+                content: '';
+                position: absolute;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                /* background: rgba(255, 255, 255, 0.2); */
+                /* Màu vòng tròn */
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(0);
+                transition: transform 0.5s ease;
+                z-index: 0;
+                border: 5px solid #fff;
+            }
+
+            .circle-effect a {
+                position: relative;
+                z-index: 1;
+            }
+
+            .circle-effect:hover::after {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            /* /css/dark-mode.css */
+            body.dark-mode {
+                background-color: #1e1e1e;
+                /* Dark mode background */
+                color: #f5f5f5;
+                /* Dark mode text color */
+            }
+
+            body.dark-mode .stat-card {
+                border-color: #444;
+                /* Dark mode border */
+                background-color: #333;
+                /* Dark mode card background */
+                color: #eee;
+                /* Dark mode card text color */
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            }
+
+            body.dark-mode .admin-header {
+                background-color: #222;
+                /* Dark mode header background */
+                color: #fff;
+            }
+
+            body.dark-mode .admin-header a {
+                color: #fff;
+            }
+
+            body.dark-mode .circle-effect::after {
+                border-color: #ddd;
+                /* Dark mode circle effect border */
+            }
+
+            body.dark-mode .stats2 .stat-card {
+                border-left-color: #a9a9a9;
+                /* Màu xám đậm hơn cho dark mode */
+            }
+
+            /* Bạn có thể cần thêm các kiểu khác cho các thành phần cụ thể */
+        </style>

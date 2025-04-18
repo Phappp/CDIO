@@ -1,0 +1,55 @@
+<%- include('../partials/admin/header') %>
+    <link rel="stylesheet" href="/css/admin/manageUsers.css">
+
+
+    <div class="container">
+        <a href="/admin/users/create" class="btnAdd"><i class="fa-solid fa-plus"></i>Thêm người
+            dùng</a>
+        <h1>Quản lý người dùng</h1>
+
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên đăng nhập</th>
+                    <th>Họ tên</th>
+                    <th>Email</th>
+                    <th>Vai trò</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user=> { %>
+                    <tr>
+                        <td>
+                            <%= user.id %>
+                        </td>
+                        <td>
+                            <%= user.username %>
+                        </td>
+                        <td>
+                            <%= user.full_name || 'N/A' %>
+                        </td>
+                        <td>
+                            <%= user.email || 'N/A' %>
+                        </td>
+                        <td>
+                            <%= user.role %>
+                        </td>
+                        <td>
+                            <%= user.is_active ? 'Hoạt động' : 'Vô hiệu hóa' %>
+                        </td>
+                        <td>
+                            <a href="/admin/users/<%= user.id %>/edit" class=" btnInfo">Sửa</a>
+                            <a href="/admin/users/<%= user.id %>/delete" class=" btnDanger"
+                                onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <%- include('../partials/admin/footer') %>

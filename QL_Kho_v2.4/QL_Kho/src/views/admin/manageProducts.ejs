@@ -1,0 +1,53 @@
+<%- include('../partials/admin/header') %>
+    <link rel="stylesheet" href="/css/admin/manageProducts.css">
+    <a href="/admin/products/create" class="add-product-button"><i class="fa-solid fa-plus"></i>Thêm sản phẩm</a>
+
+    <h1>Quản lý sản phẩm</h1>
+
+    <div class="product-management-container">
+
+
+        <table >
+            <thead >
+                <tr>
+                    <th>Mã SP</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Đơn vị</th>
+                    <th>Giá</th>
+                    <th>Người tạo</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(product=> { %>
+                    <tr>
+                        <td>
+                            <%= product.product_code %>
+                        </td>
+                        <td>
+                            <%= product.name %>
+                        </td>
+                        <td>
+                            <%= product.quantity %>
+                        </td>
+                        <td>
+                            <%= product.unit %>
+                        </td>
+                        <td>
+                            <%= product.price.toLocaleString() %> VNĐ
+                        </td>
+                        <td>
+                            <%= product.created_by_name %>
+                        </td>
+                        <td class="action">
+                            <a href="/admin/products/<%= product.id %>/edit" class="edit-product-button">Sửa</a>
+                            <a href="/admin/products/<%= product.id %>/delete"
+                                class="delete-product-button delete-btn">Xóa</a>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <%- include('../partials/admin/footer') %>
