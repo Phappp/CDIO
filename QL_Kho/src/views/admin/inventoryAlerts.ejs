@@ -1,0 +1,63 @@
+<%- include('../partials/admin/header') %>
+  <link rel="stylesheet" href="/css/admin/inventoryAlerts.css">
+  <div class="inventory-warning-container">
+    <div class="warning-header">
+      <h1 class="warning-title">Cảnh Báo Tồn Kho</h1>
+      <div class="warning-threshold">
+        <span class="threshold-badge">
+          Ngưỡng cảnh báo: <%= helpers.formatCurrency(threshold) %> VNĐ
+        </span>
+      </div>
+    </div>
+
+    <div class="warning-card">
+      <div class="card-content">
+        <% if (products.length===0) { %>
+          <div class="no-warning-alert">
+            Không có mặt hàng nào vượt ngưỡng tồn kho
+          </div>
+          <% } else { %>
+            <div class="table-responsive-wrapper">
+              <table class="inventory-table">
+                <thead class="table-header-light">
+                  <tr>
+                    <th>Mã SP</th>
+                    <th>Tên mặt hàng</th>
+                    <th>Số lượng</th>
+                    <th>Đơn vị</th>
+                    <th>Đơn giá</th>
+                    <th>Tổng giá trị</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% products.forEach(product=> { %>
+                    <tr class="<%= (product.total_value > threshold * 2) ? 'row-danger' : 'row-warning' %>">
+                      <td>
+                        <%= product.product_code %>
+                      </td>
+                      <td>
+                        <%= product.name %>
+                      </td>
+                      <td>
+                        <%= product.quantity %>
+                      </td>
+                      <td>
+                        <%= product.unit %>
+                      </td>
+                      <td>
+                        <%= helpers.formatCurrency(product.price) %> VNĐ
+                      </td>
+                      <td><b>
+                          <%= helpers.formatCurrency(product.total_value) %> VNĐ
+                        </b></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+            <% } %>
+      </div>
+    </div>
+  </div>
+  <script src="/js/darkmode/admin/inventoryAlerts.js"></script>
+  <%- include('../partials/admin/footer') %>

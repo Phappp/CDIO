@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản trị hệ thống</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/admin/header.css">
+    <link rel="stylesheet" href="/css/darkmode/admin/dashboard.css">
+    <link rel="stylesheet" href="/css/darkmode/admin/processedReports.css">
+    <link rel="stylesheet" href="/css/darkmode/admin/chart.css">
+    <link rel="stylesheet" href="/css/darkmode/admin/inventoryAlerts.css">
+    <link rel="stylesheet" href="/css/darkmode/admin/manageUsers.css">
+    <link rel="stylesheet" href="/css/darkmode/admin/manageProducts.css">
+
+</head>
+
+<body>
+    <header class="admin-header">
+        <div class="header-right">
+            <img src="/images/logo.png" id="logo" alt="">
+        </div>
+        <div class="header-left">
+            <div class="circle-effect">
+                <a href="/admin/dashboard"><i class="fa-solid fa-house"></i></a>
+            </div>
+            <div class="circle-effect">
+                <a href="/admin/reports/processed"><i class="fa-solid fa-book"></i></a>
+            </div>
+            <div class="circle-effect">
+                <a href="/admin/reports/charts"><i class="fa-solid fa-chart-simple"></i></a>
+            </div>
+            <div class="circle-effect" id="darkModeToggle">
+                <!--dark mode -->
+                <a><i class="fa-solid fa-moon"></i></a>
+            </div>
+            <div class="circle-effect">
+                <a href="#"><i class="fa-solid fa-user"></i></a>
+            </div>
+            <div class="circle-effect">
+                <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
+
+        </div>
+    </header>
+    <main>

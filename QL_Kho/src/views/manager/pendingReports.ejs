@@ -1,0 +1,65 @@
+<%- include('../partials/manager/header') %>
+
+    <div class="container">
+        <h1>Báo cáo chờ duyệt</h1>
+
+        <% if (reports.length===0) { %>
+            <div class="alert alert-info">Không có báo cáo nào chờ duyệt</div>
+            <% } else { %>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Mã BC</th>
+                            <th>Loại</th>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá trị</th>
+                            <th>Người tạo</th>
+                            <th>Ngày tạo</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% reports.forEach(report=> { %>
+                            <tr>
+                                <td>
+                                    <%= report.id %>
+                                </td>
+                                <td>
+                                    <%= report.type==='import' ? 'Nhập' : 'Xuất' %>
+                                </td>
+                                <td>
+                                    <%= report.product_name %>
+                                </td>
+                                <td>
+                                    <%= report.quantity %>
+                                </td>
+                                <td>
+                                    <%= (report.quantity * report.price).toLocaleString() %> VNĐ
+                                </td>
+                                <td>
+                                    <%= report.created_by_name %>
+                                </td>
+                                <td>
+                                    <%= new Date(report.created_at).toLocaleString() %>
+                                </td>
+                                <td>
+                                    <form method="POST" action="/manager/reports/<%= report.id %>/process"
+                                        class="d-inline">
+                                        <input type="hidden" name="action" value="approve">
+                                        <button type="submit" class="btn btn-sm btn-success">Duyệt</button>
+                                    </form>
+                                    <form method="POST" action="/manager/reports/<%= report.id %>/process"
+                                        class="d-inline">
+                                        <input type="hidden" name="action" value="reject">
+                                        <button type="submit" class="btn btn-sm btn-danger">Từ chối</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } %>
+    </div>
+
+    <%- include('../partials/admin/footer') %>

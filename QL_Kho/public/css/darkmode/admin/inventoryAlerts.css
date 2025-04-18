@@ -1,0 +1,94 @@
+/* dark-mode.css */
+body.dark-mode {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+}
+
+
+.h3.mb-0.text-gray-800.dark-mode {
+    color: #eee;
+}
+
+.badge.badge-danger.dark-mode {
+    color: #fff;
+    background-color: #d9534f;
+    /* Slightly darker red */
+}
+
+.badge.badge-warning.dark-mode {
+    color: #fff;
+    background-color: #f0ad4e
+        /* Slightly darker red */
+}
+
+.mr-2.dark-mode {
+    /* Không cần thay đổi nhiều */
+}
+
+.card.shadow.mb-4.dark-mode {
+    background-color: #333;
+    border-color: #555;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(0, 0, 0, 0.4);
+    /* Darker shadow */
+}
+
+.card-header.py-3.bg-warning.dark-mode {
+    background-color: #f0ad4e !important;
+    /* Slightly darker yellow */
+    color: #222 !important;
+    /* Dark text on darker yellow */
+    border-bottom-color: #777;
+}
+
+.card-header.py-3.bg-warning.dark-mode .text-dark {
+    color: #222 !important;
+}
+
+
+
+.card-body.dark-mode {
+    color: #eee;
+}
+
+.alert.alert-success.dark-mode {
+    color: #d4edda;
+    background-color: #28a745;
+    border-color: #1e7e34;
+}
+
+
+
+.table.table-bordered.dark-mode {
+    color: #eee;
+    border-color: #555;
+}
+
+.table.table-bordered.dark-mode th,
+.table.table-bordered.dark-mode td {
+    border-color: #555;
+}
+
+.thead-light.dark-mode th {
+    color: #f8f9fc;
+    /* background-color: #444; */
+    border-color: #555;
+}
+
+
+
+.table-warning.dark-mode {
+    background-color: #f0ad4e;
+    /* Slightly darker yellow */
+    color: #222;
+}
+
+.table-danger.dark-mode {
+    background-color: #d9534f;
+    /* Slightly darker red */
+    color: #eee;
+}
+
+b.dark-mode {
+    color: #fff;
+    /* Ensure bold text is still readable */
+}

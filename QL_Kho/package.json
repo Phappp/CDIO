@@ -1,0 +1,34 @@
+{
+  "name": "ql_kho",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "init-admin": "node src/utils/initAdmin.js",
+    "test": "NODE_ENV=test node server.js",
+    "remove-test-admin": "node src/utils/removeTestAdmin.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "chart.js": "^4.4.8",
+    "datatables.net-bs4": "^2.2.2",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "exceljs": "^4.4.0",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.25",
+    "mysql2": "^3.14.0",
+    "pdfkit": "^0.16.0",
+    "pdfkit-table": "^0.1.99"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
