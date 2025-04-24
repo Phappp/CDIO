@@ -84,14 +84,14 @@
                 height: auto;
                 z-index: 1000;
                 text-align: center;
-                display: flex;
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
+                transition: .1s ease-in-out;
             }
 
             .menu-user.active {
-                dísplay: flex;
+                display: flex;
             }
 
             .profile-header {
@@ -118,6 +118,7 @@
             .menu-user-item {
                 width: 100%;
                 padding: 16px 0;
+                cursor: pointer;
             }
 
             .menu-user-item:hover {
