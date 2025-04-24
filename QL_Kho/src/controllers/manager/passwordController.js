@@ -1,0 +1,62 @@
+const pool = require('../../config/db');
+const { comparePassword, hashPassword } = require('../../config/auth');
+
+const passwordController = {
+    // Hiển thị form thay đổi mật khẩu
+    showChangePasswordForm: (req, res) => {
+        res.render('manager/changePassword', {
+            error: null,
+            success: null
+        });
+    },
+
+    // Xử lý thay đổi mật khẩu
+    changePassword: async (req, res) => {
+        const { currentPassword, newPassword, confirmPassword } = req.body;
+        const userId = req.session.user.id;
+
+        try {
+            // Validate
+            if (newPassword !== confirmPassword) {
+                return res.render('manager/changePassword', {
+                    error: 'Mật khẩu mới không khớp',
+                    success: null
+                });
+            }
+
+            // Lấy mật khẩu hiện tại từ DB
+            const [users] = await pool.query('SELECT password FROM users WHERE id = ?', [userId]);
+            if (users.length === 0) {
+                return res.render('error', { error: 'Người dùng không tồn tại' });
+            }
+
+            // Kiểm tra mật khẩu hiện tại
+            const isMatch = await comparePassword(currentPassword, users[0].password);
+            if (!isMatch) {
+                return res.render('manafer/changePassword', {
+                    error: 'Mật khẩu hiện tại không đúng',
+                    success: null
+                });
+            }
+
+            // Hash mật khẩu mới
+            const hashedPassword = await hashPassword(newPassword);
+
+            // Cập nhật mật khẩu
+            await pool.query('UPDATE users SET password = ? WHERE id = ?', [hashedPassword, userId]);
+
+            res.render('manager/changePassword', {
+                error: null,
+                success: 'Đổi mật khẩu thành công'
+            });
+        } catch (error) {
+            console.error(error);
+            res.render('manager/changePassword', {
+                error: 'Đổi mật khẩu thất bại',
+                success: null
+            });
+        }
+    }
+};
+
+module.exports = passwordController;

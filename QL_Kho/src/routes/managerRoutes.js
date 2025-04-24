@@ -6,9 +6,15 @@ const dashboardController = require('../controllers/manager/dashboardController'
 const approvalController = require('../controllers/manager/approvalController');
 const inventoryAlertController = require('../controllers/manager/inventoryAlertController');
 const reportController = require('../controllers/manager/reportController');
+const passwordController = require('../controllers/manager/passwordController');
+
 
 // Middleware to check if user is admin
 router.use(authMiddleware.isManager);
+
+// Thêm các route sau vào staffRoutes.js
+router.get('/change-password', passwordController.showChangePasswordForm);
+router.post('/change-password', passwordController.changePassword);
 
 // Dashboard
 router.get('/dashboard', dashboardController.getDashboardStats);

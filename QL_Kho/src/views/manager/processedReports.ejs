@@ -6,7 +6,8 @@
         <div class="reportList_header">
             <div class="itemRow all ">
                 <div class="itemRow_content_bgr  "></div>
-                <a href="/manager/reports/processed?status=all" class=" <%= currentFilter === 'all' ? 'bg-light' : '' %>">
+                <a href="/manager/reports/processed?status=all"
+                    class=" <%= currentFilter === 'all' ? 'bg-light' : '' %>">
                     <div class="itemRow_content">
                         <div class="itemRow_content_top">
                             Tất cả
@@ -189,6 +190,7 @@
             </div>
         </div>
     </div>
+    
     <script src="/js/darkmode/admin/processedReports.js"></script>
 
     <%- include('../partials/manager/footer') %>
