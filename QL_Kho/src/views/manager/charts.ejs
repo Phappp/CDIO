@@ -1,6 +1,6 @@
-<%- include('../partials/admin/header') %>
-<link rel="stylesheet" href="/css/admin/chart.css">
-    
+<%- include('../partials/manager/header') %>
+    <link rel="stylesheet" href="/css/admin/chart.css">
+
     <div class="container-chart">
         <h1 class="tilte" style="padding-left: 24px;">Biểu Đồ Thống Kê Nhập/Xuất</h1>
 
@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <%- include('../partials/admin/footer') %>
+    <%- include('../partials/manager/footer') %>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             // Dữ liệu từ server
@@ -205,6 +205,6 @@
 
             // Xử lý thay đổi năm
             document.getElementById('yearFilter').addEventListener('change', function () {
-                window.location.href = `/admin/reports/charts?year=${this.value}`;
+                window.location.href = `/manager/reports/charts?year=${this.value}`;
             });
         </script>

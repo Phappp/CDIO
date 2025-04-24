@@ -13,7 +13,6 @@ warning();
 function callURL() {
     const totalProducts = document.getElementById('total-products');
     const pendingReports = document.getElementById('pending-reports');
-    const totalUsers = document.getElementById('total-users');
     const inventoryAlerts = document.getElementById('inventory-alerts');
 
     pendingReports.onclick = function () {
@@ -24,9 +23,6 @@ function callURL() {
         window.location.href = '/manager/products';
     };
 
-    totalUsers.onclick = function () {
-        window.location.href = '/manager/users';
-    };
     inventoryAlerts.onclick = function () {
         window.location.href = '/manager/inventory/alerts';
     };

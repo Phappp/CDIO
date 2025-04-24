@@ -5,6 +5,7 @@ const productController = require('../controllers/manager/productController');
 const dashboardController = require('../controllers/manager/dashboardController');
 const approvalController = require('../controllers/manager/approvalController');
 const inventoryAlertController = require('../controllers/manager/inventoryAlertController');
+const reportController = require('../controllers/manager/reportController');
 
 // Middleware to check if user is admin
 router.use(authMiddleware.isManager);
@@ -23,6 +24,13 @@ router.get('/products/:id/delete', productController.deleteProduct);
 // Thêm route duyệt báo cáo
 router.get('/reports/pending', approvalController.listPendingReports);
 router.post('/reports/:id/process', approvalController.processReport);
+
+// Danh sách báo cáo
+router.get('/reports/processed', reportController.listProcessedReports);
+router.post('/reports/:id/process', reportController.processReport);
+
+// Thêm route biêu đồ thống kê
+router.get('/reports/charts', dashboardController.showCharts);
 
 // Danh sách tồn kho cảnh báo
 router.get('/inventory/alerts', inventoryAlertController.getInventoryAlerts);
