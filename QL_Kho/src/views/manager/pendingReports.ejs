@@ -2,22 +2,22 @@
 
 <link rel="stylesheet" href="/css/darkmode/admin/pendingReports.css">
 <link rel="stylesheet" href="/css/admin/pendingReports.css">
-<h1 style="padding-top:120px; text-align: left; padding-left: 24px;">Báo cáo chờ duyệt</h1>
+<h1 style="padding-top:120px; text-align: left; padding-left: 24px;">Report pending approval</h1>
 <div class="container" >
     <% if (reports.length===0) { %>
-        <div class="alert alert-info">Không có báo cáo nào chờ duyệt</div>
+        <div class="alert alert-info">There are no reports pending approval</div>
         <% } else { %>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Mã BC</th>
-                        <th>Loại</th>
-                        <th>Sản phẩm</th>
-                        <th>Số lượng</th>
-                        <th>Giá trị</th>
-                        <th>Người tạo</th>
-                        <th>Ngày tạo</th>
-                        <th>Hành động</th>
+                        <th>Report code</th>
+                        <th>Type</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Value</th>
+                        <th>Creator</th>
+                        <th>Creation date</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,11 +47,11 @@
                             <td>
                                 <form method="POST" action="/manager/reports/<%= report.id %>/process" class="">
                                     <input type="hidden" name="action" value="approve">
-                                    <button type="submit" class="btn btn-sm btn-success">Duyệt</button>
+                                    <button type="submit" class="btn btn-sm btn-success">Approved</button>
                                 </form>
                                 <form method="POST" action="/manager/reports/<%= report.id %>/process" class="">
                                     <input type="hidden" name="action" value="reject">
-                                    <button type="submit" class="btn btn-sm btn-danger">Từ chối</button>
+                                    <button type="submit" class="btn btn-sm btn-danger">Decline</button>
                                 </form>
                             </td>
                         </tr>

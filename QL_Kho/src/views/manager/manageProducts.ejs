@@ -1,9 +1,9 @@
 <%- include('../partials/manager/header') %>
 
 <link rel="stylesheet" href="/css/admin/manageProducts.css">
-<a href="/manager/products/create" class="add-product-button"><i class="fa-solid fa-plus"></i>Thêm sản phẩm</a>
+<a href="/manager/products/create" class="add-product-button"><i class="fa-solid fa-plus"></i>Add product</a>
 
-<h1>Quản lý sản phẩm</h1>
+<h1>Product management</h1>
 
 <div class="product-management-container">
 
@@ -11,13 +11,13 @@
     <table >
         <thead >
             <tr>
-                <th>Mã SP</th>
-                <th>Tên sản phẩm</th>
-                <th>Số lượng</th>
-                <th>Đơn vị</th>
-                <th>Giá</th>
-                <th>Người tạo</th>
-                <th>Hành động</th>
+                <th>Product code</th>
+                <th>Product name</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Price</th>
+                <th>Creator</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -42,7 +42,7 @@
                         <%= product.created_by_name %>
                     </td>
                     <td class="action">
-                        <a href="/manager/products/<%= product.id %>/edit" class="edit-product-button">Sửa</a>
+                        <a href="/manager/products/<%= product.id %>/edit" class="edit-product-button">Fix</a>
                         <a href="/manager/products/<%= product.id %>/delete"
                             class="delete-product-button delete-btn">Xóa</a>
                     </td>

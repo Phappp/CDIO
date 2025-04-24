@@ -2,10 +2,10 @@
   <link rel="stylesheet" href="/css/admin/inventoryAlerts.css">
   <div class="inventory-warning-container">
     <div class="warning-header">
-      <h1 class="warning-title">Cảnh Báo Tồn Kho</h1>
+      <h1 class="warning-title">Inventory Alert</h1>
       <div class="warning-threshold">
         <span class="threshold-badge">
-          Ngưỡng cảnh báo: <%= helpers.formatCurrency(threshold) %> VNĐ
+          Warning threshold: <%= helpers.formatCurrency(threshold) %> VNĐ
         </span>
       </div>
     </div>
@@ -14,19 +14,19 @@
       <div class="card-content">
         <% if (products.length===0) { %>
           <div class="no-warning-alert">
-            Không có mặt hàng nào vượt ngưỡng tồn kho
+            There are no items exceeding the inventory threshold
           </div>
           <% } else { %>
             <div class="table-responsive-wrapper">
               <table class="inventory-table">
                 <thead class="table-header-light">
                   <tr>
-                    <th>Mã SP</th>
-                    <th>Tên mặt hàng</th>
-                    <th>Số lượng</th>
-                    <th>Đơn vị</th>
-                    <th>Đơn giá</th>
-                    <th>Tổng giá trị</th>
+                    <th>Product code</th>
+                    <th>Product name</th>
+                    <th>Quantity</th>
+                    <th>Unit</th>
+                    <th>Unit price</th>
+                    <th>Total value</th>
                   </tr>
                 </thead>
                 <tbody>

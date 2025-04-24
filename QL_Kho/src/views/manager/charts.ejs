@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="/css/admin/chart.css">
 
     <div class="container-chart">
-        <h1 class="tilte" style="padding-left: 24px;">Biểu Đồ Thống Kê Nhập/Xuất</h1>
+        <h1 class="tilte" style="padding-left: 24px;">Import-Export Statistics Chart</h1>
 
         <!-- Filter Section -->
         <div class="row mb-4">
@@ -10,7 +10,7 @@
                 <select class="form-control" id="yearFilter">
                     <% stats.availableYears.forEach(year=> { %>
                         <option value="<%= year %>" <%=year==stats.currentYear ? 'selected' : '' %>>
-                            Năm <%= year %>
+                            Year <%= year %>
                         </option>
                         <% }) %>
                 </select>
@@ -20,7 +20,7 @@
         <!-- Biểu đồ 1: Tổng quan năm -->
         <div class="card shadow mb-4">
             <div class="card-header py-3 bg-primary text-white">
-                <h6 class="m-0 font-weight-bold">Tổng Giá Trị Nhập/Xuất Năm <%= stats.currentYear %>
+                <h6 class="m-0 font-weight-bold">Total Import/Export Value for the Year <%= stats.currentYear %>
                 </h6>
             </div>
             <div class="card-body">
@@ -35,7 +35,7 @@
             <div class="col-md-6">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 bg-info text-white">
-                        <h6 class="m-0 font-weight-bold">Số Lượng Theo Tháng</h6>
+                        <h6 class="m-0 font-weight-bold">Monthly Quantity</h6>
                     </div>
                     <div class="card-body">
                         <div class="chart-container" style="height: 350px;">
@@ -47,7 +47,7 @@
             <div class="col-md-6">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 bg-success text-white">
-                        <h6 class="m-0 font-weight-bold">Giá Trị Theo Tháng (VNĐ)</h6>
+                        <h6 class="m-0 font-weight-bold">Monthly Value (VND)</h6>
                     </div>
                     <div class="card-body">
                         <div class="chart-container" style="height: 350px;">
@@ -101,7 +101,7 @@
                                         return `${label}: ${finalValue} VNĐ (${percentage}%)`;
                                     }
 
-
+                                    
                                 }
                             }
                         }
