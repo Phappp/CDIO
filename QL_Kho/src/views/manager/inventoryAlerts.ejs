@@ -4,7 +4,7 @@
     <div class="warning-header">
       <h1 class="warning-title">Inventory Alert</h1>
       <div class="warning-threshold">
-        <span class="threshold-badge">
+        <span class="threshold-badge" style="font-weight: 600; color: rgb(144, 30, 30);">
           Warning threshold: <%= helpers.formatCurrency(threshold) %> VNĐ
         </span>
       </div>
@@ -59,6 +59,6 @@
       </div>
     </div>
   </div>
-  
+
   <script src="/js/darkmode/admin/inventoryAlerts.js"></script>
   <%- include('../partials/manager/footer') %>

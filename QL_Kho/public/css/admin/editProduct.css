@@ -1,6 +1,5 @@
 /* Base layout */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
     color: #333;
     line-height: 1.6;
@@ -17,7 +16,7 @@ body {
     max-width: 800px;
     width: 100%;
     padding: 40px;
-    background-color: #fff;
+    background-color: #ffffff2a;
     border-radius: 12px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
     display: flex;
@@ -89,7 +88,7 @@ textarea.form-control {
 
 input.form-control:focus,
 textarea.form-control:focus {
-    border-color: #007bff;
+    border-color: #5b6065;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
     outline: none;
 }

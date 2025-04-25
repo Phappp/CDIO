@@ -10,7 +10,7 @@
                     class=" <%= currentFilter === 'all' ? 'bg-light' : '' %>">
                     <div class="itemRow_content">
                         <div class="itemRow_content_top">
-                            Tất cả
+                            All
                         </div>
                         <hr style="margin: 0;">
                         <div class="itemRow_content_bot" style="">
@@ -54,27 +54,27 @@
             <form class="" method="GET" action="/manager/reports/processed">
                 <input type="hidden" name="status" value="<%= currentFilter %>">
 
-                <label class="mr-2">Ngày:</label>
+                <label class="mr-2">Day:</label>
                 <select class="form-control mr-3" name="day">
-                    <option value="">Tất cả</option>
+                    <option value="">All</option>
                     <% for (let i=1; i <=31; i++) { %>
                         <option value="<%= i %>" <%=Number(selectedDay)===i ? 'selected' : '' %>><%= i %>
                         </option>
                         <% } %>
                 </select>
 
-                <label class="mr-2">Tháng:</label>
+                <label class="mr-2">Month:</label>
                 <select class="form-control mr-3" name="month">
-                    <option value="">Tất cả</option>
+                    <option value="">All</option>
                     <% for (let i=1; i <=12; i++) { %>
                         <option value="<%= i %>" <%=Number(selectedMonth)===i ? 'selected' : '' %>><%= i %>
                         </option>
                         <% } %>
                 </select>
 
-                <label class="mr-2">Năm:</label>
+                <label class="mr-2">Year:</label>
                 <select class="form-control mr-3" name="year">
-                    <option value="">Tất cả</option>
+                    <option value="">All</option>
                     <% for (let y=2022; y <=new Date().getFullYear(); y++) { %>
                         <option value="<%= y %>" <%=Number(selectedYear)===y ? 'selected' : '' %>><%= y %>
                         </option>
@@ -131,7 +131,7 @@
                                         <%= report.id %>
                                     </td>
                                     <td>
-                                        <%= report.type==='import' ? 'Nhập' : 'Xuất' %>
+                                        <%= report.type==='import' ? 'Import' : 'Export' %>
                                     </td>
                                     <td>
                                         <%= report.product_code %>
@@ -150,8 +150,8 @@
                     report.status === 'approved' ? 'success' : 
                     report.status === 'rejected' ? 'danger' : 'warning'
                   %>">
-                                            <%= report.status==='approved' ? 'Đã duyệt' : report.status==='rejected'
-                                                ? 'Từ chối' : 'Chờ xử lý' %>
+                                            <%= report.status==='approved' ? 'Approved' : report.status==='rejected'
+                                                ? 'Rejected' : 'Pending' %>
                                         </span>
                                     </td>
                                     <td>
@@ -166,22 +166,6 @@
                                     <td>
                                         <%= helpers.formatDate(report.updated_at) %>
                                     </td>
-                                    <!-- <td>
-                                        <% if (report.status==='pending' ) { %>
-                                            <form action="/admin/reports/<%= report.id %>/process" method="POST"
-                                                class="d-inline">
-                                                <input type="hidden" name="action" value="approve">
-                                                <button type="submit" class="btn btn-sm btn-success">Duyệt</button>
-                                            </form>
-                                            <form action="/admin/reports/<%= report.id %>/process" method="POST"
-                                                class="d-inline ml-1">
-                                                <input type="hidden" name="action" value="reject">
-                                                <button type="submit" class="btn btn-sm btn-danger">Từ chối</button>
-                                            </form>
-                                            <% } else { %>
-                                                <span class="text-muted">Đã xử lý</span>
-                                                <% } %>
-                                    </td> -->
                                 </tr>
                                 <% }) %>
                         </tbody>
@@ -190,7 +174,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="/js/darkmode/admin/processedReports.js"></script>
 
     <%- include('../partials/manager/footer') %>
