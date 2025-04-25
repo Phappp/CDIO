@@ -1,7 +1,7 @@
 <%- include('../partials/staff/header') %>
-<link rel="stylesheet" href="/css/staff/dashboard.css">
+    <link rel="stylesheet" href="/css/staff/dashboard.css">
     <div class="container">
-        
+
 
 
 
@@ -35,7 +35,7 @@
                                 <%= product.unit %>
                             </td>
                             <td>
-                                <%= product.price %>    
+                                <%= product.price %>
                             </td>
                         </tr>
                         <% }) %>
@@ -45,5 +45,16 @@
 
         </div>
     </div>
-
+    <div class="menu-user">
+        <div class="profile-header">
+            <i class="fa-solid fa-circle-user"></i>
+            <div class="username">
+                <%= user.username %>
+            </div>
+        </div>
+        <div class="menu-user-item">
+            <i class="fa-solid fa-key"></i>
+            <a href="/staff/change-password" class="menu-user-link">Change password</a>
+        </div>
+    </div>
     <!-- <%- include('../partials/admin/footer') %> -->
