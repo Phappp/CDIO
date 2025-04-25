@@ -19,7 +19,7 @@ const passwordController = {
             // Validate
             if (newPassword !== confirmPassword) {
                 return res.render('staff/changePassword', {
-                    error: 'Mật khẩu mới không khớp',
+                    error: 'New password and confirm password do not match',
                     success: null
                 });
             }
@@ -34,7 +34,7 @@ const passwordController = {
             const isMatch = await comparePassword(currentPassword, users[0].password);
             if (!isMatch) {
                 return res.render('staff/changePassword', {
-                    error: 'Mật khẩu hiện tại không đúng',
+                    error: 'Current password is incorrect',
                     success: null
                 });
             }
@@ -47,12 +47,12 @@ const passwordController = {
 
             res.render('staff/changePassword', {
                 error: null,
-                success: 'Đổi mật khẩu thành công'
+                success: 'Change password successfully'
             });
         } catch (error) {
             console.error(error);
             res.render('staff/changePassword', {
-                error: 'Đổi mật khẩu thất bại',
+                error: 'Change password failed',
                 success: null
             });
         }

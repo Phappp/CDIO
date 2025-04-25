@@ -1,5 +1,5 @@
 <%- include('../partials/staff/header') %>
-<!-- <link rel="stylesheet" href="/css/staff.css">
+    <!-- <link rel="stylesheet" href="/css/staff.css">
     
 </head>
 
@@ -22,7 +22,7 @@
     <!-- <link rel="stylesheet" href="/css/staff/changePassword.css"> -->
 
     <div class="container">
-        <h1>Create a report <%= reportType==='import' ? 'NHẬP' : 'XUẤT' %> goods</h1>
+        <h1>Create a report <%= reportType==='import' ? 'IMPORT' : 'EXPORT' %> goods</h1>
 
         <% if (error) { %>
             <div class="alert alert-danger">
@@ -57,4 +57,3 @@
                     <a href="/staff/reports" class="btn btn-secondary">Cancel</a>
                 </form>
     </div>
-    
