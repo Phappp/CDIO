@@ -52,7 +52,7 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 28px;
+    gap: 64px;
 }
 
 .admin-nav li {
