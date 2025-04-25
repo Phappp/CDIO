@@ -41,7 +41,7 @@
                 <!--dark mode -->
                 <a><i class="fa-solid fa-moon"></i></a>
             </div>
-            <div class="circle-effect">
+            <div class="circle-effect" id="user-header">
                 <a href="#"><i class="fa-solid fa-user"></i></a>
             </div>
             <div class="circle-effect">
@@ -51,3 +51,78 @@
         </div>
     </header>
     <main>
+        <script>
+            const menuUser = document.getElementById('user-header');
+            menuUser.addEventListener('click', function () {
+                const menu = document.querySelector('.menu-user');
+                menu.classList.toggle('active');
+            });
+        </script>
+        <style>
+            .menu-user {
+                display: none;
+                position: absolute;
+                top: 80px;
+                right: 72px;
+                background-color: #ffffffdf;
+                border-radius: 5px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+                width: 200px;
+                height: auto;
+                z-index: 1000;
+                text-align: center;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                transition: .1s ease-in-out;
+                color: #000000 !important;
+            }
+
+            .menu-user.active {
+                display: flex;
+            }
+
+            .profile-header {
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                width: 90%;
+                border-bottom: 2px solid #0000009a;
+                padding-bottom: 12px;
+                padding-top: 12px;
+            }
+
+            .profile-header i {
+                font-size: 40px;
+                margin-right: 10px;
+            }
+
+            .profile-header.dark-mode i {
+                font-size: 40px;
+                margin-right: 10px;
+            }
+
+            .username {
+                font-size: 18px;
+                font-weight: bold;
+
+            }
+
+            .menu-user-item {
+                width: 100%;
+                padding: 16px 0;
+                cursor: pointer;
+            }
+
+            .menu-user-item:hover {
+                background-color: #0000001a;
+            }
+
+            .menu-user-link {
+                text-decoration: none;
+                color: #000000;
+                font-size: 18px;
+                font-weight: 600;
+
+            }
+        </style>

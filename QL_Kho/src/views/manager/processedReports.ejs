@@ -10,10 +10,10 @@
                     class=" <%= currentFilter === 'all' ? 'bg-light' : '' %>">
                     <div class="itemRow_content">
                         <div class="itemRow_content_top">
-                            All
+                            Tất cả
                         </div>
                         <hr style="margin: 0;">
-                        <div class="itemRow_content_bot" style="">
+                        <div class="itemRow_content_bot">
                             <%= Number(counts.approved_count) + Number(counts.rejected_count) %>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                     class=" <%= currentFilter === 'approved' ? 'bg-light' : '' %>">
                     <div class="itemRow_content_top">
                         <div class="">
-                            Approval
+                            Chấp thuận
                         </div>
                         <hr style="margin: 0;">
                         <div class="itemRow_content_bot">
@@ -42,7 +42,7 @@
                     class=" <%= currentFilter === 'rejected' ? 'bg-light' : '' %>">
                     <div class="">
                         <div class="itemRow_content_top">
-                            Decline
+                            Từ chối
                         </div>
                         <hr style="margin: 0;">
                         <div class="itemRow_content_bot">
@@ -54,27 +54,27 @@
             <form class="" method="GET" action="/manager/reports/processed">
                 <input type="hidden" name="status" value="<%= currentFilter %>">
 
-                <label class="mr-2">Day:</label>
+                <label class="mr-2">Ngày:</label>
                 <select class="form-control mr-3" name="day">
-                    <option value="">All</option>
+                    <option value="">Tất cả</option>
                     <% for (let i=1; i <=31; i++) { %>
                         <option value="<%= i %>" <%=Number(selectedDay)===i ? 'selected' : '' %>><%= i %>
                         </option>
                         <% } %>
                 </select>
 
-                <label class="mr-2">Month:</label>
+                <label class="mr-2">Tháng:</label>
                 <select class="form-control mr-3" name="month">
-                    <option value="">All</option>
+                    <option value="">Tất cả</option>
                     <% for (let i=1; i <=12; i++) { %>
                         <option value="<%= i %>" <%=Number(selectedMonth)===i ? 'selected' : '' %>><%= i %>
                         </option>
                         <% } %>
                 </select>
 
-                <label class="mr-2">Year:</label>
+                <label class="mr-2">Năm:</label>
                 <select class="form-control mr-3" name="year">
-                    <option value="">All</option>
+                    <option value="">Tất cả</option>
                     <% for (let y=2022; y <=new Date().getFullYear(); y++) { %>
                         <option value="<%= y %>" <%=Number(selectedYear)===y ? 'selected' : '' %>><%= y %>
                         </option>
@@ -89,7 +89,7 @@
         <div class="reportList_body">
             <div class="reportList_body_top">
                 <div class="title">
-                    <h2>List of processed reports</h2>
+                    <h2>Danh sách báo cáo đã xử lý</h2>
                 </div>
                 <div class="dropdown ">
                     <div class="dropdown-menu" aria-labelledby="exportDropdown">
@@ -110,17 +110,17 @@
                     <table class="" id="dataTable" width="100%" cellspacing="0">
                         <thead class="thead-light">
                             <tr>
-                                <th>Report code</th>
-                                <th>Type</th>
-                                <th>Product code</th>
-                                <th>Product Name</th>
-                                <th>Quantity</th>
-                                <th>Value</th>
-                                <th>Status</th>
-                                <th>Creator</th>
-                                <th>Handler</th>
-                                <th>Creation date</th>
-                                <th>Processing Date</th>
+                                <th>Mã BC</th>
+                                <th>Loại</th>
+                                <th>Mã SP</th>
+                                <th>Tên SP</th>
+                                <th>SL</th>
+                                <th>Giá trị</th>
+                                <th>Trạng thái</th>
+                                <th>Người tạo</th>
+                                <th>Người xử lý</th>
+                                <th>Ngày tạo</th>
+                                <th>Ngày Xử lý</th>
                                 <!-- <th>Thao tác</th> -->
                             </tr>
                         </thead>
@@ -131,7 +131,7 @@
                                         <%= report.id %>
                                     </td>
                                     <td>
-                                        <%= report.type==='import' ? 'Import' : 'Export' %>
+                                        <%= report.type==='import' ? 'Nhập' : 'Xuất' %>
                                     </td>
                                     <td>
                                         <%= report.product_code %>
@@ -150,8 +150,8 @@
                     report.status === 'approved' ? 'success' : 
                     report.status === 'rejected' ? 'danger' : 'warning'
                   %>">
-                                            <%= report.status==='approved' ? 'Approved' : report.status==='rejected'
-                                                ? 'Rejected' : 'Pending' %>
+                                            <%= report.status==='approved' ? 'Đã duyệt' : report.status==='rejected'
+                                                ? 'Từ chối' : 'Chờ xử lý' %>
                                         </span>
                                     </td>
                                     <td>
@@ -166,6 +166,7 @@
                                     <td>
                                         <%= helpers.formatDate(report.updated_at) %>
                                     </td>
+
                                 </tr>
                                 <% }) %>
                         </tbody>
@@ -174,8 +175,7 @@
             </div>
         </div>
     </div>
-
-    <script src="/js/darkmode/admin/processedReports.js"></script>
+    <!-- <script src="/js/darkmode/admin/processedReports.js"></script> -->
 
     <%- include('../partials/manager/footer') %>
 

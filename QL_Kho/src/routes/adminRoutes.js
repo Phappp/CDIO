@@ -7,6 +7,9 @@ const dashboardController = require('../controllers/admin/dashboardController');
 const approvalController = require('../controllers/admin/approvalController');
 const reportController = require('../controllers/admin/reportController');
 const inventoryAlertController = require('../controllers/admin/inventoryAlertController');
+const passwordController = require('../controllers/admin/passwordController');
+
+
 // Middleware to check if user is admin
 router.use(authMiddleware.isAdmin);
 
@@ -45,5 +48,9 @@ router.get('/reports/charts', dashboardController.showCharts);
 
 // Danh sách tồn kho cảnh báo
 router.get('/inventory/alerts', inventoryAlertController.getInventoryAlerts);
+
+// Thêm các route sau vào staffRoutes.js
+router.get('/change-password', passwordController.showChangePasswordForm);
+router.post('/change-password', passwordController.changePassword);
 
 module.exports = router;

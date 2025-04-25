@@ -41,4 +41,5 @@ router.get('/reports/charts', dashboardController.showCharts);
 // Danh sách tồn kho cảnh báo
 router.get('/inventory/alerts', inventoryAlertController.getInventoryAlerts);
 
+
 module.exports = router;
