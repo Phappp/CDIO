@@ -10,6 +10,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+<<<<<<< HEAD
                             <th>Report code</th>
                             <th>Type</th>
                             <th>Product</th>
@@ -18,6 +19,39 @@
                             <th>Creator</th>
                             <th>Creation date</th>
                             <th>Action</th>
+=======
+                            <td>
+                                <%= report.id %>
+                            </td>
+                            <td>
+                                <%= report.type==='import' ? 'Nhập' : 'Xuất' %>
+                            </td>
+                            <td>
+                                <%= report.product_name %>
+                            </td>
+                            <td>
+                                <%= report.quantity %>
+                            </td>
+                            <td>
+                                <%= (report.quantity * report.price).toLocaleString() %> VND
+                            </td>
+                            <td>
+                                <%= report.created_by_name %>
+                            </td>
+                            <td>
+                                <%= new Date(report.created_at).toLocaleString() %>
+                            </td>
+                            <td>
+                                <form method="POST" action="/manager/reports/<%= report.id %>/process" class="">
+                                    <input type="hidden" name="action" value="approve">
+                                    <button type="submit" class="btn btn-sm btn-success">Approved</button>
+                                </form>
+                                <form method="POST" action="/manager/reports/<%= report.id %>/process" class="">
+                                    <input type="hidden" name="action" value="reject">
+                                    <button type="submit" class="btn btn-sm btn-danger">Rejected</button>
+                                </form>
+                            </td>
+>>>>>>> 4007710dbd1428b1ceedfa6f48ff7c91cde5cc1c
                         </tr>
                     </thead>
                     <tbody>
