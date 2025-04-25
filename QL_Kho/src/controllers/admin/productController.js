@@ -94,7 +94,7 @@ const productController = {
         const { id } = req.params;
 
         try {
-            await pool.query('DELETE FROM products WHERE id = ?', [id]);
+            await pool.query('UPDATE products SET is_deleted = 1 WHERE id = ?', [id]);
             res.redirect('/admin/products');
         } catch (error) {
             console.error(error);
