@@ -5,11 +5,12 @@ const productController = {
     listProducts: async (req, res) => {
         try {
             const [products] = await pool.query(`
-        SELECT p.*, u.username as created_by_name 
-        FROM products p
-        JOIN users u ON p.created_by = u.id
-        ORDER BY p.id DESC
-      `);
+                SELECT p.*, u.username as created_by_name 
+                FROM products p
+                JOIN users u ON p.created_by = u.id
+                WHERE p.is_deleted = 0
+                ORDER BY p.id DESC
+            `);
             res.render('manager/manageProducts', { products });
         } catch (error) {
             console.error(error);
@@ -94,7 +95,7 @@ const productController = {
         const { id } = req.params;
 
         try {
-            await pool.query('DELETE FROM products WHERE id = ?', [id]);
+            await pool.query('UPDATE products SET is_deleted = 1 WHERE id = ?', [id]);
             res.redirect('/manager/products');
         } catch (error) {
             console.error(error);

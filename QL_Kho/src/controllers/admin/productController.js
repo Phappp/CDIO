@@ -5,17 +5,19 @@ const productController = {
     listProducts: async (req, res) => {
         try {
             const [products] = await pool.query(`
-        SELECT p.*, u.username as created_by_name 
-        FROM products p
-        JOIN users u ON p.created_by = u.id
-        ORDER BY p.id DESC
-      `);
+                SELECT p.*, u.username as created_by_name 
+                FROM products p
+                JOIN users u ON p.created_by = u.id
+                WHERE p.is_deleted = 0
+                ORDER BY p.id DESC
+            `);
             res.render('admin/manageProducts', { products });
         } catch (error) {
             console.error(error);
             res.render('error', { error: 'Lỗi khi tải danh sách sản phẩm' });
         }
     },
+
 
     // Hiển thị form thêm sản phẩm
     showCreateProduct: (req, res) => {
