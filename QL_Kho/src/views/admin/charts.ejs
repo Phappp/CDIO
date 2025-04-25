@@ -47,7 +47,7 @@
             <div class="col-md-6">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 bg-success text-white">
-                        <h6 class="m-0 font-weight-bold">Giá Trị Theo Tháng (VNĐ)</h6>
+                        <h6 class="m-0 font-weight-bold">Monthly Value (VND)</h6>
                     </div>
                     <div class="card-body">
                         <div class="chart-container" style="height: 350px;">
@@ -64,8 +64,8 @@
         <script>
             // Dữ liệu từ server
             const stats = <%- JSON.stringify(stats) %>;
-            const monthNames = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
-                'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
+            const monthNames = ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6',
+                'Month 7', 'Month 8', 'Month 9', 'Month 10', 'Month 11', 'Month 12'];
 
             // 1. Biểu đồ tổng quan năm
             new Chart(
@@ -73,7 +73,7 @@
                 {
                     type: 'doughnut',
                     data: {
-                        labels: ['Tổng nhập', 'Tổng xuất'],
+                        labels: ['Total Import', 'Total Export'],
                         datasets: [{
                             data: [
                                 stats.monthlySummary.find(d => d.type === 'import')?.total_value || 0,
@@ -98,7 +98,7 @@
                                         const total = dataArr.reduce((a, b) => Number(a) + Number(b), 0);
                                         const percentage = total > 0 ? Math.round((value / total) * 100) : 0;
                                         const finalValue = value.toLocaleString('vi-VN');
-                                        return `${label}: ${finalValue} VNĐ (${percentage}%)`;
+                                        return `${label}: ${finalValue} VND (${percentage}%)`;
                                     }
 
 
@@ -118,14 +118,14 @@
                         labels: monthNames,
                         datasets: [
                             {
-                                label: 'Nhập hàng',
+                                label: 'Import',
                                 data: stats.monthlyData.map(d => d.import_qty),
                                 backgroundColor: '#36b9cc',
                                 borderColor: '#2c9faf',
                                 borderWidth: 1
                             },
                             {
-                                label: 'Xuất hàng',
+                                label: 'Export',
                                 data: stats.monthlyData.map(d => d.export_qty),
                                 backgroundColor: '#1cc88a',
                                 borderColor: '#17a673',
@@ -140,7 +140,7 @@
                                 beginAtZero: true,
                                 title: {
                                     display: true,
-                                    text: 'Số lượng'
+                                    text: 'Quantity'
                                 }
                             }
                         }
@@ -157,14 +157,14 @@
                         labels: monthNames,
                         datasets: [
                             {
-                                label: 'Giá trị nhập',
+                                label: 'Import Value',
                                 data: stats.monthlyData.map(d => d.import_value),
                                 backgroundColor: '#f6c23e',
                                 borderColor: '#dda20a',
                                 borderWidth: 1
                             },
                             {
-                                label: 'Giá trị xuất',
+                                label: 'Export Value',
                                 data: stats.monthlyData.map(d => d.export_value),
                                 backgroundColor: '#e74a3b',
                                 borderColor: '#be2617',
@@ -184,7 +184,7 @@
                                 },
                                 title: {
                                     display: true,
-                                    text: 'Triệu VNĐ'
+                                    text: 'Million VND'
                                 }
                             }
                         },
@@ -194,7 +194,7 @@
                                     label: (ctx) => {
                                         const label = ctx.dataset.label || '';
                                         const value = Number(ctx.raw) || 0;
-                                        return `${label}: ${value.toLocaleString('vi-VN')} VNĐ`;
+                                        return `${label}: ${value.toLocaleString('vi-VN')} VND`;
                                     }
                                 }
                             }
