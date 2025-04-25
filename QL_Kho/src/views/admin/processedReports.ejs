@@ -165,22 +165,7 @@
                                     <td>
                                         <%= helpers.formatDate(report.updated_at) %>
                                     </td>
-                                    <!-- <td>
-                                        <% if (report.status==='pending' ) { %>
-                                            <form action="/admin/reports/<%= report.id %>/process" method="POST"
-                                                class="d-inline">
-                                                <input type="hidden" name="action" value="approve">
-                                                <button type="submit" class="btn btn-sm btn-success">Duyệt</button>
-                                            </form>
-                                            <form action="/admin/reports/<%= report.id %>/process" method="POST"
-                                                class="d-inline ml-1">
-                                                <input type="hidden" name="action" value="reject">
-                                                <button type="submit" class="btn btn-sm btn-danger">Từ chối</button>
-                                            </form>
-                                            <% } else { %>
-                                                <span class="text-muted">Đã xử lý</span>
-                                                <% } %>
-                                    </td> -->
+
                                 </tr>
                                 <% }) %>
                         </tbody>

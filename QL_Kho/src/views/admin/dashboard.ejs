@@ -44,6 +44,18 @@
             </div>
         </div>
     </div>
+    <div class="menu-user">
+        <div class="profile-header">
+            <i class="fa-solid fa-circle-user"></i>
+            <div class="username">
+                <%= user.username %>
+            </div>
+        </div>
+        <div class="menu-user-item">
+            <i class="fa-solid fa-key"></i>
+            <a href="/admin/change-password" class="menu-user-link">Change password</a>
+        </div>
+    </div>
     <script src="/js/darkmode/admin/dashboard.js"></script>
 
     <%- include('../partials/admin/footer') %>
