@@ -2,13 +2,13 @@
     <link rel="stylesheet" href="/css/admin/manageProducts.css">
     <a href="/admin/products/create" class="add-product-button"><i class="fa-solid fa-plus"></i>Thêm sản phẩm</a>
 
-    <h1>Quản lý sản phẩm</h1>
+    <h1 class="manageProduct-heading">Quản lý sản phẩm</h1>
 
     <div class="product-management-container">
 
 
-        <table >
-            <thead >
+        <table class="table">
+            <thead>
                 <tr>
                     <th>Mã SP</th>
                     <th>Tên sản phẩm</th>
@@ -35,7 +35,7 @@
                             <%= product.unit %>
                         </td>
                         <td>
-                            <%= product.price.toLocaleString() %> VNĐ
+                            <%= product.price.toLocaleString() %> VND
                         </td>
                         <td>
                             <%= product.created_by_name %>
@@ -50,4 +50,6 @@
             </tbody>
         </table>
     </div>
+    <script src="/js/darkmode/share/manageProducts.js"></script>
+
     <%- include('../partials/admin/footer') %>

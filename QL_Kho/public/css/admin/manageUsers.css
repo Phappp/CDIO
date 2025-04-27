@@ -1,8 +1,6 @@
-/* General styles (you might have these already) */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f6f9;
-    color: #333;
+    /* color: #333; */
     line-height: 1.6;
     transition: background-color 0.3s ease;
 
@@ -11,7 +9,7 @@ body {
 .btnAdd {
     color: #ffffff;
     border-radius: 8px;
-    border: 1px solid #000;
+    border: 1px solid #fff;
     padding: 20px 8px;
     text-decoration: none;
     font-size: 18px;
@@ -24,11 +22,11 @@ body {
     align-items: center;
     box-shadow: 0 8px 8px #0000002a;
     transition: .3s;
-    background-color: #0000005a;
+    background-color: #444;
 }
 
 .btnAdd:hover {
-    background-color: #0000009b;
+    background-color: #000;
 }
 
 .btnAdd i {
@@ -41,10 +39,9 @@ body {
     transform: rotate(90deg);
 }
 
-h1 {
-    color: #333;
+.manageProduct-heading {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 52px;
 }
 
 .container {
@@ -58,47 +55,62 @@ h1 {
 
 table {
     align-self: center;
-    width: 95%;
+    width: 90%;
     border-collapse: collapse;
     margin-bottom: 20px;
-    background-color: #fff;
     transition: background-color 0.3s ease;
-
 }
 
+
+
 table thead th {
-    background-color: #f8f9fa;
-    color: #333;
+    /* background-color: #333; */
+    /* color: #000000 ; */
     font-weight: bold;
     text-align: left;
     padding: 12px;
-    border-bottom: 2px solid #ddd;
     transition: background-color 0.3s ease;
+    /* color: #ddd; */
+    border-bottom: 2px solid ;
+}
+
+table thead th:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: center;
+}
+table thead th:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 
 }
 
 table tbody td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid ;
     transition: background-color 0.3s ease;
 
 }
 
-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-    transition: background-color 0.3s ease;
+table tbody td:last-child {
+    display: flex;
+    justify-content: space-evenly;
 
 }
 
+/* table tbody tr:nth-child(even) {
+    background-color: #5755555a;
+    transition: background-color 0.3s ease;
 
+} */
 
 .btnInfo {
-    background-color: #0bbbd6;
+    background-color: #0c9fb5;
     color: #fff;
     box-shadow: 0px 4px 8px #0000009a;
     transition: background-color 0.3s ease;
-    padding: 5px 10px;
+    padding: 5px 15px;
     font-size: 0.875rem;
     border-radius: 3px;
     text-decoration: none;
@@ -116,7 +128,7 @@ table tbody tr:nth-child(even) {
     color: #fff;
     box-shadow: 0px 4px 8px #0000009a;
     transition: background-color 0.3s ease;
-    padding: 5px 10px;
+    padding: 5px 15px;
     font-size: 0.875rem;
     border-radius: 3px;
     text-decoration: none;
@@ -127,4 +139,64 @@ table tbody tr:nth-child(even) {
 .btnDanger:hover {
     background-color: #8d1b26;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* CSS DARKMODE */
+body.dark-mode {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+}
+
+
+
+/* .manageProduct-heading.dark-mode {
+    color: #eee;
+} */
+
+
+
+.table.dark-mode {
+    background-color: #333;
+    color: #eee;
+}
+
+.table.dark-mode thead th {
+    background-color: #444;
+    color: #ddd ;
+    border-bottom-color: #666;
+}
+
+.table.dark-mode tbody td {
+    border-bottom-color: #555;
+}
+
+.table.dark-mode tbody tr:nth-child(even) {
+    background-color: #444;
+}
+
+.btnInfo.dark-mode {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+.btnInfo.dark-mode:hover {
+    background-color: #117a8b;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.btnDanger.dark-mode {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btnDanger.dark-mode:hover {
+    background-color: #c82333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.btnAdd.dark-mode {
+    color: #eee;
+    box-shadow: 0px 4px 8px #ffffff1a;
+    border: 1px solid #eee;
+    background-color: transparent;
 }

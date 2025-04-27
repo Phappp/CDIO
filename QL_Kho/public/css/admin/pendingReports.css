@@ -9,18 +9,22 @@ body {
     padding: 20px;
     background-color: transparent;
     border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     margin-top: 40px;
     transition: background-color 0.3s ease;
     padding-bottom: 40px;
+    font-size: 18px;
 
 }
 
-h1 {
+
+.pendingReports-heading {
     text-align: center;
     color: #343a40;
     margin-bottom: 30px;
     font-family: 'Arial', sans-serif;
+    padding-top: 120px;
+    text-align: center;
+    padding-bottom: 32px;
 }
 
 .alert {
@@ -34,30 +38,28 @@ h1 {
 
 }
 
-table {
+.pendingReports-table {
     width: 100%;
     border-collapse: collapse;
+    font-weight: 500;
 }
 
 th,
 td {
     padding: 10px;
     text-align: left;
-    /* Căn trái */
     border-bottom: 1px solid #ccc;
     transition: background-color 0.3s ease;
 
 }
 
 th {
-    background-color: #f2f2f2;
     font-weight: bold;
     transition: background-color 0.3s ease;
 
 }
 
 td {
-    background-color: white;
     transition: background-color 0.3s ease;
 
 }
@@ -120,4 +122,68 @@ button:hover {
         padding: 6px 12px;
         font-size: 12px;
     }
+}
+
+/* CSS DARKMODE */
+body.dark-mode {
+    background-color: #1e1e1e;
+}
+
+
+
+.pendingReports-heading.dark-mode {
+    color: #eee;
+}
+
+.alert.alert-info.dark-mode {
+    background-color: #3a3d40;
+    color: #cce5ff;
+    border-color: #b8daff;
+}
+
+.pendingReports-table.dark-mode {
+    color: #eee;
+    background-color: transparent;
+}
+
+thead.dark-mode th {
+    background-color: transparent;
+    color: #ddd;
+    border-bottom-color: #666;
+}
+
+tbody.dark-mode td {
+    background-color: transparent;
+    border-bottom-color: #444;
+}
+
+tbody.dark-mode tr {
+    background-color: transparent;
+    border-bottom-color: #444;
+}
+
+.btn.dark-mode {
+    color: #eee;
+    border-color: #666;
+    box-shadow: 0px 4px 0px #000000;
+}
+
+.btn.dark-mode:hover {
+    filter: brightness(1.1);
+}
+
+.btn-success.dark-mode {
+    background-color: #28a745;
+}
+
+.btn-success.dark-mode:hover {
+    background-color: #218838;
+}
+
+.btn-danger.dark-mode {
+    background-color: #dc3545;
+}
+
+.btn-danger.dark-mode:hover {
+    background-color: #c82333;
 }

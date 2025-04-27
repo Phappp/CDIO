@@ -33,6 +33,33 @@ const inventoryAlertController = {
             console.error('Lỗi lấy danh sách tồn kho:', error);
             res.render('admin/inventoryAlerts', { products: [], threshold: 3000000000 });
         }
+    },
+    getExhaustedProducts: async (req, res) => {
+        try {
+            const [products] = await pool.query(`
+        SELECT 
+        id,
+        product_code,
+        name,
+        quantity,
+        unit,
+        price
+        FROM products 
+        WHERE quantity < 10
+        ORDER BY quantity DESC
+      `);
+
+            res.render('admin/exhaustedProducts', {
+                products,
+                threshold: 10,
+                helpers: {
+                    formatCurrency: (value) => new Intl.NumberFormat('vi-VN').format(value)
+                }
+            });
+        } catch (error) {
+            console.error('Lỗi lấy danh sách gàn hết hàng:', error);
+            res.render('admin/exhaustedProducts', { products: [], threshold: 10 });
+        }
     }
 };
 

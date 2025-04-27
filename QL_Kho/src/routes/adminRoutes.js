@@ -8,13 +8,17 @@ const approvalController = require('../controllers/admin/approvalController');
 const reportController = require('../controllers/admin/reportController');
 const inventoryAlertController = require('../controllers/admin/inventoryAlertController');
 const passwordController = require('../controllers/admin/passwordController');
-
+const personalController = require('../controllers/admin/personalController');
 
 // Middleware to check if user is admin
 router.use(authMiddleware.isAdmin);
 
 // Dashboard
 router.get('/dashboard', dashboardController.getDashboardStats);
+
+// Personal information
+router.get('/personal', personalController.getPersonal);
+
 // User management
 router.get('/users', userController.listUsers);
 router.get('/users/create', userController.showCreateUser);
@@ -48,6 +52,9 @@ router.get('/reports/charts', dashboardController.showCharts);
 
 // Danh sách tồn kho cảnh báo
 router.get('/inventory/alerts', inventoryAlertController.getInventoryAlerts);
+
+// Danh sách sản phẩm gần hết hàng
+router.get('/inventory/exhausted', inventoryAlertController.getExhaustedProducts);
 
 // Thêm các route sau vào staffRoutes.js
 router.get('/change-password', passwordController.showChangePasswordForm);

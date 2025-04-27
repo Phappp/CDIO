@@ -1,10 +1,9 @@
-const darkModeToggle = document.getElementById('darkModeToggle'); // Assuming you have a toggle button with this ID
+const darkModeToggle = document.getElementById('darkModeToggle'); 
 const body = document.body;
-const titleElement = document.querySelector('.tilte'); // Corrected typo to '.title' if that's the actual class
+const titleElement = document.querySelector('.tilte'); 
 const cardHeadersPrimary = document.querySelectorAll('.card-header.py-3.bg-primary.text-white');
 const cardHeadersInfo = document.querySelectorAll('.card-header.py-3.bg-info.text-white');
 const cardHeadersSuccess = document.querySelectorAll('.card-header.py-3.bg-success.text-white');
-// const container = document.querySelector('.container-chart');
 darkModeToggle.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
     if (titleElement) {
@@ -13,8 +12,7 @@ darkModeToggle.addEventListener('click', () => {
     cardHeadersPrimary.forEach(header => header.classList.toggle('dark-mode'));
     cardHeadersInfo.forEach(header => header.classList.toggle('dark-mode'));
     cardHeadersSuccess.forEach(header => header.classList.toggle('dark-mode'));
-    // container.classList.toggle('dark-mode');
-    // Lưu trạng thái dark mode vào localStorage (tùy chọn)
+    
     localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
 });
 

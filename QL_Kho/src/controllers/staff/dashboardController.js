@@ -13,9 +13,9 @@ const dashboardController = {
                 todayReports
             ] = await Promise.all([
                 // Sản phẩm
-                pool.query('SELECT * FROM products'),
+                pool.query('SELECT * FROM products WHERE is_deleted = 0'),
                 // Tổng sản phẩm
-                pool.query('SELECT COUNT(*) as count FROM products'),
+                pool.query('SELECT COUNT(*) as count FROM products WHERE is_deleted = 0'),
 
                 // Báo cáo chờ duyệt
                 pool.query('SELECT COUNT(*) as count FROM reports WHERE status = "pending"'),

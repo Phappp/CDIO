@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const app = express();
+const sessionUser = require('./src/middlewares/sessionUser');
 
 // Database connection
 require('./src/config/db');
@@ -19,6 +20,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }));
+app.use(sessionUser);
 
 // Thêm sau các import nhưng trước các route chính
 if (process.env.NODE_ENV === 'development') {

@@ -22,7 +22,7 @@ const reportController = {
     // Hiển thị form nhập hàng
     showCreateImport: async (req, res) => {
         try {
-            const [products] = await pool.query('SELECT id, name, quantity, price FROM products');
+            const [products] = await pool.query('SELECT id, name, quantity, price FROM products WHERE is_deleted = 0');
             res.render('staff/createReport', {
                 products,
                 reportType: 'import',
@@ -42,7 +42,7 @@ const reportController = {
     // Hiển thị form xuất hàng
     showCreateExport: async (req, res) => {
         try {
-            const [products] = await pool.query('SELECT id, name, quantity, price FROM products');
+            const [products] = await pool.query('SELECT id, name, quantity, price FROM products WHERE is_deleted = 0');
             res.render('staff/createReport', {
                 products,
                 reportType: 'export',

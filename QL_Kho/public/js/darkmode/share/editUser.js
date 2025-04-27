@@ -1,7 +1,7 @@
 const darkModeToggle = document.getElementById('darkModeToggle');
 const body = document.body;
 const editUserContainer = document.querySelector('.edit-user-container');
-const heading = document.querySelector('h1');
+const eUheading = document.querySelector('.editUser-heading');
 const errorAlert = document.querySelector('.error-alert');
 const formLabels = document.querySelectorAll('.form-label');
 const formInputs = document.querySelectorAll('.form-input');
@@ -14,7 +14,7 @@ const secondaryButton = document.querySelector('.secondary-button');
 darkModeToggle.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
     editUserContainer.classList.toggle('dark-mode');
-    heading.classList.toggle('dark-mode');
+    eUheading.classList.toggle('dark-mode');
     if (errorAlert) errorAlert.classList.toggle('dark-mode');
     formLabels.forEach(label => label.classList.toggle('dark-mode'));
     formInputs.forEach(input => input.classList.toggle('dark-mode'));
@@ -32,7 +32,7 @@ darkModeToggle.addEventListener('click', () => {
 if (localStorage.getItem('darkMode') === 'true') {
     body.classList.add('dark-mode');
     editUserContainer.classList.add('dark-mode');
-    heading.classList.add('dark-mode');
+    eUheading.classList.add('dark-mode');
     if (errorAlert) errorAlert.classList.add('dark-mode');
     formLabels.forEach(label => label.classList.add('dark-mode'));
     formInputs.forEach(input => input.classList.add('dark-mode'));

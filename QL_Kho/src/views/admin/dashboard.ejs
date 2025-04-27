@@ -1,7 +1,7 @@
 <%- include('../partials/admin/header') %>
     <link rel="stylesheet" href="/css/admin/dashboard.css">
 
-    <div class="container">
+    <div class="dashboard-container">
         <div class="stats stats1">
             <div class="stat-card" id="pending-reports">
                 <h3>Báo cáo chờ duyệt</h3>
@@ -9,7 +9,7 @@
                     <%= stats.pendingReports || 0 %>
                 </p>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" id="exhausted-alerts">
                 <h3>Sản phẩm sắp hết</h3>
                 <p>
                     <%= stats.lowStockProducts || 0 %>
@@ -44,18 +44,7 @@
             </div>
         </div>
     </div>
-    <div class="menu-user">
-        <div class="profile-header">
-            <i class="fa-solid fa-circle-user"></i>
-            <div class="username">
-                <%= user.username %>
-            </div>
-        </div>
-        <div class="menu-user-item">
-            <i class="fa-solid fa-key"></i>
-            <a href="/admin/change-password" class="menu-user-link">Change password</a>
-        </div>
-    </div>
-    <script src="/js/darkmode/admin/dashboard.js"></script>
+    <script src="/js/admin/dashboard.js"></script>
+    <script src="/js/darkmode/share/dashboard.js"></script>
 
     <%- include('../partials/admin/footer') %>
