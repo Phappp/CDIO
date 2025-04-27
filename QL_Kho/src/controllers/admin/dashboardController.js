@@ -13,7 +13,7 @@ const dashboardController = {
                 alerts
             ] = await Promise.all([
                 // Tổng sản phẩm
-                pool.query('SELECT COUNT(*) as count FROM products'),
+                pool.query('SELECT COUNT(*) as count FROM products WHERE is_deleted = 0'),
 
                 // Báo cáo chờ duyệt
                 pool.query('SELECT COUNT(*) as count FROM reports WHERE status = "pending"'),
@@ -22,7 +22,7 @@ const dashboardController = {
                 pool.query('SELECT COUNT(*) as count FROM users'),
 
                 // Sản phẩm sắp hết (quantity < 10)
-                pool.query('SELECT COUNT(*) as count FROM products WHERE quantity < 10'),
+                pool.query('SELECT COUNT(*) as count FROM products WHERE quantity < 10 AND is_deleted = 0'),
 
                 // Báo cáo hôm nay
                 pool.query('SELECT COUNT(*) as count FROM reports WHERE DATE(created_at) = CURDATE()'),

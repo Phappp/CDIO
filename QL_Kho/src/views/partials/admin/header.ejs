@@ -71,7 +71,13 @@
             const menu = document.querySelector('.menu-user');
             const userItemChangePassword = document.getElementById('userItem-change-password');
             const userItemPersonal = document.getElementById('userItem-personal');
+            const logo = document.getElementById('logo');
 
+
+            logo.onclick = function () {
+                window.location.href = '/admin/dashboard';
+            }
+            
             userItemChangePassword.addEventListener('click', function () {
                 window.location.href = '/admin/change-password';
             });

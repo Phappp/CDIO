@@ -16,6 +16,7 @@ function callURL() {
     const totalUsers = document.getElementById('total-users');
     const inventoryAlerts = document.getElementById('inventory-alerts');
     const exhaustedAlerts = document.getElementById('exhausted-alerts');
+   
 
     pendingReports.onclick = function () {
         window.location.href = '/admin/reports/pending';
@@ -28,9 +29,11 @@ function callURL() {
     totalUsers.onclick = function () {
         window.location.href = '/admin/users';
     };
+
     inventoryAlerts.onclick = function () {
         window.location.href = '/admin/inventory/alerts';
     };
+
     exhaustedAlerts.onclick = function () {
         window.location.href = '/admin/inventory/exhausted';
     };

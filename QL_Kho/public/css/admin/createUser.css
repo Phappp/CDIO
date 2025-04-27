@@ -27,8 +27,9 @@ body {
 
 /* Heading */
 h1 {
-    font-size: 2rem;
-    font-weight: 700;
+    padding-top: 40px;
+    font-weight: bold;
+    font-size: 2.2rem;
     text-align: center;
     color: #222;
     margin-bottom: 10px;
