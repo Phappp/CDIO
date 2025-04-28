@@ -26,14 +26,14 @@ const productController = {
 
     // Thêm sản phẩm mới
     createProduct: async (req, res) => {
-        const { product_code, name, description, quantity, unit, price } = req.body;
+        const { product_code, name, description, image, quantity, unit, price, warehouse } = req.body;
 
         try {
             await pool.query(
                 `INSERT INTO products 
-        (product_code, name, description, quantity, unit, price, created_by) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)`,
-                [product_code, name, description, quantity, unit, price, req.session.user.id]
+        (product_code, name, description, image, quantity, unit, price, warehouse,created_by) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [product_code, name, description, image, quantity, unit, price, warehouse, req.session.user.id]
             );
 
             res.redirect('/admin/products');
@@ -70,15 +70,15 @@ const productController = {
     // Cập nhật sản phẩm
     updateProduct: async (req, res) => {
         const { id } = req.params;
-        const { product_code, name, description, quantity, unit, price } = req.body;
+        const { product_code, name, description, image, quantity, unit, price } = req.body;
 
         try {
             await pool.query(
                 `UPDATE products SET 
-        product_code = ?, name = ?, description = ?, 
+        product_code = ?, name = ?, description = ?, image = ?, 
         quantity = ?, unit = ?, price = ? 
         WHERE id = ?`,
-                [product_code, name, description, quantity, unit, price, id]
+                [product_code, name, description, image, quantity, unit, price, id]
             );
 
             res.redirect('/admin/products');
@@ -96,7 +96,7 @@ const productController = {
         const { id } = req.params;
 
         try {
-            await pool.query('UPDATE products SET is_deleted = 1 WHERE id = ?', [id]);
+            await pool.query('UPDATE products SET is_deleted = 1, quantity = 0 WHERE id = ?', [id]);
             res.redirect('/admin/products');
         } catch (error) {
             console.error(error);
