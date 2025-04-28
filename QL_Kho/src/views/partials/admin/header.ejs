@@ -11,14 +11,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/admin/header.css">
 
-    <!--CSS darkmode -->
-    <!-- <link rel="stylesheet" href="/css/darkmode/admin/manageUsers.css"> -->
-    <!-- <link rel="stylesheet" href="/css/darkmode/admin/manageProducts.css"> -->
-    <!-- <link rel="stylesheet" href="/css/darkmode/admin/createProduct.css"> -->
-    <!-- <link rel="stylesheet" href="/css/darkmode/admin/editUser.css"> -->
-
-
-
 </head>
 
 <body>
@@ -29,22 +21,28 @@
         <div class="header-left">
             <div class="circle-effect">
                 <a href="/admin/dashboard"><i class="fa-solid fa-house"></i></a>
+                <span class="tooltip">Home</span>
             </div>
             <div class="circle-effect">
                 <a href="/admin/reports/processed"><i class="fa-solid fa-book"></i></a>
+                <span class="tooltip">Report list</span>
             </div>
             <div class="circle-effect">
                 <a href="/admin/reports/charts"><i class="fa-solid fa-chart-simple"></i></a>
+                <span class="tooltip">Chart</span>
             </div>
             <div class="circle-effect" id="darkModeToggle">
                 <!--dark mode -->
                 <a><i class="fa-solid fa-moon"></i></a>
+                <span class="tooltip">Darkmode</span>
             </div>
             <div class="circle-effect" id="user-header">
                 <a href="#"><i class="fa-solid fa-user"></i></a>
+                <span class="tooltip">Yoursefl</span>
             </div>
-            <div class="circle-effect">
-                <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <div class="circle-effect" id="logout-header">
+                <a><i class="fa-solid fa-right-from-bracket"></i></a>
+                <span class="tooltip">Logout</span>
             </div>
 
         </div>
@@ -66,18 +64,29 @@
                 <a href="#" class="menu-user-link">Personal information</a>
             </div>
         </div>
+        <div class="logout-modal">
+            <div class="logout-modal-content">
+                <h2>Are you sure you want to log out?</h2>
+                <div class="logout-modal-buttons">
+                    <a href="/logout" class="logout-button">Logout</a>
+                    <button class="cancel-button">Cancel</button>
+                </div>
+            </div>
+        </div>
         <script>
             const menuUser = document.getElementById('user-header');
             const menu = document.querySelector('.menu-user');
             const userItemChangePassword = document.getElementById('userItem-change-password');
             const userItemPersonal = document.getElementById('userItem-personal');
             const logo = document.getElementById('logo');
-
+            const logoutHeader = document.getElementById('logout-header');
+            const logoutModal = document.querySelector('.logout-modal');
+            const cancelButton = document.querySelector('.cancel-button');
 
             logo.onclick = function () {
                 window.location.href = '/admin/dashboard';
             }
-            
+
             userItemChangePassword.addEventListener('click', function () {
                 window.location.href = '/admin/change-password';
             });
@@ -96,92 +105,13 @@
                     menu.classList.remove('active');
                 }
             });
+            logoutHeader.addEventListener('click', function (event) {
+                logoutModal.classList.toggle('active');
+                event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+            });
+            cancelButton.addEventListener('click', function () {
+                logoutModal.classList.remove('active');
+            });
 
 
         </script>
-        <style>
-            .menu-user {
-                display: block;
-                position: absolute;
-                top: 80px;
-                right: 72px;
-                background-color: #ffffffdf;
-                border-radius: 5px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
-                min-width: 200px;
-                width: auto;
-                height: 0;
-                z-index: 1000;
-                text-align: center;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                transition: height 0.25s ease-in-out;
-                color: #000000 !important;
-                overflow: hidden;
-            }
-
-            .menu-user.active {
-                height: 180px;
-            }
-
-            .profile-header {
-                display: flex;
-                justify-content: left;
-                align-items: center;
-                width: 90%;
-                border-bottom: 2px solid #0000009a;
-                padding-bottom: 12px;
-                padding-top: 12px;
-                padding-left: 12px;
-            }
-
-            .profile-header i {
-                font-size: 40px;
-                margin-right: 10px;
-            }
-
-            .profile-header.dark-mode i {
-                font-size: 40px;
-                margin-right: 10px;
-            }
-
-            .username {
-                font-size: 18px;
-                font-weight: bold;
-
-            }
-
-            .menu-user-item {
-                width: 90%;
-                padding-top: 20px;
-                cursor: pointer;
-                text-align: left;
-                padding-left: 24px;
-                padding-right: 12px;
-                padding-bottom: 12px;
-                border-bottom: 1px solid #000000;
-                display: flex;
-                gap: 10px;
-                font-size: 20px;
-
-            }
-
-            .menu-user-item:last-child {
-                padding-bottom: 24px;
-                border: none;
-
-            }
-
-            .menu-user-item:hover {
-                background-color: #0000001a;
-            }
-
-            .menu-user-link {
-                text-decoration: none;
-                color: #000000;
-                font-weight: 600;
-                font-size: 16px;
-
-            }
-        </style>
