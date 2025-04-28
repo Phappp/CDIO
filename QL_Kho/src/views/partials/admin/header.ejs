@@ -73,6 +73,7 @@
                 </div>
             </div>
         </div>
+        <div class="clock" id="clock"></div>
         <script>
             const menuUser = document.getElementById('user-header');
             const menu = document.querySelector('.menu-user');
@@ -113,5 +114,26 @@
                 logoutModal.classList.remove('active');
             });
 
+            // JS ĐỒNG HỒ
+            function updateClock() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
 
+                const day = String(now.getDate()).padStart(2, '0');
+                const month = String(now.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+                const year = now.getFullYear();
+
+                const timeString = `${hours}:${minutes}:${seconds}`;
+                const dateString = `${day}/${month}/${year}`;
+
+                document.getElementById('clock').textContent = `${dateString} ${timeString}`;
+            }
+
+            // Cập nhật đồng hồ mỗi giây
+            setInterval(updateClock, 1000);
+
+            // Cập nhật đồng hồ ngay khi tải trang
+            updateClock();
         </script>

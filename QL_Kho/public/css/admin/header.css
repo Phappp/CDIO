@@ -247,8 +247,8 @@ img {
 .logout-modal-content h2 {
     color: #000000;
     margin-bottom: 20px;
-    padding-bottom:8px ;
-    border-bottom:2px solid #000000;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #000000;
 }
 
 .logout-modal-buttons {
@@ -292,4 +292,18 @@ img {
 .logout-modal-buttons button:hover {
     background-color: #bbb;
     color: #000;
+}
+
+/* CSS ĐỒNG HỒ */
+.clock {
+    position: absolute;
+    top: 84px;
+    right: 16px;
+    font-size: 14px;
+    padding: 12px;
+    /* border: 2px solid white; */
+    border-radius: 10px;
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    text-align: center;
+    z-index: 100;
 }
