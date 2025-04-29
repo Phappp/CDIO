@@ -1,50 +1,181 @@
 <%- include('../partials/staff/header') %>
     <link rel="stylesheet" href="/css/staff/dashboard.css">
     <div class="container">
+        <div class="container-header">
+            <div class="select-warehouse">
+                <h2 class="manageProduct-h2">Warehouse: </h2>
+                <div class="warehouseAll warehouse-option active" onclick="chooseWarehouse('warehouseAll')">All</div>
+                <div class=" warehouse-option" onclick="chooseWarehouse('warehouseA')">A</div>
+                <div class=" warehouse-option" onclick="chooseWarehouse('warehouseB')">B</div>
+                <div class=" warehouse-option" onclick="chooseWarehouse('warehouseC')">C</div>
+            </div>
 
+            <div class="products-list">
+                <!-- A -->
+                <div class="warehouse-item warehouseA" id="warehouseA">
+                    <h2>Warehouse <b>A</b> ( <%= stats.totalProductA %> )</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Code</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% productA.forEach(product=> { %>
+                                <tr>
+                                    <td>
+                                        <%= product.product_code %>
+                                    </td>
+                                    <td>
+                                        <%= product.name %>
+                                    </td>
+                                    <td>
+                                        <%= product.quantity %>
+                                    </td>
+                                    <td>
+                                        <%= product.unit %>
+                                    </td>
+                                    <td>
+                                        <%= product.price %>
+                                    </td>
+                                </tr>
+                                <% }) %>
 
+                        </tbody>
+                    </table>
+                </div>
+                <!-- B -->
+                <div class="warehouse-item warehouseB" id="warehouseB">
+                    <h2>Warehouse <b>B</b> ( <%= stats.totalProductB %> )</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Code</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% productB.forEach(product=> { %>
+                                <tr>
+                                    <td>
+                                        <%= product.product_code %>
+                                    </td>
+                                    <td>
+                                        <%= product.name %>
+                                    </td>
+                                    <td>
+                                        <%= product.quantity %>
+                                    </td>
+                                    <td>
+                                        <%= product.unit %>
+                                    </td>
+                                    <td>
+                                        <%= product.price %>
+                                    </td>
+                                </tr>
+                                <% }) %>
 
+                        </tbody>
+                    </table>
+                </div>
+                <!-- C -->
+                <div class="warehouse-item warehouseC" id="warehouseC">
+                    <h2>Warehouse <b>C</b> ( <%= stats.totalProductC %> )</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Code</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Unit</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% productC.forEach(product=> { %>
+                                <tr>
+                                    <td>
+                                        <%= product.product_code %>
+                                    </td>
+                                    <td>
+                                        <%= product.name %>
+                                    </td>
+                                    <td>
+                                        <%= product.quantity %>
+                                    </td>
+                                    <td>
+                                        <%= product.unit %>
+                                    </td>
+                                    <td>
+                                        <%= product.price %>
+                                    </td>
+                                </tr>
+                                <% }) %>
 
+                        </tbody>
+                    </table>
+                </div>
 
-        <div class="products-list">
-            <h2>Product list ( <%= stats.totalProducts %> )</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product Code</th>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                        <th>Unit</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dữ liệu sản phẩm sẽ được lặp qua ở đây -->
-                    <% products.forEach(product=> { %>
-                        <tr>
-                            <td>
-                                <%= product.product_code %>
-                            </td>
-                            <td>
-                                <%= product.name %>
-                            </td>
-                            <td>
-                                <%= product.quantity %>
-                            </td>
-                            <td>
-                                <%= product.unit %>
-                            </td>
-                            <td>
-                                <%= product.price %>
-                            </td>
-                        </tr>
-                        <% }) %>
-
-                </tbody>
-            </table>
-
+            </div>
+        </div>
+        <div class="container-between">
+            <i class="fa-solid fa-angles-left" id="container-row-left"></i>
+            <div class="line_container"></div>
+            <i class="fa-solid fa-angles-right" id="container-row-right"></i>
+        </div>
+        <!-- container 2 -->
+        <div class="container-footer">
+            <div class="container-footer-header">
+                <h2>Statistics</h2>
+            </div>
+            <div class="stats stats1">
+                <div class="stat-card" id="pending-reports">
+                    <h3>Báo cáo chờ duyệt</h3>
+                    <p>
+                        <%= stats.pendingReports || 0 %>
+                    </p>
+                </div>
+                <div class="stat-card" id="exhausted-alerts">
+                    <h3>Sản phẩm sắp hết</h3>
+                    <p>
+                        <%= stats.lowStockProducts || 0 %>
+                    </p>
+                </div>
+                <div class="stat-card" id="inventory-alerts">
+                    <h3>Tồn kho</h3>
+                    <p>
+                        <%= stats.inventoryAlerts || 0%>
+                    </p>
+                </div>
+                <!-- <div class="stat-card" id="total-products">
+                    <h3>Kho</h3>
+                    <p>
+                        <%= stats.totalProducts || 0 %>
+                    </p>
+                </div> -->
+                <!-- <div class="stat-card" id="total-users">
+                    <h3>Tài khoản</h3>
+                    <p>
+                        <%= stats.totalUsers || 0 %>
+                    </p>
+                </div> -->
+                <!-- <div class="stat-card">
+                    <h3>Báo cáo hôm nay</h3>
+                    <p>
+                        <%= stats.todayReports || 0 %>
+                    </p>
+                </div> -->
+            </div>
         </div>
     </div>
+    <!-- Modal -->
     <div class="menu-user">
         <div class="profile-header">
             <i class="fa-solid fa-circle-user"></i>
@@ -57,4 +188,141 @@
             <a href="/staff/change-password" class="menu-user-link">Change password</a>
         </div>
     </div>
-    <!-- <%- include('../partials/admin/footer') %> -->
+    <script src="/js/darkmode/share/staff-dashboard.js"></script>
+    <script>
+        const warehouseA = document.getElementById('warehouseA');
+        const warehouseB = document.getElementById('warehouseB');
+        const warehouseC = document.getElementById('warehouseC');
+        const formSelectWarehouse = document.querySelector('.form-select-warehouse');
+        const warehouseItems = document.querySelectorAll('.warehouse-item');
+
+        function chooseWarehouse(warehouse) {
+            const warehouseItems = document.querySelectorAll('.warehouse-item');
+            const warehouseOptions = document.querySelectorAll('.warehouse-option');
+
+            warehouseItems.forEach(item => {
+                item.style.display = 'none';
+            });
+
+            if (warehouse === 'warehouseAll') {
+                warehouseItems.forEach(item => {
+                    item.style.display = 'block';
+                });
+            } else {
+                document.querySelector(`.${warehouse}`).style.display = 'block';
+                localStorage.setItem('selectedWarehouse', warehouse);
+
+            }
+
+        }
+        chooseWarehouse('warehouseAll');
+
+        function selectHandler() {
+            const warehouseOptions = document.querySelectorAll('.warehouse-option');
+            warehouseOptions.forEach(option => {
+                option.addEventListener('click', function () {
+                    warehouseOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        }
+        selectHandler();
+
+        function warning() {
+            const firstStats = document.querySelectorAll('.stats1 .stat-card');
+            firstStats.forEach((stat) => {
+                if (stat.querySelector('p').textContent.trim() === "0") {
+                    stat.style.borderLeft = '12px solid green';
+                } else {
+                    stat.style.borderLeft = '12px solid red';
+                }
+            });
+        }
+        warning();
+
+        function callURL() {
+            // const totalProducts = document.getElementById('total-products');
+            // const pendingReports = document.getElementById('pending-reports');
+            // const totalUsers = document.getElementById('total-users');
+            // const inventoryAlerts = document.getElementById('inventory-alerts');
+            // const exhaustedAlerts = document.getElementById('exhausted-alerts');
+
+
+            // pendingReports.onclick = function () {
+            //     window.location.href = '/admin/reports/pending';
+            // };
+
+            // totalProducts.onclick = function () {
+            //     window.location.href = '/admin/products';
+            // };
+
+            // totalUsers.onclick = function () {
+            //     window.location.href = '/admin/users';
+            // };
+
+            // inventoryAlerts.onclick = function () {
+            //     window.location.href = '/admin/inventory/alerts';
+            // };
+
+            // exhaustedAlerts.onclick = function () {
+            //     window.location.href = '/admin/inventory/exhausted';
+            // };
+
+        }
+        callURL();
+        function handleContainer() {
+            const container = document.querySelector('.container');
+            const containerRowLeft = document.getElementById('container-row-left');
+            const containerRowRight = document.getElementById('container-row-right');
+
+            // Khôi phục trạng thái từ localStorage khi trang tải
+            const savedState = localStorage.getItem('containerState');
+            if (savedState === 'activeLeft') {
+                container.classList.add('activeLeft');
+                containerRowRight.style.display = 'none';
+            } else if (savedState === 'activeRight') {
+                container.classList.add('activeRight');
+                containerRowLeft.style.display = 'none';
+            }
+
+            containerRowRight.addEventListener('click', function () {
+                if (container.classList.contains('activeRight')) {
+                    container.classList.remove('activeRight'); // Xóa activeRight nếu có
+                    containerRowLeft.style.display = 'block';
+                    //Xóa trạng thái trong localStorage
+                    localStorage.removeItem('containerState');
+                } else {
+                    container.classList.add('activeLeft');
+                    container.classList.remove('activeRight'); // Đảm bảo chỉ có activeLeft
+                    containerRowRight.style.display = 'none';
+                    containerRowLeft.style.display = 'block'; // Hiển thị lại nút bên trái nếu cần
+                    // Lưu trạng thái vào localStorage
+                    localStorage.setItem('containerState', 'activeLeft');
+                }
+
+            });
+
+            containerRowLeft.addEventListener('click', function () {
+                if (container.classList.contains('activeLeft')) {
+                    container.classList.remove('activeLeft'); // Xóa activeLeft nếu có
+                    containerRowRight.style.display = 'block';
+                    //Xóa trạng thái trong localStorage
+                    localStorage.removeItem('containerState');
+                } else {
+                    container.classList.add('activeRight');
+                    container.classList.remove('activeLeft'); // Đảm bảo chỉ có activeRight
+                    containerRowLeft.style.display = 'none';
+                    containerRowRight.style.display = 'block'; // Hiển thị lại nút bên phải nếu cần
+                    // Lưu trạng thái vào localStorage
+                    localStorage.setItem('containerState', 'activeRight');
+                }
+
+            });
+        }
+
+
+        handleContainer();
+
+
+    </script>
+    <%- include('../partials/staff/footer') %>

@@ -16,6 +16,18 @@ body {
     background-color: transparent;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.warehouse-item {
+    padding-bottom: 48px;
+    padding-top: 12px;
+}
+
+.warehouse-item h2 {
+    text-shadow: 0 2px 4px #0000008a;
 }
 
 table tbody td:last-child {
@@ -159,6 +171,52 @@ table tbody tr:nth-child(even) {
     transition: background-color 0.3s ease;
 }
 
+.select-warehouse {
+    margin-left: 200px;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    gap: 20px;
+    justify-content: left;
+    align-items: center;
+
+}
+
+.select-warehouse select {
+    height: 24px;
+}
+
+.warehouse-option {
+    background-color: #f4f6f9;
+    border: 2px solid #000;
+    color: #333;
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s ease;
+    min-width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.warehouse-option:hover {
+    background-color: #0000009a;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.warehouse-option.active {
+    background-color: #000000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
 /* Dark Mode Styles */
 body.dark-mode {
     background-color: #1e1e1e;
@@ -221,4 +279,8 @@ table.dark-mode tbody tr:nth-child(even) {
 .delete-product-button.dark-mode:hover {
     background-color: #8d1b26;
     box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .manageProduct-h2 {
+    color: #eee;
 }

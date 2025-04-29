@@ -4,17 +4,85 @@ const productController = {
     // Danh sách sản phẩm
     listProducts: async (req, res) => {
         try {
-            const [products] = await pool.query(`
-                SELECT p.*, u.username as created_by_name 
-                FROM products p
-                JOIN users u ON p.created_by = u.id
-                WHERE p.is_deleted = 0
-                ORDER BY p.id DESC
-            `);
-            res.render('admin/manageProducts', { products });
+            // Lấy tất cả thống kê cùng lúc bằng Promise.all
+            const [
+                allProducts,
+                productA,
+                productB,
+                productC,
+                totalProductA,
+                totalProductB,
+                totalProductC,
+                totalProducts,
+                pendingReports,
+                totalUsers,
+                lowStockProducts,
+                todayReports
+            ] = await Promise.all([
+                // Sản phẩm
+                pool.query('SELECT * FROM products WHERE is_deleted = 0'),
+
+                // Kho A
+                pool.query('SELECT * FROM products WHERE is_deleted = 0 AND warehouse = "A"'),
+
+                // Kho B
+                pool.query('SELECT * FROM products WHERE is_deleted = 0 AND warehouse = "B"'),
+
+                // Kho C
+                pool.query('SELECT * FROM products WHERE is_deleted = 0 AND warehouse = "C"'),
+
+                //Tổng kho A
+                pool.query('SELECT COUNT(*) as count FROM products WHERE is_deleted = 0 AND warehouse = "A"'),
+
+                // Tổng kho B
+                pool.query('SELECT COUNT(*) as count FROM products WHERE is_deleted = 0 AND warehouse = "B"'),
+
+                //Tổng kho C
+                pool.query('SELECT COUNT(*) as count FROM products WHERE is_deleted = 0 AND warehouse = "C"'),
+
+                // Tổng sản phẩm
+                pool.query('SELECT COUNT(*) as count FROM products WHERE is_deleted = 0'),
+
+                // Báo cáo chờ duyệt
+                pool.query('SELECT COUNT(*) as count FROM reports WHERE status = "pending"'),
+
+                // Tổng người dùng
+                pool.query('SELECT COUNT(*) as count FROM users'),
+
+                // Sản phẩm sắp hết (quantity < 10)
+                pool.query('SELECT COUNT(*) as count FROM products WHERE quantity < 10'),
+
+                // Báo cáo hôm nay
+                pool.query('SELECT COUNT(*) as count FROM reports WHERE DATE(created_at) = CURDATE()')
+            ]);
+
+            res.render('admin/manageProducts', {
+                user: req.session.user,
+                stats: {
+                    totalProductA: totalProductA[0][0].count,
+                    totalProductB: totalProductB[0][0].count,
+                    totalProductC: totalProductC[0][0].count,
+                    totalProducts: totalProducts[0][0].count,
+                    pendingReports: pendingReports[0][0].count,
+                    totalUsers: totalUsers[0][0].count,
+                    lowStockProducts: lowStockProducts[0][0].count,
+                    todayReports: todayReports[0][0].count
+                },
+                products: allProducts[0],
+                productA: productA[0],
+                productB: productB[0],
+                productC: productC[0]
+            });
         } catch (error) {
-            console.error(error);
-            res.render('error', { error: 'Lỗi khi tải danh sách sản phẩm' });
+            console.error('Lỗi khi lấy thống kê dashboard:', error);
+            res.render('admin/manageProducts', {
+                user: req.session.user,
+                stats: {},
+                products: [],
+                productA: [],
+                productB: [],
+                productC: []
+            });
         }
     },
 

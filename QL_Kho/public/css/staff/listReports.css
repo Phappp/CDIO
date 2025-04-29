@@ -7,9 +7,18 @@ body {
     line-height: 1.6;
 }
 
+.alert-success {
+    font-size: 20px;
+    color: #15803d;
+    font-weight: bold;
+    text-shadow: 0 1px 2px #15803d9a;
+}
+
 .container {
-    padding-top: 40px; /* Giảm padding-top để bảng sát đầu trang */
-    max-width: 1200px; /* Tăng max-width để bảng rộng rãi */
+    padding-top: 80px;
+    /* Giảm padding-top để bảng sát đầu trang */
+    max-width: 1200px;
+    /* Tăng max-width để bảng rộng rãi */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -17,7 +26,8 @@ body {
 }
 
 h1 {
-    display: none; /* Ẩn tiêu đề "Danh sách báo cáo của tôi" */
+    display: block;
+    /* Ẩn tiêu đề "Danh sách báo cáo của tôi" */
 }
 
 .table {

@@ -1,49 +1,53 @@
 <%- include('../partials/staff/header') %>
-<link rel="stylesheet" href="/css/staff/listReports.css">
+    <link rel="stylesheet" href="/css/staff/listReports.css">
     <div class="container">
         <h1>My report list</h1>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Report code</th>
-                    <th>Type</th>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Value</th>
-                    <th>Status</th>
-                    <th>Creation date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% reports.forEach(report=> { %>
-                    <tr>
-                        <td>
-                            <%= report.id %>
-                        </td>
-                        <td>
-                            <%= report.type==='import' ? 'Import' : 'Export' %>
-                        </td>
-                        <td>
-                            <%= report.product_name %>
-                        </td>
-                        <td>
-                            <%= report.quantity %>
-                        </td>
-                        <td>
-                            <%= (report.quantity * report.price).toLocaleString() %> VND
-                        </td>
-                        <td class="status-<%= report.status %>">
-                            <%= report.status==='pending' ? 'Pending' : report.status==='approved' ? 'Approved'
-                                : 'Rejected' %>
-                        </td>
-                        <td>
-                            <%= new Date(report.created_at).toLocaleString() %>
-                        </td>
-                    </tr>
-                    <% }) %>
-            </tbody>
-        </table>
+        <% if (successMessage) { %>
+            <div class="alert alert-success">
+                <%= successMessage %>
+            </div>
+            <% } %>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Report code</th>
+                            <th>Type</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Value</th>
+                            <th>Status</th>
+                            <th>Creation date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% reports.forEach(report=> { %>
+                            <tr>
+                                <td>
+                                    <%= report.id %>
+                                </td>
+                                <td>
+                                    <%= report.type==='import' ? 'Import' : 'Export' %>
+                                </td>
+                                <td>
+                                    <%= report.product_name %>
+                                </td>
+                                <td>
+                                    <%= report.quantity %>
+                                </td>
+                                <td>
+                                    <%= (report.quantity * report.price).toLocaleString() %> VND
+                                </td>
+                                <td class="status-<%= report.status %>">
+                                    <%= report.status==='pending' ? 'Pending' : report.status==='approved' ? 'Approved'
+                                        : 'Rejected' %>
+                                </td>
+                                <td>
+                                    <%= new Date(report.created_at).toLocaleString() %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
     </div>
 
     <%- include('../partials/admin/footer') %>
