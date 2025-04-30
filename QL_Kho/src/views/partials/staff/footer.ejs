@@ -1,4 +1,104 @@
+<a href="javascript:void(0);" onclick="scrollToTop()">
+    <div class="up-to-first"><i class="fa-solid fa-chevron-up"></i></div>
+</a>
 </main>
+
 </body>
 
 </html>
+<style>
+    .up-to-first {
+        cursor: pointer;
+        font-size: 20px;
+        padding: 12px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        position: fixed;
+        bottom: 32px;
+        right: 20px;
+        border: 3px solid #0000005a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #0000001a;
+        transition: .2s;
+        color: #0000009a;
+        opacity: 0.6;
+    }
+
+    .up-to-first i {
+        position: relative;
+        transition-duration: 0.4s;
+    }
+
+    .up-to-first:hover {
+        background-color: #000000;
+        opacity: 1;
+        border-color: #fff;
+        color: #fff;
+        opacity: 0.6;
+    }
+
+    .up-to-first:hover i {
+        transform: translateY(-2px);
+    }
+
+    /* CSS DARKMODE */
+    .up-to-first.dark-mode {
+        background-color: #ffffff1a;
+        color: #ddd;
+        border-color: #ddd;
+        transition: .4s;
+
+    }
+
+    .up-to-first.dark-mode:hover {
+        background-color: #ffff;
+        opacity: 1;
+        border-color: #000;
+        color: #000;
+    }
+</style>
+<script>
+    function scrollToTop() {
+        const containerHeader = document.querySelector('.container-header');
+        const containerFooter = document.querySelector('.container-footer');
+        if (containerHeader) {
+            containerHeader.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Adds smooth scroll effect
+            });
+        }
+        if (containerFooter) {
+            containerFooter.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Adds smooth scroll effect
+            });
+        }
+        else {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Adds smooth scroll effect
+            });
+        }
+
+    }
+    scrollToTop();
+    function footerDarkmode() {
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        // const body = document.body;
+        const upToFirst = document.querySelector('.up-to-first');
+        darkModeToggle.addEventListener('click', () => {
+            upToFirst.classList.toggle('dark-mode');
+            // body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+        });
+
+        if (localStorage.getItem('darkMode') === 'true') {
+            upToFirst.classList.add('dark-mode');
+            // body.classList.add('dark-mode');
+        }
+    }
+    footerDarkmode();
+</script>
