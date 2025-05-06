@@ -137,12 +137,6 @@
                 <h2>Statistics</h2>
             </div>
             <div class="stats stats1">
-                <div class="stat-card" id="pending-reports">
-                    <h3>Báo cáo chờ duyệt</h3>
-                    <p>
-                        <%= stats.pendingReports || 0 %>
-                    </p>
-                </div>
                 <div class="stat-card" id="exhausted-alerts">
                     <h3>Sản phẩm sắp hết</h3>
                     <p>
@@ -152,27 +146,9 @@
                 <div class="stat-card" id="inventory-alerts">
                     <h3>Tồn kho</h3>
                     <p>
-                        <%= stats.inventoryAlerts || 0%>
+                        <%= stats.inventoryAlerts || 0 %>
                     </p>
                 </div>
-                <!-- <div class="stat-card" id="total-products">
-                    <h3>Kho</h3>
-                    <p>
-                        <%= stats.totalProducts || 0 %>
-                    </p>
-                </div> -->
-                <!-- <div class="stat-card" id="total-users">
-                    <h3>Tài khoản</h3>
-                    <p>
-                        <%= stats.totalUsers || 0 %>
-                    </p>
-                </div> -->
-                <!-- <div class="stat-card">
-                    <h3>Báo cáo hôm nay</h3>
-                    <p>
-                        <%= stats.todayReports || 0 %>
-                    </p>
-                </div> -->
             </div>
         </div>
     </div>
@@ -245,8 +221,8 @@
             // const totalProducts = document.getElementById('total-products');
             // const pendingReports = document.getElementById('pending-reports');
             // const totalUsers = document.getElementById('total-users');
-            // const inventoryAlerts = document.getElementById('inventory-alerts');
-            // const exhaustedAlerts = document.getElementById('exhausted-alerts');
+            const inventoryAlerts = document.getElementById('inventory-alerts');
+            const exhaustedAlerts = document.getElementById('exhausted-alerts');
 
 
             // pendingReports.onclick = function () {
@@ -261,13 +237,13 @@
             //     window.location.href = '/admin/users';
             // };
 
-            // inventoryAlerts.onclick = function () {
-            //     window.location.href = '/admin/inventory/alerts';
-            // };
+            inventoryAlerts.onclick = function () {
+                window.location.href = '/staff/inventory/alerts';
+            };
 
-            // exhaustedAlerts.onclick = function () {
-            //     window.location.href = '/admin/inventory/exhausted';
-            // };
+            exhaustedAlerts.onclick = function () {
+                window.location.href = '/staff/inventory/exhausted';
+            };
 
         }
         callURL();

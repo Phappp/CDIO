@@ -4,6 +4,8 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const reportController = require('../controllers/staff/reportController');
 const dashboardController = require('../controllers/staff/dashboardController');
 const passwordController = require('../controllers/staff/passwordController');
+const inventoryAlertController = require('../controllers/staff/inventoryAlertController');
+
 // Middleware kiểm tra quyền staff
 router.use(authMiddleware.isStaff);
 
@@ -23,4 +25,12 @@ router.post('/reports/import', reportController.createImport);
 // Route riêng cho xuất hàng
 router.get('/reports/export', reportController.showCreateExport);
 router.post('/reports/export', reportController.createExport);
+
+
+// Danh sách tồn kho cảnh báo
+router.get('/inventory/alerts', inventoryAlertController.getInventoryAlerts);
+
+// Danh sách sản phẩm gần hết hàng
+router.get('/inventory/exhausted', inventoryAlertController.getExhaustedProducts);
+
 module.exports = router;

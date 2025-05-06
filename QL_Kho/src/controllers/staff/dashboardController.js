@@ -16,7 +16,8 @@ const dashboardController = {
                 pendingReports,
                 totalUsers,
                 lowStockProducts,
-                todayReports
+                todayReports,
+                alerts
             ] = await Promise.all([
                 // Sản phẩm
                 pool.query('SELECT * FROM products WHERE is_deleted = 0'),
@@ -52,7 +53,14 @@ const dashboardController = {
                 pool.query('SELECT COUNT(*) as count FROM products WHERE quantity < 10'),
 
                 // Báo cáo hôm nay
-                pool.query('SELECT COUNT(*) as count FROM reports WHERE DATE(created_at) = CURDATE()')
+                pool.query('SELECT COUNT(*) as count FROM reports WHERE DATE(created_at) = CURDATE()'),
+
+                // Sản phẩm có giá trị lớn hơn 3 tỷ (cảnh báo tồn kho)
+                pool.query(`
+                    SELECT COUNT(*) as count 
+                    FROM products 
+                    WHERE (quantity * price) > 3000000000
+                  `)
             ]);
 
             res.render('staff/dashboard', {
@@ -65,7 +73,8 @@ const dashboardController = {
                     pendingReports: pendingReports[0][0].count,
                     totalUsers: totalUsers[0][0].count,
                     lowStockProducts: lowStockProducts[0][0].count,
-                    todayReports: todayReports[0][0].count
+                    todayReports: todayReports[0][0].count,
+                    inventoryAlerts: alerts[0][0].count
                 },
                 products: allProducts[0],
                 productA: productA[0],

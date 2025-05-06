@@ -1,0 +1,56 @@
+<%- include('../partials/staff/header') %>
+    <link rel="stylesheet" href="/css/admin/inventoryAlerts.css">
+    <div class="inventory-warning-container">
+        <div class="warning-header">
+            <h1 class="warning-title">Cảnh Báo Hết Hàng</h1>
+            <div class="warning-threshold">
+                <span class="threshold-badge">
+                    Ngưỡng cảnh báo: <%= threshold %> (Cái)
+                </span>
+            </div>
+        </div>
+
+        <div class="warning-card">
+            <div class="card-content">
+                <% if (products.length===0) { %>
+                    <div class="no-warning-alert">
+                        Không có mặt hàng gần hết hàng
+                    </div>
+                    <% } else { %>
+                        <div class="table-responsive-wrapper">
+                            <table class="inventory-table">
+                                <thead class="table-header-light">
+                                    <tr>
+                                        <th>Mã SP</th>
+                                        <th>Tên mặt hàng</th>
+                                        <th>Đơn vị</th>
+                                        <th>Số lượng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% products.forEach(product=> { %>
+                                        <tr
+                                            class="<%= ( threshold / 2 > product.quantity ) ? 'row-danger' : 'row-warning' %>">
+                                            <td>
+                                                <%= product.product_code %>
+                                            </td>
+                                            <td>
+                                                <%= product.name %>
+                                            </td>
+                                            <td>
+                                                <%= product.unit %>
+                                            </td>
+                                            <td style="font-weight: bold;">
+                                                <%= product.quantity %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <% } %>
+            </div>
+        </div>
+    </div>
+    <script src="/js/darkmode/share/inventoryAlerts.js"></script>
+    <%- include('../partials/staff/footer') %>
