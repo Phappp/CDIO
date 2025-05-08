@@ -1,7 +1,7 @@
 const pool = require('../../config/db');
 
 const approvalController = {
-    // Danh sách báo cáo chờ duyệt
+    // List of pending inventory reports
     listPendingReports: async (req, res) => {
         try {
             const [reports] = await pool.query(`
@@ -16,27 +16,27 @@ const approvalController = {
             res.render('admin/pendingReports', { reports });
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Lỗi khi tải danh sách báo cáo' });
+            res.render('error', { error: 'Error while loading report list' });
         }
     },
 
-    // Xử lý duyệt/từ chối báo cáo
+    // Process approval/rejection of inventory report
     processReport: async (req, res) => {
         const { id } = req.params;
         const { action } = req.body;
         const approved_by = req.session.user.id;
 
         try {
-            // Lấy thông tin báo cáo
+            // Retrieve report information
             const [reports] = await pool.query('SELECT * FROM reports WHERE id = ?', [id]);
             if (reports.length === 0) {
-                return res.render('error', { error: 'Báo cáo không tồn tại' });
+                return res.render('error', { error: 'Report does not exist' });
             }
 
             const report = reports[0];
 
             if (action === 'approve') {
-                // Cập nhật kho nếu được approve
+                // Update inventory if approved
                 await updateInventory(
                     report.product_id,
                     report.type === 'import' ? report.quantity : -report.quantity,
@@ -58,52 +58,52 @@ const approvalController = {
             res.redirect('/admin/reports/pending');
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Xử lý báo cáo thất bại' });
+            res.render('error', { error: 'Failed to process report' });
         }
     }
 };
 
-// Helper function để cập nhật kho hàng
+// Helper function to update inventory quantity
 async function updateInventory(product_id, quantityChange, created_by, reference_id) {
     const conn = await pool.getConnection();
     try {
-      await conn.beginTransaction();
-  
-      // Lấy số lượng hiện tại
-      const [product] = await conn.query('SELECT quantity FROM products WHERE id = ? FOR UPDATE', [product_id]);
-      const previousQuantity = product[0].quantity;
-      const newQuantity = previousQuantity + quantityChange;
-  
-      if (newQuantity < 0) {
-        throw new Error('Số lượng trong kho không đủ');
-      }
-  
-      // Cập nhật sản phẩm
-      await conn.query('UPDATE products SET quantity = ? WHERE id = ?', [newQuantity, product_id]);
-  
-      // Ghi log
-      await conn.query(
-        `INSERT INTO inventory_logs 
-        (product_id, change_type, quantity_change, previous_quantity, new_quantity, reference_id, created_by) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)`,
-        [
-          product_id,
-          quantityChange > 0 ? 'import' : 'export',
-          Math.abs(quantityChange),
-          previousQuantity,
-          newQuantity,
-          reference_id,
-          created_by
-        ]
-      );
-  
-      await conn.commit();
+        await conn.beginTransaction();
+
+        // Get current inventory quantity
+        const [product] = await conn.query('SELECT quantity FROM products WHERE id = ? FOR UPDATE', [product_id]);
+        const previousQuantity = product[0].quantity;
+        const newQuantity = previousQuantity + quantityChange;
+
+        if (newQuantity < 0) {
+            throw new Error('Insufficient inventory quantity');
+        }
+
+        // Update product quantity
+        await conn.query('UPDATE products SET quantity = ? WHERE id = ?', [newQuantity, product_id]);
+
+        // Log inventory change
+        await conn.query(
+            `INSERT INTO inventory_logs 
+            (product_id, change_type, quantity_change, previous_quantity, new_quantity, reference_id, created_by) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [
+                product_id,
+                quantityChange > 0 ? 'import' : 'export',
+                Math.abs(quantityChange),
+                previousQuantity,
+                newQuantity,
+                reference_id,
+                created_by
+            ]
+        );
+
+        await conn.commit();
     } catch (error) {
-      await conn.rollback();
-      throw error;
+        await conn.rollback();
+        throw error;
     } finally {
-      conn.release();
+        conn.release();
     }
-  }
+}
 
 module.exports = approvalController;

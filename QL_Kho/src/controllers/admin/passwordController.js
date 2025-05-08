@@ -19,7 +19,7 @@ const passwordController = {
             // Validate
             if (newPassword !== confirmPassword) {
                 return res.render('admin/changePassword', {
-                    error: 'Mật khẩu mới không khớp',
+                    error: 'New password does not match the confirmation',
                     success: null
                 });
             }
@@ -27,14 +27,14 @@ const passwordController = {
             // Lấy mật khẩu hiện tại từ DB
             const [users] = await pool.query('SELECT password FROM users WHERE id = ?', [userId]);
             if (users.length === 0) {
-                return res.render('error', { error: 'Người dùng không tồn tại' });
+                return res.render('error', { error: 'User does not exist' });
             }
 
             // Kiểm tra mật khẩu hiện tại
             const isMatch = await comparePassword(currentPassword, users[0].password);
             if (!isMatch) {
                 return res.render('admin/changePassword', {
-                    error: 'Mật khẩu hiện tại không đúng',
+                    error: 'Current password is incorrect',
                     success: null
                 });
             }
@@ -47,12 +47,12 @@ const passwordController = {
 
             res.render('admin/changePassword', {
                 error: null,
-                success: 'Đổi mật khẩu thành công'
+                success: 'Password changed successfully'
             });
         } catch (error) {
             console.error(error);
             res.render('admin/changePassword', {
-                error: 'Đổi mật khẩu thất bại',
+                error: 'Failed to change password',
                 success: null
             });
         }

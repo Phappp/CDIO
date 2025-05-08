@@ -69,7 +69,7 @@ const reportController = {
             });
 
         } catch (error) {
-            console.error('Lỗi truy vấn báo cáo:', error);
+            console.error('Report query error:', error);
             res.render('manager/processedReports', {
                 reports: [],
                 counts: { approved_count: 0, rejected_count: 0, pending_count: 0 },
@@ -88,7 +88,7 @@ const reportController = {
             const processorId = req.user.id;
 
             if (!['approve', 'reject'].includes(action)) {
-                return res.status(400).json({ error: 'Hành động không hợp lệ' });
+                return res.status(400).json({ error: 'Invalid action' });
             }
 
             await pool.query(`
@@ -103,8 +103,8 @@ const reportController = {
             res.redirect('/manager/reports/processed');
 
         } catch (error) {
-            console.error('Lỗi xử lý báo cáo:', error);
-            res.status(500).json({ error: 'Lỗi server khi xử lý báo cáo' });
+            console.error('Report processing error:', error);
+            res.status(500).json({ error: 'Server error while processing report' });
         }
     },
     /**
@@ -160,7 +160,7 @@ const reportController = {
             reports.forEach(report => {
                 worksheet.addRow({
                     ...report,
-                    type: report.type === 'import' ? 'Nhập' : 'Xuất',
+                    type: report.type === 'import' ? 'Input' : 'Output',
                     status: formatStatus(report.status),
                     total: report.quantity * report.price,
                     created_at: new Date(report.created_at).toLocaleString('vi-VN')
@@ -182,8 +182,8 @@ const reportController = {
             res.end();
 
         } catch (error) {
-            console.error('Lỗi xuất Excel:', error);
-            res.status(500).send('Lỗi khi xuất file Excel');
+            console.error('Excel export error:', error);
+            res.status(500).send('Error when exporting Excel file');
         }
     },
 
@@ -223,26 +223,26 @@ const reportController = {
             doc.pipe(stream);
 
             // Tiêu đề
-            doc.fontSize(16).text('BÁO CÁO NHẬP/XUẤT', { align: 'center' });
-            doc.fontSize(10).text(`Ngày xuất: ${new Date().toLocaleDateString('vi-VN')}`, { align: 'center' });
+            doc.fontSize(16).text('IMPORT/EXPORT REPORT', { align: 'center' });
+            doc.fontSize(10).text(`Date of issue: ${new Date().toLocaleDateString('vi-VN')}`, { align: 'center' });
             doc.moveDown(1.5);
 
             // Tạo bảng
             const table = {
                 headers: [
-                    { label: 'Mã BC', property: 'id', width: 40, renderer: null },
-                    { label: 'Loại', property: 'type', width: 50 },
-                    { label: 'Mã SP', property: 'product_code', width: 60 },
-                    { label: 'Tên SP', property: 'product_name', width: 100 },
+                    { label: 'BC Code', property: 'id', width: 40, renderer: null },
+                    { label: 'Type', property: 'type', width: 50 },
+                    { label: 'Product Code', property: 'product_code', width: 60 },
+                    { label: 'Product Name', property: 'product_name', width: 100 },
                     { label: 'SL', property: 'quantity', width: 30 },
-                    { label: 'Đơn giá', property: 'price', width: 60 },
-                    { label: 'Thành tiền', property: 'total', width: 70 },
-                    { label: 'Trạng thái', property: 'status', width: 60 },
-                    { label: 'Ngày tạo', property: 'created_at', width: 90 },
+                    { label: 'Unit price', property: 'price', width: 60 },
+                    { label: 'Total amount', property: 'total', width: 70 },
+                    { label: 'Status', property: 'status', width: 60 },
+                    { label: 'Date created', property: 'created_at', width: 90 },
                 ],
                 datas: reports.map(r => ({
                     id: r.id,
-                    type: r.type === 'import' ? 'Nhập' : 'Xuất',
+                    type: r.type === 'import' ? 'Input' : 'Output',
                     product_code: r.product_code,
                     product_name: r.product_name,
                     quantity: r.quantity,
@@ -262,8 +262,8 @@ const reportController = {
             stream.pipe(res);
 
         } catch (error) {
-            console.error('Lỗi xuất PDF:', error);
-            res.status(500).send('Lỗi khi xuất file PDF');
+            console.error('Output error PDF:', error);
+            res.status(500).send('Error while exporting file PDF');
         }
     }
 };
@@ -293,9 +293,9 @@ function buildWhereClause(status, day, month, year) {
 
 function formatStatus(status) {
     const statusMap = {
-        approved: 'Đã duyệt',
-        rejected: 'Từ chối',
-        pending: 'Chờ xử lý'
+        approved: 'Approved',
+        rejected: 'Refuse',
+        pending: 'Pending processing'
     };
     return statusMap[status] || status;
 }

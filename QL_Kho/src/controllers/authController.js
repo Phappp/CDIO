@@ -13,18 +13,18 @@ const authController = {
             const [users] = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
 
             if (users.length === 0) {
-                return res.render('index', { error: 'Tài khoản không tồn tại' });
+                return res.render('index', { error: 'Account does not exist' });
             }
 
             const user = users[0];
             const isMatch = await comparePassword(password, user.password);
 
             if (!isMatch) {
-                return res.render('index', { error: 'Mật khẩu không chính xác' });
+                return res.render('index', { error: 'Password is incorrect' });
             }
 
             if (!user.is_active) {
-                return res.render('index', { error: 'Tài khoản đã bị vô hiệu hóa' });
+                return res.render('index', { error: 'Account has been disabled' });
             }
 
             req.session.user = user;
@@ -43,7 +43,7 @@ const authController = {
             }
         } catch (error) {
             console.error(error);
-            res.render('index', { error: 'Đăng nhập thất bại' });
+            res.render('index', { error: 'Login failed' });
         }
     },
 

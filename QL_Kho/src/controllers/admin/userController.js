@@ -13,7 +13,7 @@ const userController = {
             res.render('admin/manageUsers', { users });
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Lỗi khi tải danh sách người dùng' });
+            res.render('error', { error: 'Error loading user list' });
         }
     },
 
@@ -60,7 +60,7 @@ const userController = {
             console.error(error);
             res.render('admin/createUser', {
                 roles: Object.values(roles),
-                error: 'Tạo người dùng thất bại',
+                error: 'Failed to create user',
                 formData: req.body
             });
         }
@@ -78,7 +78,7 @@ const userController = {
       `, [id]);
 
             if (users.length === 0) {
-                return res.render('error', { error: 'Người dùng không tồn tại' });
+                return res.render('error', { error: 'User does not exist' });
             }
 
             res.render('admin/editUser', {
@@ -88,7 +88,7 @@ const userController = {
             });
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Lỗi khi tải thông tin người dùng' });
+            res.render('error', { error: 'Error loading user information' });
         }
     },
 
@@ -133,7 +133,7 @@ const userController = {
             res.render('admin/editUser', {
                 user: { id, ...req.body },
                 roles: Object.values(roles),
-                error: 'Cập nhật thông tin thất bại'
+                error: 'Failed to update information'
             });
         }
     },
@@ -146,7 +146,7 @@ const userController = {
             res.redirect('/admin/users');
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Xóa người dùng thất bại' });
+            res.render('error', { error: 'Failed to delete user' });
         }
     }
 };

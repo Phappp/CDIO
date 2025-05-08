@@ -31,13 +31,13 @@ const productController = {
                 // Kho C
                 pool.query('SELECT * FROM products WHERE is_deleted = 0 AND warehouse = "C"'),
 
-                //Tổng kho A
+                // Tổng kho A
                 pool.query('SELECT COUNT(*) as count FROM products WHERE is_deleted = 0 AND warehouse = "A"'),
 
                 // Tổng kho B
                 pool.query('SELECT COUNT(*) as count FROM products WHERE is_deleted = 0 AND warehouse = "B"'),
 
-                //Tổng kho C
+                // Tổng kho C
                 pool.query('SELECT COUNT(*) as count FROM products WHERE is_deleted = 0 AND warehouse = "C"'),
 
                 // Tổng sản phẩm
@@ -74,7 +74,7 @@ const productController = {
                 productC: productC[0]
             });
         } catch (error) {
-            console.error('Lỗi khi lấy thống kê dashboard:', error);
+            console.error('Error while retrieving dashboard statistics:', error);
             res.render('admin/manageProducts', {
                 user: req.session.user,
                 stats: {},
@@ -85,7 +85,6 @@ const productController = {
             });
         }
     },
-
 
     // Hiển thị form thêm sản phẩm
     showCreateProduct: (req, res) => {
@@ -99,7 +98,7 @@ const productController = {
         try {
             await pool.query(
                 `INSERT INTO products 
-        (product_code, name, description, image, quantity, unit, price, warehouse,created_by) 
+        (product_code, name, description, image, quantity, unit, price, warehouse, created_by) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
                 [product_code, name, description, image, quantity, unit, price, warehouse, req.session.user.id]
             );
@@ -108,7 +107,7 @@ const productController = {
         } catch (error) {
             console.error(error);
             res.render('admin/createProduct', {
-                error: 'Thêm sản phẩm thất bại. Mã sản phẩm có thể đã tồn tại.',
+                error: 'Failed to add product. Product code may already exist.',
                 formData: req.body
             });
         }
@@ -122,7 +121,7 @@ const productController = {
             const [products] = await pool.query('SELECT * FROM products WHERE id = ?', [id]);
 
             if (products.length === 0) {
-                return res.render('error', { error: 'Sản phẩm không tồn tại' });
+                return res.render('error', { error: 'Product not found' });
             }
 
             res.render('admin/editProduct', {
@@ -131,7 +130,7 @@ const productController = {
             });
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Lỗi khi tải thông tin sản phẩm' });
+            res.render('error', { error: 'Error loading product information' });
         }
     },
 
@@ -154,7 +153,7 @@ const productController = {
             console.error(error);
             res.render('admin/editProduct', {
                 product: { id, ...req.body },
-                error: 'Cập nhật sản phẩm thất bại'
+                error: 'Failed to update product'
             });
         }
     },
@@ -168,7 +167,7 @@ const productController = {
             res.redirect('/admin/products');
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Xóa sản phẩm thất bại' });
+            res.render('error', { error: 'Failed to delete product' });
         }
     }
 };

@@ -63,8 +63,8 @@ const reportController = {
                 selectedMonth: req.query.month || '',
                 selectedYear: req.query.year || '',
                 helpers: {
-                    formatDate: (date) => date ? new Date(date).toLocaleString('vi-VN') : 'N/A',
-                    calculateValue: (quantity, price) => (quantity * price).toLocaleString('vi-VN')
+                    formatDate: (date) => date ? new Date(date).toLocaleString('en-GB') : 'N/A',
+                    calculateValue: (quantity, price) => (quantity * price).toLocaleString('en-GB')
                 }
             });
 
@@ -88,7 +88,7 @@ const reportController = {
             const processorId = req.user.id;
 
             if (!['approve', 'reject'].includes(action)) {
-                return res.status(400).json({ error: 'Hành động không hợp lệ' });
+                return res.status(400).json({ error: 'Invalid action' });
             }
 
             await pool.query(`
@@ -104,7 +104,7 @@ const reportController = {
 
         } catch (error) {
             console.error('Lỗi xử lý báo cáo:', error);
-            res.status(500).json({ error: 'Lỗi server khi xử lý báo cáo' });
+            res.status(500).json({ error: 'Server error while processing report' });
         }
     },
     /**
@@ -140,30 +140,30 @@ const reportController = {
 
             // Tạo workbook Excel
             const workbook = new ExcelJS.Workbook();
-            const worksheet = workbook.addWorksheet('Báo cáo');
+            const worksheet = workbook.addWorksheet('Reports');
 
             // Định dạng header
             worksheet.columns = [
-                { header: 'Mã BC', key: 'id', width: 10 },
-                { header: 'Loại', key: 'type', width: 10 },
-                { header: 'Mã SP', key: 'product_code', width: 15 },
-                { header: 'Tên SP', key: 'product_name', width: 30 },
-                { header: 'SL', key: 'quantity', width: 10 },
-                { header: 'Đơn giá', key: 'price', width: 15, style: { numFmt: '#,##0' } },
-                { header: 'Thành tiền', key: 'total', width: 15, style: { numFmt: '#,##0' } },
-                { header: 'Trạng thái', key: 'status', width: 15 },
-                { header: 'Người tạo', key: 'creator_name', width: 20 },
-                { header: 'Ngày tạo', key: 'created_at', width: 20 }
+                { header: 'Report ID', key: 'id', width: 10 },
+                { header: 'Type', key: 'type', width: 10 },
+                { header: 'Product Code', key: 'product_code', width: 15 },
+                { header: 'Product Name', key: 'product_name', width: 30 },
+                { header: 'Qty', key: 'quantity', width: 10 },
+                { header: 'Unit Price', key: 'price', width: 15, style: { numFmt: '#,##0' } },
+                { header: 'Total', key: 'total', width: 15, style: { numFmt: '#,##0' } },
+                { header: 'Status', key: 'status', width: 15 },
+                { header: 'Created By', key: 'creator_name', width: 20 },
+                { header: 'Created At', key: 'created_at', width: 20 }
             ];
 
             // Thêm dữ liệu
             reports.forEach(report => {
                 worksheet.addRow({
                     ...report,
-                    type: report.type === 'import' ? 'Nhập' : 'Xuất',
+                    type: report.type === 'import' ? 'Import' : 'Export',
                     status: formatStatus(report.status),
                     total: report.quantity * report.price,
-                    created_at: new Date(report.created_at).toLocaleString('vi-VN')
+                    created_at: new Date(report.created_at).toLocaleString('en-GB')
                 });
             });
 
@@ -174,7 +174,7 @@ const reportController = {
             );
             res.setHeader(
                 'Content-Disposition',
-                `attachment; filename=bao_cao_${new Date().toISOString().split('T')[0]}.xlsx`
+                `attachment; filename=report_${new Date().toISOString().split('T')[0]}.xlsx`
             );
 
             // Ghi file
@@ -183,7 +183,7 @@ const reportController = {
 
         } catch (error) {
             console.error('Lỗi xuất Excel:', error);
-            res.status(500).send('Lỗi khi xuất file Excel');
+            res.status(500).send('Error exporting Excel file');
         }
     },
 
@@ -217,39 +217,39 @@ const reportController = {
             res.setHeader('Content-Type', 'application/pdf');
             res.setHeader(
                 'Content-Disposition',
-                `attachment; filename=bao_cao_${new Date().toISOString().split('T')[0]}.pdf`
+                `attachment; filename=report_${new Date().toISOString().split('T')[0]}.pdf`
             );
 
             doc.pipe(stream);
 
             // Tiêu đề
-            doc.fontSize(16).text('BÁO CÁO NHẬP/XUẤT', { align: 'center' });
-            doc.fontSize(10).text(`Ngày xuất: ${new Date().toLocaleDateString('vi-VN')}`, { align: 'center' });
+            doc.fontSize(16).text('INVENTORY REPORT', { align: 'center' });
+            doc.fontSize(10).text(`Export Date: ${new Date().toLocaleDateString('en-GB')}`, { align: 'center' });
             doc.moveDown(1.5);
 
             // Tạo bảng
             const table = {
                 headers: [
-                    { label: 'Mã BC', property: 'id', width: 40, renderer: null },
-                    { label: 'Loại', property: 'type', width: 50 },
-                    { label: 'Mã SP', property: 'product_code', width: 60 },
-                    { label: 'Tên SP', property: 'product_name', width: 100 },
-                    { label: 'SL', property: 'quantity', width: 30 },
-                    { label: 'Đơn giá', property: 'price', width: 60 },
-                    { label: 'Thành tiền', property: 'total', width: 70 },
-                    { label: 'Trạng thái', property: 'status', width: 60 },
-                    { label: 'Ngày tạo', property: 'created_at', width: 90 },
+                    { label: 'Report ID', property: 'id', width: 40, renderer: null },
+                    { label: 'Type', property: 'type', width: 50 },
+                    { label: 'Product Code', property: 'product_code', width: 60 },
+                    { label: 'Product Name', property: 'product_name', width: 100 },
+                    { label: 'Qty', property: 'quantity', width: 30 },
+                    { label: 'Unit Price', property: 'price', width: 60 },
+                    { label: 'Total', property: 'total', width: 70 },
+                    { label: 'Status', property: 'status', width: 60 },
+                    { label: 'Created At', property: 'created_at', width: 90 },
                 ],
                 datas: reports.map(r => ({
                     id: r.id,
-                    type: r.type === 'import' ? 'Nhập' : 'Xuất',
+                    type: r.type === 'import' ? 'Import' : 'Export',
                     product_code: r.product_code,
                     product_name: r.product_name,
                     quantity: r.quantity,
                     price: formatCurrency(r.price),
                     total: formatCurrency(r.price * r.quantity),
                     status: formatStatus(r.status),
-                    created_at: new Date(r.created_at).toLocaleString('vi-VN')
+                    created_at: new Date(r.created_at).toLocaleString('en-GB')
                 })),
             };
 
@@ -263,7 +263,7 @@ const reportController = {
 
         } catch (error) {
             console.error('Lỗi xuất PDF:', error);
-            res.status(500).send('Lỗi khi xuất file PDF');
+            res.status(500).send('Error exporting PDF file');
         }
     }
 };
@@ -293,15 +293,15 @@ function buildWhereClause(status, day, month, year) {
 
 function formatStatus(status) {
     const statusMap = {
-        approved: 'Đã duyệt',
-        rejected: 'Từ chối',
-        pending: 'Chờ xử lý'
+        approved: 'Approved',
+        rejected: 'Rejected',
+        pending: 'Pending'
     };
     return statusMap[status] || status;
 }
 
 function formatCurrency(amount) {
-    return new Intl.NumberFormat('vi-VN').format(amount);
+    return new Intl.NumberFormat('en-GB').format(amount);
 }
 
 module.exports = reportController;

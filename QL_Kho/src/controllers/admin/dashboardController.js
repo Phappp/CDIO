@@ -32,7 +32,7 @@ const dashboardController = {
                     SELECT COUNT(*) as count 
                     FROM products 
                     WHERE (quantity * price) > 3000000000
-                  `)
+                `)
             ]);
 
             res.render('admin/dashboard', {
@@ -47,7 +47,7 @@ const dashboardController = {
                 }
             });
         } catch (error) {
-            console.error('Lỗi khi lấy thống kê dashboard:', error);
+            console.error('Error while fetching dashboard statistics:', error);
             res.render('admin/dashboard', {
                 user: req.session.user,
                 stats: {}
@@ -108,7 +108,7 @@ const dashboardController = {
                 }
             });
         } catch (error) {
-            console.error('Lỗi khi lấy dữ liệu biểu đồ:', error);
+            console.error('Error while fetching chart data:', error);
             res.render('admin/charts', {
                 user: req.session.user,
                 stats: {

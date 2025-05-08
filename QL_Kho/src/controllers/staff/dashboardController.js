@@ -82,7 +82,7 @@ const dashboardController = {
                 productC: productC[0]
             });
         } catch (error) {
-            console.error('Lỗi khi lấy thống kê dashboard:', error);
+            console.error('Error getting statistics dashboard:', error);
             res.render('staff/dashboard', {
                 user: req.session.user,
                 stats: {},

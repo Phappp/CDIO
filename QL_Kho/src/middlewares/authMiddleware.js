@@ -12,20 +12,20 @@ module.exports = {
         if (req.session.user && req.session.user.role === roles.admin) {
             return next();
         }
-        res.status(403).render('error', { error: 'Bạn không có quyền truy cập' });
+        res.status(403).render('error', { error: 'You do not have access' });
     },
 
     isManager: (req, res, next) => {
         if (req.session.user && req.session.user.role === roles.manager) {
             return next();
         }
-        res.status(403).render('error', { error: 'Bạn không có quyền truy cập' });
+        res.status(403).render('error', { error: 'You do not have access' });
     },
 
     isStaff: (req, res, next) => {
         if (req.session.user && req.session.user.role === roles.staff) {
             return next();
         }
-        res.status(403).render('error', { error: 'Bạn không có quyền truy cập' });
+        res.status(403).render('error', { error: 'You do not have access' });
     }
 };

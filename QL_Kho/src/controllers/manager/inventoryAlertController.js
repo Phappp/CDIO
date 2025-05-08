@@ -1,13 +1,13 @@
 const pool = require('../../config/db');
 const convertNumberToWords = (num) => {
     // Copy nội dung hàm convertNumberToWords từ client-side vào đây
-    if (isNaN(num) || num < 0) return 'Không hợp lệ';
-    if (num === 0) return 'Không đồng';
+    if (isNaN(num) || num < 0) return 'Invalid';
+    if (num === 0) return 'No coin';
 
-    const units = ['', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
-    const teens = ['mười', 'mười một', 'mười hai', 'mười ba', 'mười bốn', 'mười lăm', 'mười sáu', 'mười bảy', 'mười tám', 'mười chín'];
-    const tens = ['', 'mười', 'hai mươi', 'ba mươi', 'bốn mươi', 'năm mươi', 'sáu mươi', 'bảy mươi', 'tám mươi', 'chín mươi'];
-    const scales = ['', 'nghìn', 'triệu', 'tỷ'];
+    const units = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+    const tens = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+    const scales = ['', 'thousand', 'million', 'billion'];
 
     function convertChunk(chunk) {
         if (chunk === 0) return '';
@@ -16,7 +16,7 @@ const convertNumberToWords = (num) => {
         const remainder = chunk % 100;
 
         if (hundred > 0) {
-            str += units[hundred] + ' trăm ';
+            str += units[hundred] + 'hundred';
         }
 
         if (remainder > 0) {
@@ -55,7 +55,7 @@ const convertNumberToWords = (num) => {
         scaleIndex++;
     }
 
-    return words ? words + ' đồng' : '';
+    return words ? words + ' dong' : '';
 };
 const inventoryAlertController = {
     /**
@@ -91,7 +91,7 @@ const inventoryAlertController = {
                 }
             });
         } catch (error) {
-            console.error('Lỗi lấy danh sách tồn kho:', error);
+            console.error('Error getting inventory list:', error);
             res.render('manager/inventoryAlerts', {
                 products: [],
                 threshold: req.query.threshold || 3000000000,
@@ -126,7 +126,7 @@ const inventoryAlertController = {
                 }
             });
         } catch (error) {
-            console.error('Lỗi lấy danh sách gần hết hàng:', error);
+            console.error('Error getting list of almost out of stock:', error);
             res.render('manager/exhaustedProducts', {
                 products: [],
                 threshold: req.query.threshold || 10

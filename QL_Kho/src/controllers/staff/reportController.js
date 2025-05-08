@@ -12,12 +12,12 @@ const reportController = {
                 ORDER BY r.created_at DESC
             `, [req.session.user.id]);
 
-            const successMessage = req.query.success === 'true' ? 'Tạo báo cáo thành công!' : null;
+            const successMessage = req.query.success === 'true' ? 'Generate report successfully!' : null;
 
             res.render('staff/listReports', { reports, successMessage });
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Lỗi khi tải danh sách báo cáo' });
+            res.render('error', { error: 'Error loading report list' });
         }
     },
 
@@ -34,7 +34,7 @@ const reportController = {
             });            
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Lỗi khi tải danh sách sản phẩm' });
+            res.render('error', { error: 'Error loading product list' });
         }
     },
 
@@ -56,7 +56,7 @@ const reportController = {
 
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Lỗi khi tải danh sách sản phẩm' });
+            res.render('error', { error: 'Error loading product list' });
         }
     },
 
@@ -77,7 +77,7 @@ async function updateInventory(product_id, quantityChange, created_by, reference
         const newQuantity = previousQuantity + quantityChange;
 
         if (newQuantity < 0) {
-            throw new Error('Số lượng trong kho không đủ');
+            throw new Error('Insufficient stock');
         }
 
         // Cập nhật sản phẩm
@@ -116,7 +116,7 @@ async function handleReportCreation(req, res, reportType) {
         // Kiểm tra sản phẩm
         const [products] = await pool.query('SELECT price FROM products WHERE id = ?', [product_id]);
         if (products.length === 0) {
-            return res.render('error', { error: 'Sản phẩm không tồn tại' });
+            return res.render('error', { error: 'Product does not exist' });
         }
 
         const totalValue = products[0].price * quantity;
@@ -129,7 +129,7 @@ async function handleReportCreation(req, res, reportType) {
                 return res.render('staff/createReport', {
                     products: await getProducts(),
                     reportType,
-                    error: 'Số lượng trong kho không đủ'
+                    error: 'Insufficient stock'
                 });
             }
         }
@@ -159,7 +159,7 @@ async function handleReportCreation(req, res, reportType) {
         res.render('staff/createReport', {
             products: await getProducts(),
             reportType,
-            error: 'Tạo báo cáo thất bại',
+            error: 'Create failure report',
             successMessage: null // thêm dòng này
         });
         

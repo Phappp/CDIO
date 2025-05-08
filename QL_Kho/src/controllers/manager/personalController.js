@@ -22,7 +22,7 @@ const personalController = {
                 personal: personal[0] || null  // chỉ lấy 1 user thôi
             });
         } catch (error) {
-            console.error('Lỗi lấy thông tin cá nhân:', error);
+            console.error('Error getting personal information:', error);
             res.render('manager/personal', { personal: null });
         }
     }

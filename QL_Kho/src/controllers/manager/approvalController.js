@@ -16,7 +16,7 @@ const approvalController = {
             res.render('manager/pendingReports', { reports });
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Lỗi khi tải danh sách báo cáo' });
+            res.render('error', { error: 'Error loading report list' });
         }
     },
 
@@ -30,7 +30,7 @@ const approvalController = {
             // Lấy thông tin báo cáo
             const [reports] = await pool.query('SELECT * FROM reports WHERE id = ?', [id]);
             if (reports.length === 0) {
-                return res.render('error', { error: 'Báo cáo không tồn tại' });
+                return res.render('error', { error: 'Report does not exist' });
             }
 
             const report = reports[0];
@@ -58,7 +58,7 @@ const approvalController = {
             res.redirect('/manager/reports/pending');
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Xử lý báo cáo thất bại' });
+            res.render('error', { error: 'Handling failed reports' });
         }
     }
 };
@@ -75,7 +75,7 @@ async function updateInventory(product_id, quantityChange, created_by, reference
       const newQuantity = previousQuantity + quantityChange;
   
       if (newQuantity < 0) {
-        throw new Error('Số lượng trong kho không đủ');
+        throw new Error('Insufficient stock');
       }
   
       // Cập nhật sản phẩm

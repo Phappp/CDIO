@@ -74,7 +74,7 @@ const productController = {
                 productC: productC[0]
             });
         } catch (error) {
-            console.error('Lỗi khi lấy thống kê dashboard:', error);
+            console.error('Error getting statistics dashboard:', error);
             res.render('manager/manageProducts', {
                 user: req.session.user,
                 stats: {},
@@ -108,7 +108,7 @@ const productController = {
         } catch (error) {
             console.error(error);
             res.render('manager/createProduct', {
-                error: 'Thêm sản phẩm thất bại. Mã sản phẩm có thể đã tồn tại.',
+                error: 'Add product failed. Product code may already exist.',
                 formData: req.body
             });
         }
@@ -122,7 +122,7 @@ const productController = {
             const [products] = await pool.query('SELECT * FROM products WHERE id = ?', [id]);
 
             if (products.length === 0) {
-                return res.render('error', { error: 'Sản phẩm không tồn tại' });
+                return res.render('error', { error: 'Product does not exist' });
             }
 
             res.render('manager/editProduct', {
@@ -131,7 +131,7 @@ const productController = {
             });
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Lỗi khi tải thông tin sản phẩm' });
+            res.render('error', { error: 'Error loading product information' });
         }
     },
 
@@ -154,7 +154,7 @@ const productController = {
             console.error(error);
             res.render('manager/editProduct', {
                 product: { id, ...req.body },
-                error: 'Cập nhật sản phẩm thất bại'
+                error: 'Product update failed'
             });
         }
     },
@@ -168,7 +168,7 @@ const productController = {
             res.redirect('/manager/products');
         } catch (error) {
             console.error(error);
-            res.render('error', { error: 'Xóa sản phẩm thất bại' });
+            res.render('error', { error: 'Delete product failed' });
         }
     }
 };

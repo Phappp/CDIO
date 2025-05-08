@@ -27,7 +27,7 @@ const passwordController = {
             // Lấy mật khẩu hiện tại từ DB
             const [users] = await pool.query('SELECT password FROM users WHERE id = ?', [userId]);
             if (users.length === 0) {
-                return res.render('error', { error: 'Người dùng không tồn tại' });
+                return res.render('error', { error: 'User does not exist' });
             }
 
             // Kiểm tra mật khẩu hiện tại

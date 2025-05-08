@@ -47,7 +47,7 @@ const dashboardController = {
                 }
             });
         } catch (error) {
-            console.error('Lỗi khi lấy thống kê dashboard:', error);
+            console.error('Error getting statistics dashboard:', error);
             res.render('manager/dashboard', {
                 user: req.session.user,
                 stats: {}
@@ -108,7 +108,7 @@ const dashboardController = {
                 }
             });
         } catch (error) {
-            console.error('Lỗi khi lấy dữ liệu biểu đồ:', error);
+            console.error('Error while retrieving chart data:', error);
             res.render('manager/charts', {
                 user: req.session.user,
                 stats: {
