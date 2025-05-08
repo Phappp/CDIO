@@ -45,5 +45,7 @@ router.get('/reports/charts', dashboardController.showCharts);
 // Danh sách tồn kho cảnh báo
 router.get('/inventory/alerts', inventoryAlertController.getInventoryAlerts);
 
+// Danh sách sản phẩm cạn kiệt
+router.get('/inventory/exhausted', inventoryAlertController.getExhaustedProducts);
 
 module.exports = router;
