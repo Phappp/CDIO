@@ -24,7 +24,7 @@
                                 <option value="<%= product.id %>">
                                     <%= product.name %> (SL: <strong>
                                             <%= product.quantity %>
-                                        </strong>, Giá: <strong>
+                                        </strong>, Price: <strong>
                                             <%= product.price.toLocaleString() %>
                                         </strong> VNĐ)
                                 </option>
@@ -42,7 +42,7 @@
                         <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Send </button>
+                    <button type="submit" class="btn btn-primary">Submit </button>
                     <a href="/staff/reports" class="btn btn-secondary">Cancel</a>
                 </form>
     </div>
