@@ -1,55 +1,263 @@
 <%- include('../partials/manager/header') %>
+    <link rel="stylesheet" href="/css/admin/manageProducts.css">
+    <a href="/manager/products/create" class="add-product-button"><i class="fa-solid fa-plus"></i>Thêm sản phẩm</a>
 
-<link rel="stylesheet" href="/css/admin/manageProducts.css">
-<a href="/manager/products/create" class="add-product-button"><i class="fa-solid fa-plus"></i>Add product</a>
+    <h1 class="manageProduct-heading"></h1>
+    <div class="select-warehouse">
+        <h2 class="manageProduct-h2">Warehouse: </h2>
+        <div class="warehouseAll warehouse-option active" onclick="chooseWarehouse('warehouseAll')">All</div>
+        <div class=" warehouse-option" onclick="chooseWarehouse('warehouseA')">A</div>
+        <div class=" warehouse-option" onclick="chooseWarehouse('warehouseB')">B</div>
+        <div class=" warehouse-option" onclick="chooseWarehouse('warehouseC')">C</div>
+    </div>
+    <div class="product-management-container">
+        <!-- A -->
+        <div class="warehouse-item warehouseA">
+            <h2>Warehouse A</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Mã SP</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Đơn vị</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Kho</th>
+                        <!-- <th>Người tạo</th> -->
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% productA.forEach(product=> { %>
+                        <tr>
+                            <td>
+                                <img src="<%= product.image || '/images/default-product.png' %>" alt="Product Image"
+                                    class="product-image"
+                                    style="margin-left:16px ; margin-right: 0; width: auto; max-width: 80px; height: 64px;"
+                                    onclick="openModal();">
+                            </td>
+                            <td>
+                                <%= product.product_code %>
+                            </td>
+                            <td>
+                                <%= product.name %>
+                            </td>
+                            <td>
+                                <%= product.unit %>
+                            </td>
+                            <td>
+                                <%= product.quantity %>
+                            </td>
+                            <td>
+                                <%= product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ," ) %> VND
+                            </td>
+                            <td>
+                                <%= product.warehouse %>
+                            </td>
+                            <td class="action">
+                                <a href="/manager/products/<%= product.id %>/edit" class="edit-product-button">Sửa</a>
+                                <a href="/manager/products/<%= product.id %>/delete"
+                                    class="delete-product-button delete-btn">Xóa</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <!-- B -->
+        <div class="warehouse-item warehouseB">
+            <h2>Warehouse B</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Mã SP</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Đơn vị</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Kho</th>
+                        <!-- <th>Người tạo</th> -->
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% productB.forEach(product=> { %>
+                        <tr>
+                            <td>
+                                <img src="<%= product.image || '/images/default-product.png' %>" alt="Product Image"
+                                    class="product-image"
+                                    style="margin-left:16px ; margin-right: 0; width: auto; max-width: 80px; height: 64px;"
+                                    onclick="openModal();">
+                            </td>
+                            <td>
+                                <%= product.product_code %>
+                            </td>
+                            <td>
+                                <%= product.name %>
+                            </td>
+                            <td>
+                                <%= product.unit %>
+                            </td>
+                            <td>
+                                <%= product.quantity %>
+                            </td>
+                            <td>
+                                <%= product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ," ) %> VND
+                            </td>
+                            <td>
+                                <%= product.warehouse %>
+                            </td>
+                            <td class="action">
+                                <a href="/manager/products/<%= product.id %>/edit" class="edit-product-button">Sửa</a>
+                                <a href="/manager/products/<%= product.id %>/delete"
+                                    class="delete-product-button delete-btn">Xóa</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+        <!-- C -->
+        <div class="warehouse-item warehouseC">
+            <h2>Warehouse C</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Mã SP</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Đơn vị</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Kho</th>
+                        <!-- <th>Người tạo</th> -->
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% productC.forEach(product=> { %>
+                        <tr>
+                            <td>
+                                <img src="<%= product.image || '/images/default-product.png' %>" alt="Product Image"
+                                    class="product-image"
+                                    style="margin-left:16px ; margin-right: 0; width: auto; max-width: 80px; height: 64px;"
+                                    onclick="openModal();">
+                            </td>
+                            <td>
+                                <%= product.product_code %>
+                            </td>
+                            <td>
+                                <%= product.name %>
+                            </td>
+                            <td>
+                                <%= product.unit %>
+                            </td>
+                            <td>
+                                <%= product.quantity %>
+                            </td>
+                            <td>
+                                <%= product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ," ) %> VND
+                            </td>
+                            <td>
+                                <%= product.warehouse %>
+                            </td>
+                            <td class="action">
+                                <a href="/manager/products/<%= product.id %>/edit" class="edit-product-button">Sửa</a>
+                                <a href="/manager/products/<%= product.id %>/delete"
+                                    class="delete-product-button delete-btn">Xóa</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
 
-<h1>Product management</h1>
+    </div>
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <!-- <span class="close">&times;</span> -->
+        <img class="modal-content" id="modalImage">
+    </div>
+    <script src="/js/darkmode/share/manageProducts.js"></script>
 
-<div class="product-management-container">
+    <%- include('../partials/admin/footer') %>
+        <style>
+            .image-container {
+                cursor: pointer;
+            }
+
+            .modal {
+                /* display: none; */
+                opacity: 0;
+                pointer-events: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                display: flex;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                justify-content: center;
+                align-items: center;
+                transition: .3s;
+            }
+
+            .modal-content {
+                transform: scale(2);
+            }
+
+            .close {
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                color: white;
+                font-size: 40px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        </style>
+        <script>
+            function openModal() {
+                const modal = document.getElementById("imageModal");
+                const modalImage = document.getElementById("modalImage");
+                modalImage.src = event.target.src; // Lấy nguồn hình ảnh từ hình ảnh đã nhấp vào
+                modal.style.opacity = "1"; // Hiển thị modal
+                modal.style.pointerEvents = "auto"; // Cho phép tương tác với modal
+            }
+
+            function closeModal() {
+                document.getElementById("imageModal").style.opacity = "0"; // Ẩn modal khi nhấp vào
+                document.getElementById("imageModal").style.pointerEvents = "none"; // Ngăn chặn tương tác với modal
+            }
+
+            function chooseWarehouse(warehouse) {
+                const warehouseItems = document.querySelectorAll('.warehouse-item');
+                const warehouseOptions = document.querySelectorAll('.warehouse-option');
+
+                warehouseItems.forEach(item => {
+                    item.style.display = 'none';
+                });
 
 
-    <table >
-        <thead >
-            <tr>
-                <th>Product code</th>
-                <th>Product name</th>
-                <th>Quantity</th>
-                <th>Unit</th>
-                <th>Price</th>
-                <th>Creator</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% products.forEach(product=> { %>
-                <tr>
-                    <td>
-                        <%= product.product_code %>
-                    </td>
-                    <td>
-                        <%= product.name %>
-                    </td>
-                    <td>
-                        <%= product.quantity %>
-                    </td>
-                    <td>
-                        <%= product.unit %>
-                    </td>
-                    <td>
-                        <%= product.price.toLocaleString() %> VND
-                    </td>
-                    <td>
-                        <%= product.created_by_name %>
-                    </td>
-                    <td class="action">
-                        <a href="/manager/products/<%= product.id %>/edit" class="edit-product-button">Edit</a>
-                        <a href="/manager/products/<%= product.id %>/delete"
-                            class="delete-product-button delete-btn">Delete</a>
-                    </td>
-                </tr>
-                <% }) %>
-        </tbody>
-    </table>
-</div>
 
-    <%- include('../partials/manager/footer') %>
+                if (warehouse === 'warehouseAll') {
+                    warehouseItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                } else {
+                    document.querySelector(`.${warehouse}`).style.display = 'block';
+                }
+
+            }
+            chooseWarehouse('warehouseAll');
+
+            const warehouseOptions = document.querySelectorAll('.warehouse-option');
+            warehouseOptions.forEach(option => {
+                option.addEventListener('click', function () {
+                    warehouseOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        </script>

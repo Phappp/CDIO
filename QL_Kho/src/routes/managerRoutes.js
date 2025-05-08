@@ -7,6 +7,7 @@ const approvalController = require('../controllers/manager/approvalController');
 const inventoryAlertController = require('../controllers/manager/inventoryAlertController');
 const reportController = require('../controllers/manager/reportController');
 const passwordController = require('../controllers/manager/passwordController');
+const personalController = require('../controllers/admin/personalController');
 
 
 // Middleware to check if user is admin
@@ -18,6 +19,9 @@ router.post('/change-password', passwordController.changePassword);
 
 // Dashboard
 router.get('/dashboard', dashboardController.getDashboardStats);
+
+// Personal information
+router.get('/personal', personalController.getPersonal);
 
 // Thêm các route quản lý sản phẩm
 router.get('/products', productController.listProducts);

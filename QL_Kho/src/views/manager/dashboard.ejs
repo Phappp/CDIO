@@ -1,5 +1,4 @@
 <%- include('../partials/manager/header') %>
-
     <link rel="stylesheet" href="/css/admin/dashboard.css">
 
     <div class="dashboard-container">
@@ -31,12 +30,6 @@
                     <%= stats.totalProducts || 0 %>
                 </p>
             </div>
-            <!-- <div class="stat-card" id="total-users">
-                <h3>Tài khoản</h3>
-                <p>
-                    <%= stats.totalUsers || 0 %>
-                </p>
-            </div> -->
             <div class="stat-card">
                 <h3>Báo cáo hôm nay</h3>
                 <p>
@@ -45,5 +38,7 @@
             </div>
         </div>
     </div>
-    <script src="/js/darkmode/admin/dashboard.js"></script>
+    <script src="/js/manager/dashboard.js"></script>
+    <script src="/js/darkmode/share/dashboard.js"></script>
+
     <%- include('../partials/manager/footer') %>

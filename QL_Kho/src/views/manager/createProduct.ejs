@@ -1,9 +1,8 @@
 <%- include('../partials/manager/header') %>
-
     <link rel="stylesheet" href="/css/admin/createProduct.css">
 
     <div class="container">
-        <h1>Add a new product</h1>
+        <h1 class="createProduct-heading">Add New Product</h1>
 
         <% if (error) { %>
             <div class="alert alert-danger">
@@ -14,13 +13,13 @@
                 <form method="POST" action="/manager/products">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="product_code">Product code *</label>
+                            <label for="product_code">Product Code *</label>
                             <input type="text" class="form-control" id="product_code" name="product_code"
                                 value="<%= formData?.product_code || '' %>" required>
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="name">Product name *</label>
+                            <label for="name">Product Name *</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 value="<%= formData?.name || '' %>" required>
                         </div>
@@ -30,6 +29,12 @@
                         <label for="description">Description</label>
                         <textarea class="form-control" id="description" name="description"
                             rows="3"><%= formData?.description || '' %></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Image URL</label>
+                        <textarea class="form-control" id="image" name="image"
+                            rows="3"><%= formData?.image || '' %></textarea>
                     </div>
 
                     <div class="form-row">
@@ -50,11 +55,33 @@
                             <input type="number" class="form-control" id="price" name="price"
                                 value="<%= formData?.price || '' %>" min="0" required>
                         </div>
+
+                        <div class="form-group col-md-6">
+                            <label>Warehouse *</label>
+                            <div style="display: flex;flex-direction: column;  ">
+                                <div class="form-check" style=" display: flex;gap: 10px; border-bottom: 2px solid #555;">
+                                    <label style="cursor: pointer;" class="form-check-label" for="warehouseA">A</label>
+                                    <input class="form-check-input" type="radio" id="warehouseA" name="warehouse"
+                                        value="A" <%=formData?.warehouse==='A' ? 'checked' : '' %> required>
+                                </div>
+                                <div class="form-check" style=" display: flex;gap: 10px; border-bottom: 2px solid #555;">
+                                    <label style="cursor: pointer;" class="form-check-label" for="warehouseB">B</label>
+                                    <input class="form-check-input" type="radio" id="warehouseB" name="warehouse"
+                                        value="B" <%=formData?.warehouse==='B' ? 'checked' : '' %> required>
+                                </div>
+                                <div class="form-check" style=" display: flex;gap: 10px; border-bottom: 2px solid #555;">
+                                    <label style="cursor: pointer;" class="form-check-label" for="warehouseC">C</label>
+                                    <input class="form-check-input" type="radio" id="warehouseC" name="warehouse"
+                                        value="C" <%=formData?.warehouse==='C' ? 'checked' : '' %> required>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save it</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                     <a href="/manager/products" class="btn btn-secondary">Cancel</a>
                 </form>
     </div>
+    <script src="/js/darkmode/share/createProduct.js"></script>
 
     <%- include('../partials/manager/footer') %>
