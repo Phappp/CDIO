@@ -118,7 +118,7 @@ async function handleReportCreation(req, res, reportType) {
         if (products.length === 0) {
             return res.render('error', { error: 'Product does not exist' });
         }
-
+        
         const totalValue = products[0].price * quantity;
         const isHighValue = totalValue > 10000000; // Trên 10 triệu
 

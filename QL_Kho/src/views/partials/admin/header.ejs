@@ -69,7 +69,7 @@
                 <h2>Are you sure you want to log out?</h2>
                 <div class="logout-modal-buttons">
                     <a href="/logout" class="logout-button">Logout</a>
-                    <button class="cancel-button">Cancel</button>
+                    <button class="cancel-button-logout">Cancel</button>
                 </div>
             </div>
         </div>
@@ -82,8 +82,8 @@
             const logo = document.getElementById('logo');
             const logoutHeader = document.getElementById('logout-header');
             const logoutModal = document.querySelector('.logout-modal');
-            const cancelButton = document.querySelector('.cancel-button');
-
+            const cancelButton = document.querySelector('.cancel-button-logout');
+            
             logo.onclick = function () {
                 window.location.href = '/admin/dashboard';
             }

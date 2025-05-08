@@ -2,10 +2,10 @@
     <link rel="stylesheet" href="/css/admin/inventoryAlerts.css">
     <div class="inventory-warning-container">
         <div class="warning-header">
-            <h1 class="warning-title">Cảnh Báo Hết Hàng</h1>
+            <h1 class="warning-title">Out of Stock Alert</h1>
             <div class="warning-threshold">
                 <span class="threshold-badge">
-                    Ngưỡng cảnh báo: <%= threshold %> (Cái)
+                    Warning threshold: <%= threshold %> (Items)
                 </span>
             </div>
         </div>
@@ -14,17 +14,17 @@
             <div class="card-content">
                 <% if (products.length===0) { %>
                     <div class="no-warning-alert">
-                        Không có mặt hàng gần hết hàng
+                        No items are low in stock
                     </div>
                     <% } else { %>
                         <div class="table-responsive-wrapper">
                             <table class="inventory-table">
                                 <thead class="table-header-light">
                                     <tr>
-                                        <th>Mã SP</th>
-                                        <th>Tên mặt hàng</th>
-                                        <th>Đơn vị</th>
-                                        <th>Số lượng</th>
+                                        <th>Code</th>
+                                        <th>Item name</th>
+                                        <th>Unit</th>
+                                        <th>Quantity</th>
                                     </tr>
                                 </thead>
                                 <tbody>
