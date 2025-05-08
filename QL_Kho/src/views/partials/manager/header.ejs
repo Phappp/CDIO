@@ -8,18 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/admin/header.css">
-    <link rel="stylesheet" href="/css/darkmode/admin/dashboard.css">
-    <link rel="stylesheet" href="/css/darkmode/admin/processedReports.css">
-    <link rel="stylesheet" href="/css/darkmode/admin/chart.css">
-    <link rel="stylesheet" href="/css/darkmode/admin/inventoryAlerts.css">
-    <link rel="stylesheet" href="/css/darkmode/admin/manageUsers.css">
-    <link rel="stylesheet" href="/css/darkmode/admin/manageProducts.css">
-    <link rel="stylesheet" href="/css/darkmode/admin/createProduct.css">
-    <link rel="stylesheet" href="/css/darkmode/admin/editUser.css">
-    <!-- <link rel="stylesheet" href="/css/staff/changePassword.css"> -->
-     
-
 
 </head>
 
@@ -31,99 +21,119 @@
         <div class="header-left">
             <div class="circle-effect">
                 <a href="/manager/dashboard"><i class="fa-solid fa-house"></i></a>
+                <span class="tooltip">Home</span>
             </div>
             <div class="circle-effect">
                 <a href="/manager/reports/processed"><i class="fa-solid fa-book"></i></a>
+                <span class="tooltip">Report list</span>
             </div>
             <div class="circle-effect">
                 <a href="/manager/reports/charts"><i class="fa-solid fa-chart-simple"></i></a>
+                <span class="tooltip">Chart</span>
             </div>
-            <div class="circle-effect" id="darkModeToggle" style="position: relative;">
+            <div class="circle-effect" id="darkModeToggle">
                 <!--dark mode -->
                 <a><i class="fa-solid fa-moon"></i></a>
+                <span class="tooltip">Darkmode</span>
             </div>
             <div class="circle-effect" id="user-header">
                 <a href="#"><i class="fa-solid fa-user"></i></a>
+                <span class="tooltip">Yoursefl</span>
             </div>
-
-            <div class="circle-effect">
-                <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <div class="circle-effect" id="logout-header">
+                <a><i class="fa-solid fa-right-from-bracket"></i></a>
+                <span class="tooltip">Logout</span>
             </div>
 
         </div>
     </header>
-
     <main>
+        <div class="menu-user">
+            <div class="profile-header">
+                <i class="fa-solid fa-circle-user"></i>
+                <div class="username">
+                    <%= user.username %>
+                </div>
+            </div>
+            <div class="menu-user-item" id="userItem-change-password">
+                <i class="fa-solid fa-key"></i>
+                <a href="#" class="menu-user-link">Change password</a>
+            </div>
+            <div class="menu-user-item" id="userItem-personal">
+                <i class="fa-solid fa-user"></i>
+                <a href="#" class="menu-user-link">Personal information</a>
+            </div>
+        </div>
+        <div class="logout-modal">
+            <div class="logout-modal-content">
+                <h2>Are you sure you want to log out?</h2>
+                <div class="logout-modal-buttons">
+                    <a href="/logout" class="logout-button">Logout</a>
+                    <button class="cancel-button">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div class="clock" id="clock"></div>
         <script>
             const menuUser = document.getElementById('user-header');
-            menuUser.addEventListener('click', function () {
-                const menu = document.querySelector('.menu-user');
-                menu.classList.toggle('active');
+            const menu = document.querySelector('.menu-user');
+            const userItemChangePassword = document.getElementById('userItem-change-password');
+            const userItemPersonal = document.getElementById('userItem-personal');
+            const logo = document.getElementById('logo');
+            const logoutHeader = document.getElementById('logout-header');
+            const logoutModal = document.querySelector('.logout-modal');
+            const cancelButton = document.querySelector('.cancel-button');
+
+            logo.onclick = function () {
+                window.location.href = '/manager/dashboard';
+            }
+
+            userItemChangePassword.addEventListener('click', function () {
+                window.location.href = '/manager/change-password';
             });
+
+            userItemPersonal.addEventListener('click', function () {
+                window.location.href = '/manager/personal';
+            });
+
+            menuUser.addEventListener('click', function (event) {
+                menu.classList.toggle('active');
+                event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+            });
+
+            document.addEventListener('click', function () {
+                if (menu.classList.contains('active')) {
+                    menu.classList.remove('active');
+                }
+            });
+            logoutHeader.addEventListener('click', function (event) {
+                logoutModal.classList.toggle('active');
+                event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+            });
+            cancelButton.addEventListener('click', function () {
+                logoutModal.classList.remove('active');
+            });
+
+            // JS ĐỒNG HỒ
+            function updateClock() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+
+                const day = String(now.getDate()).padStart(2, '0');
+                const month = String(now.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+                const year = now.getFullYear();
+
+                const timeString = `${hours}:${minutes}:${seconds}`;
+                const dateString = `${day}/${month}/${year}`;
+
+                document.getElementById('clock').textContent = `${dateString} ${timeString}`;
+            }
+
+            // Cập nhật đồng hồ mỗi giây
+            setInterval(updateClock, 1000);
+
+            // Cập nhật đồng hồ ngay khi tải trang
+            updateClock();
         </script>
-        <style>
-            .menu-user {
-                display: none;
-                position: absolute;
-                top: 80px;
-                right: 72px;
-                background-color: #ffffffdf;
-                border-radius: 5px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
-                width: 200px;
-                height: auto;
-                z-index: 1000;
-                text-align: center;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                transition: .1s ease-in-out;
-                color: #000000 !important;
-            }
-
-            .menu-user.active {
-                display: flex;
-            }
-
-            .profile-header {
-                display: flex;
-                justify-content: left;
-                align-items: center;
-                width: 90%;
-                border-bottom: 2px solid #0000009a ;
-                padding-bottom: 12px;
-                padding-top: 12px;
-            }
-
-            .profile-header i {
-                font-size: 40px;
-                margin-right: 10px;
-            }
-            .profile-header.dark-mode i {
-                font-size: 40px;
-                margin-right: 10px;
-            }
-            .username {
-                font-size: 18px;
-                font-weight: bold;
-
-            }
-
-            .menu-user-item {
-                width: 100%;
-                padding: 16px 0;
-                cursor: pointer;
-            }
-
-            .menu-user-item:hover {
-                background-color: #0000001a;
-            }
-
-            .menu-user-link {
-                text-decoration: none;
-                color: #000000;
-                font-size: 18px;
-                font-weight: 600;
-
-            }
-        </style>

@@ -2,53 +2,47 @@
 
     <link rel="stylesheet" href="/css/admin/dashboard.css">
 
-    <div class="container">
+    <div class="dashboard-container">
         <div class="stats stats1">
             <div class="stat-card" id="pending-reports">
-                <h3>Report pending approval</h3>
+                <h3>Báo cáo chờ duyệt</h3>
                 <p>
                     <%= stats.pendingReports || 0 %>
                 </p>
             </div>
-            <div class="stat-card">
-                <h3>The product is running low</h3>
+            <div class="stat-card" id="exhausted-alerts">
+                <h3>Sản phẩm sắp hết</h3>
                 <p>
                     <%= stats.lowStockProducts || 0 %>
                 </p>
             </div>
             <div class="stat-card" id="inventory-alerts">
-                <h3>Inventory</h3>
+                <h3>Tồn kho</h3>
                 <p>
-                    <%= stats.inventoryAlerts || 0 %>
+                    <%= stats.inventoryAlerts || 0%>
                 </p>
             </div>
         </div>
         <hr>
         <div class="stats stats2">
             <div class="stat-card" id="total-products">
-                <h3>Product</h3>
+                <h3>Kho</h3>
                 <p>
                     <%= stats.totalProducts || 0 %>
                 </p>
             </div>
+            <!-- <div class="stat-card" id="total-users">
+                <h3>Tài khoản</h3>
+                <p>
+                    <%= stats.totalUsers || 0 %>
+                </p>
+            </div> -->
             <div class="stat-card">
-                <h3>Today's report</h3>
+                <h3>Báo cáo hôm nay</h3>
                 <p>
                     <%= stats.todayReports || 0 %>
                 </p>
             </div>
-        </div>
-    </div>
-    <div class="menu-user">
-        <div class="profile-header">
-            <i class="fa-solid fa-circle-user"></i>
-            <div class="username">
-                <%= user.username %>
-            </div>
-        </div>
-        <div class="menu-user-item">
-            <i class="fa-solid fa-key"></i>
-            <a href="/manager/change-password" class="menu-user-link">Change password</a>
         </div>
     </div>
     <script src="/js/darkmode/admin/dashboard.js"></script>

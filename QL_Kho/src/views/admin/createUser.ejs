@@ -9,7 +9,7 @@
             </div>
             <% } %>
 
-                <form method="POST" action="/admin/users">
+                <form method="POST" action="/admin/users/create">
                     <div class="form-group">
                         <label for="username">Tên đăng nhập *</label>
                         <input type="text" class="form-control" id="username" name="username"
@@ -19,17 +19,6 @@
                     <div class="form-group">
                         <label for="password">Mật khẩu *</label>
                         <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="role">Vai trò *</label>
-                        <select class="form-control" id="role" name="role" required>
-                            <% for (const role of roles) { %>
-                                <option value="<%= role %>" <%=formData?.role===role ? 'selected' : '' %>>
-                                    <%= role %>
-                                </option>
-                                <% } %>
-                        </select>
                     </div>
 
                     <div class="form-group">
@@ -54,6 +43,20 @@
                         <label for="address">Địa chỉ</label>
                         <textarea class="form-control" id="address" name="address"
                             rows="3"><%= formData?.address || '' %></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Vai trò *</label>
+                        <% for (const role of roles) { %>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="<%= role %>" name="role"
+                                    value="<%= role %>" <% if (formData?.role===role) { %> checked <% } %>
+                                    required>
+                                    <label class="form-check-label" for="<%= role %>">
+                                        <%= role %>
+                                    </label>
+                            </div>
+                            <% } %>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Lưu lại</button>
