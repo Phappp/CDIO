@@ -5,19 +5,19 @@
     <div class="dashboard-container">
         <div class="stats stats1">
             <div class="stat-card" id="pending-reports">
-                <h3>Báo cáo chờ duyệt</h3>
+                <h3>Pending report</h3>
                 <p>
                     <%= stats.pendingReports || 0 %>
                 </p>
             </div>
             <div class="stat-card" id="exhausted-alerts">
-                <h3>Sản phẩm sắp hết</h3>
+                <h3>Product is running out soon</h3>
                 <p>
                     <%= stats.lowStockProducts || 0 %>
                 </p>
             </div>
             <div class="stat-card" id="inventory-alerts">
-                <h3>Tồn kho</h3>
+                <h3>Inventory</h3>
                 <p>
                     <%= stats.inventoryAlerts || 0%>
                 </p>
@@ -26,7 +26,7 @@
         <hr>
         <div class="stats stats2">
             <div class="stat-card" id="total-products">
-                <h3>Kho</h3>
+                <h3>Warehouse</h3>
                 <p>
                     <%= stats.totalProducts || 0 %>
                 </p>
@@ -38,7 +38,7 @@
                 </p>
             </div> -->
             <div class="stat-card">
-                <h3>Báo cáo hôm nay</h3>
+                <h3>Report today</h3>
                 <p>
                     <%= stats.todayReports || 0 %>
                 </p>
