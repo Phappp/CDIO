@@ -177,7 +177,7 @@ textarea.form-control {
 
 /* Dark Mode Styles */
 body.dark-mode {
-    background-color: #212529;
+    background-color: #1e1e1e;
     color: #eee !important;
 }
 
