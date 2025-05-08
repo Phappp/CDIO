@@ -257,7 +257,7 @@ img {
     margin-top: 52px;
 }
 
-.logout-modal-buttons a {
+.logout-modal-buttons .logout-button {
     text-decoration: none;
     color: #eee;
     font-weight: 600;
@@ -271,7 +271,7 @@ img {
 
 }
 
-.logout-modal-buttons a:hover {
+.logout-modal-buttons .logout-button:hover {
     background-color: #222;
     color: #fff;
 }
