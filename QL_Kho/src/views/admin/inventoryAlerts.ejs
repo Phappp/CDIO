@@ -53,11 +53,11 @@
                 <thead class="table-header-light">
                   <tr>
                     <th>Product Code</th>
-                            <th>Item Name</th>
-                            <th>Quantity</th>
-                            <th>Unit</th>
-                            <th>Unit Price</th>
-                            <th>Total Value</th>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Unit</th>
+                    <th>Unit Price</th>
+                    <th>Total Value</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -122,13 +122,13 @@
     <script>
       // Hàm chuyển số thành chữ
       function convertNumberToWords(num) {
-        if (isNaN(num) || num < 0) return 'Không hợp lệ';
-        if (num === 0) return 'Không đồng';
+        if (isNaN(num) || num < 0) return 'Invalid';
+        if (num === 0) return 'Zero dong';
 
-        const units = ['', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
-        const teens = ['mười', 'mười một', 'mười hai', 'mười ba', 'mười bốn', 'mười lăm', 'mười sáu', 'mười bảy', 'mười tám', 'mười chín'];
-        const tens = ['', 'mười', 'hai mươi', 'ba mươi', 'bốn mươi', 'năm mươi', 'sáu mươi', 'bảy mươi', 'tám mươi', 'chín mươi'];
-        const scales = ['', 'nghìn', 'triệu', 'tỷ'];
+        const units = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+        const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+        const tens = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+        const scales = ['', 'thousand', 'million', 'billion'];
 
         function convertChunk(chunk) {
           if (chunk === 0) return '';
@@ -137,7 +137,7 @@
           const remainder = chunk % 100;
 
           if (hundred > 0) {
-            str += units[hundred] + ' trăm ';
+            str += units[hundred] + ' hundred ';
           }
 
           if (remainder > 0) {
@@ -150,7 +150,7 @@
               const unit = remainder % 10;
               str += tens[ten];
               if (unit > 0) {
-                str += ' ' + (unit === 1 ? 'mốt' : units[unit]);
+                str += ' ' + units[unit];
               }
             }
           }
@@ -176,7 +176,7 @@
           scaleIndex++;
         }
 
-        return words ? words + ' đồng' : '';
+        return words ? words + ' Dong' : '';
       }
 
       // Xử lý input với debounce
