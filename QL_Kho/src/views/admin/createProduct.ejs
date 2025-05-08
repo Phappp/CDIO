@@ -57,13 +57,24 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="warehouse">Warehouse *</label>
-                            <select class="form-control" id="warehouse" name="warehouse" required>
-                                <option value="" disabled selected>Select an option</option>
-                                <option value="A" <%=formData?.warehouse==='A' ? 'selected' : '' %>>A</option>
-                                <option value="B" <%=formData?.warehouse==='B' ? 'selected' : '' %>>B</option>
-                                <option value="C" <%=formData?.warehouse==='C' ? 'selected' : '' %>>C</option>
-                            </select>
+                            <label>Warehouse *</label>
+                            <div style="display: flex;flex-direction: column;  ">
+                                <div class="form-check" style=" display: flex;gap: 10px; border-bottom: 2px solid #555;">
+                                    <label style="cursor: pointer;" class="form-check-label" for="warehouseA">A</label>
+                                    <input class="form-check-input" type="radio" id="warehouseA" name="warehouse"
+                                        value="A" <%=formData?.warehouse==='A' ? 'checked' : '' %> required>
+                                </div>
+                                <div class="form-check" style=" display: flex;gap: 10px; border-bottom: 2px solid #555;">
+                                    <label style="cursor: pointer;" class="form-check-label" for="warehouseB">B</label>
+                                    <input class="form-check-input" type="radio" id="warehouseB" name="warehouse"
+                                        value="B" <%=formData?.warehouse==='B' ? 'checked' : '' %> required>
+                                </div>
+                                <div class="form-check" style=" display: flex;gap: 10px; border-bottom: 2px solid #555;">
+                                    <label style="cursor: pointer;" class="form-check-label" for="warehouseC">C</label>
+                                    <input class="form-check-input" type="radio" id="warehouseC" name="warehouse"
+                                        value="C" <%=formData?.warehouse==='C' ? 'checked' : '' %> required>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
