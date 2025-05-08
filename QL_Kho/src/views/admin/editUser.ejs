@@ -12,12 +12,12 @@
 
         <form method="POST" action="/admin/users/<%= user.id %>" class="edit-user-form">
           <div class="form-item">
-            <label for="username" class="form-label">Tên đăng nhập *</label>
+            <label for="username" class="form-label">Username *</label>
             <input type="text" class="form-input" id="username" name="username" value="<%= user.username %>" required>
           </div>
 
           <div class="form-item">
-            <label for="role" class="form-label">Vai trò *</label>
+            <label for="role" class="form-label">Role *</label>
             <select class="form-select" id="role" name="role" required>
               <% for (const role of roles) { %>
                 <option value="<%= role %>" <%=user.role===role ? 'selected' : '' %>>
@@ -29,7 +29,7 @@
 
 
           <div class="form-item">
-            <label for="full_name" class="form-label">Họ và tên *</label>
+            <label for="full_name" class="form-label">Full name *</label>
             <input type="text" class="form-input" id="full_name" name="full_name" value="<%= user.full_name %>"
               required>
           </div>
@@ -40,24 +40,24 @@
           </div>
 
           <div class="form-item">
-            <label for="phone" class="form-label">Số điện thoại</label>
+            <label for="phone" class="form-label">Phone</label>
             <input type="text" class="form-input" id="phone" name="phone" value="<%= user.phone || '' %>">
           </div>
 
           <div class="form-item">
-            <label for="address" class="form-label">Địa chỉ</label>
+            <label for="address" class="form-label">Address</label>
             <textarea class="form-textarea" id="address" name="address" rows="3"><%= user.address || '' %></textarea>
           </div>
 
           <div class="form-item form-checkbox">
             <input type="checkbox" class="checkbox-input" id="is_active" name="is_active" <%=user.is_active ? 'checked'
               : '' %>>
-            <label class="checkbox-label" for="is_active">Kích hoạt tài khoản</label>
+            <label class="checkbox-label" for="is_active">Activate account</label>
           </div>
 
           <div class="form-actions">
-            <button type="submit" class="primary-button">Cập nhật</button>
-            <a href="/admin/users" class="secondary-button">Hủy bỏ</a>
+            <button type="submit" class="primary-button">submit</button>
+            <a href="/admin/users" class="secondary-button">Cancel</a>
           </div>
         </form>
   </div>

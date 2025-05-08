@@ -3,21 +3,20 @@
 
 
     <div class="container">
-        <a href="/admin/users/create" class="btnAdd"><i class="fa-solid fa-plus"></i>Thêm người
-            dùng</a>
-        <h1 class="manageProduct-heading">Quản lý người dùng</h1>
+        <a href="/admin/users/create" class="btnAdd"><i class="fa-solid fa-plus"></i>Add User</a>
+        <h1 class="manageProduct-heading">User Management</h1>
 
 
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Tên đăng nhập</th>
-                    <th>Họ tên</th>
+                    <th>Username</th>
+                    <th>Full Name</th>
                     <th>Email</th>
-                    <th>Vai trò</th>
-                    <th>Trạng thái</th>
-                    <th>Hành động</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,12 +38,12 @@
                             <%= user.role %>
                         </td>
                         <td>
-                            <%= user.is_active ? 'Hoạt động' : 'Vô hiệu hóa' %>
+                            <%= user.is_active ? 'Work' : 'Disable' %>
                         </td>
                         <td>
-                            <a href="/admin/users/<%= user.id %>/edit" class=" btnInfo">Sửa</a>
+                            <a href="/admin/users/<%= user.id %>/edit" class=" btnInfo">Edit</a>
                             <a href="/admin/users/<%= user.id %>/delete" class=" btnDanger"
-                                onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a>
+                                onclick="return confirm('Are you sure you want to delete??')">delete</a>
                         </td>
                     </tr>
                     <% }) %>

@@ -1,6 +1,6 @@
 <%- include('../partials/admin/header') %>
     <link rel="stylesheet" href="/css/admin/manageProducts.css">
-    <a href="/admin/products/create" class="add-product-button"><i class="fa-solid fa-plus"></i>Thêm sản phẩm</a>
+    <a href="/admin/products/create" class="add-product-button"><i class="fa-solid fa-plus"></i>Add product</a>
 
     <h1 class="manageProduct-heading"></h1>
     <div class="select-warehouse">
@@ -18,14 +18,14 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Mã SP</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Đơn vị</th>
-                        <th>Số lượng</th>
-                        <th>Giá</th>
-                        <th>Kho</th>
+                        <th>Product Code</th>
+                        <th>Product Name</th>
+                        <th>Unit</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Warehouse</th>
                         <!-- <th>Người tạo</th> -->
-                        <th>Hành động</th>
+                        <th>Act</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,9 +56,9 @@
                                 <%= product.warehouse %>
                             </td>
                             <td class="action">
-                                <a href="/admin/products/<%= product.id %>/edit" class="edit-product-button">Sửa</a>
+                                <a href="/admin/products/<%= product.id %>/edit" class="edit-product-button">edit</a>
                                 <a href="/admin/products/<%= product.id %>/delete"
-                                    class="delete-product-button delete-btn">Xóa</a>
+                                    class="delete-product-button delete-btn">delete</a>
                             </td>
                         </tr>
                         <% }) %>
@@ -72,14 +72,14 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Mã SP</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Đơn vị</th>
-                        <th>Số lượng</th>
-                        <th>Giá</th>
-                        <th>Kho</th>
+                        <th>Product Code</th>
+                        <th>Product Name</th>
+                        <th>Unit</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Warehouse</th>
                         <!-- <th>Người tạo</th> -->
-                        <th>Hành động</th>
+                        <th>Act</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -110,9 +110,9 @@
                                 <%= product.warehouse %>
                             </td>
                             <td class="action">
-                                <a href="/admin/products/<%= product.id %>/edit" class="edit-product-button">Sửa</a>
+                                <a href="/admin/products/<%= product.id %>/edit" class="edit-product-button">edit</a>
                                 <a href="/admin/products/<%= product.id %>/delete"
-                                    class="delete-product-button delete-btn">Xóa</a>
+                                    class="delete-product-button delete-btn">delete</a>
                             </td>
                         </tr>
                         <% }) %>
@@ -126,14 +126,14 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Mã SP</th>
-                        <th>Tên sản phẩm</th>
-                        <th>Đơn vị</th>
-                        <th>Số lượng</th>
-                        <th>Giá</th>
-                        <th>Kho</th>
+                        <th>Product Code</th>
+                        <th>Product Name</th>
+                        <th>Unit</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Warehouse</th>
                         <!-- <th>Người tạo</th> -->
-                        <th>Hành động</th>
+                        <th>Act</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -164,9 +164,9 @@
                                 <%= product.warehouse %>
                             </td>
                             <td class="action">
-                                <a href="/admin/products/<%= product.id %>/edit" class="edit-product-button">Sửa</a>
+                                <a href="/admin/products/<%= product.id %>/edit" class="edit-product-button">Edit</a>
                                 <a href="/admin/products/<%= product.id %>/delete"
-                                    class="delete-product-button delete-btn">Xóa</a>
+                                    class="delete-product-button delete-btn">delete</a>
                             </td>
                         </tr>
                         <% }) %>

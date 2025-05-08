@@ -1,7 +1,7 @@
 <%- include('../partials/admin/header') %>
     <link rel="stylesheet" href="/css/admin/createUser.css">
     <div class="container">
-        <h1>Thêm người dùng mới</h1>
+        <h1>Add new user</h1>
 
         <% if (error) { %>
             <div class="alert alert-danger">
@@ -11,18 +11,18 @@
 
                 <form method="POST" action="/admin/users">
                     <div class="form-group">
-                        <label for="username">Tên đăng nhập *</label>
+                        <label for="username">Username *</label>
                         <input type="text" class="form-control" id="username" name="username"
                             value="<%= formData?.username || '' %>" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="password">Mật khẩu *</label>
+                        <label for="password">Password *</label>
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="full_name">Họ và tên *</label>
+                        <label for="full_name">Full name *</label>
                         <input type="text" class="form-control" id="full_name" name="full_name"
                             value="<%= formData?.full_name || '' %>" required>
                     </div>
@@ -34,19 +34,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Số điện thoại</label>
+                        <label for="phone">Phone</label>
                         <input type="text" class="form-control" id="phone" name="phone"
                             value="<%= formData?.phone || '' %>">
                     </div>
 
                     <div class="form-group">
-                        <label for="address">Địa chỉ</label>
+                        <label for="address">Address</label>
                         <textarea class="form-control" id="address" name="address"
                             rows="3"><%= formData?.address || '' %></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label>Vai trò *</label>
+                        <label>Role *</label>
                         <% for (const role of roles) { %>
                             <div class="form-check">
                                 <input type="radio" class="form-check-input" id="<%= role %>" name="role"
@@ -59,8 +59,8 @@
                             <% } %>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Lưu lại</button>
-                    <a href="/admin/users" class="btn btn-secondary">Hủy bỏ</a>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/admin/users" class="btn btn-secondary">Cancel</a>
                 </form>
     </div>
     <script src="/js/darkmode/share/createUser.js"></script>

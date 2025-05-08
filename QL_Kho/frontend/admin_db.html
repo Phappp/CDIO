@@ -5,25 +5,25 @@
 
     <div class="stats">
         <div class="stat-card active" id="total-products">
-            <h3>Tổng sản phẩm</h3>
+            <h3>Total product</h3>
             <p>
                 <%= stats.totalProducts || 0 %>
             </p>
         </div>
         <div class="stat-card active" id="pending-reports">
-            <h3>Báo cáo chờ duyệt</h3>
+            <h3>Pending report</h3>
             <p style="color: red;">
                 <%= stats.pendingReports || 0 %>
             </p>
         </div>
         <div class="stat-card active" id="total-users">
-            <h3>Người dùng</h3>
+            <h3>User</h3>
             <p>
                 <%= stats.totalUsers || 0 %>
             </p>
         </div>
         <div class="stat-card active" id="inventory-alerts">
-            <h3>Tồn kho</h3>
+            <h3>Inventory</h3>
             <p>
                 <%= stats.inventoryAlerts %>
             </p>
@@ -32,13 +32,13 @@
     <!-- Thêm phần thống kê mới nếu cần -->
     <div class="stats mt-4">
         <div class="stat-card">
-            <h3>Sản phẩm sắp hết</h3>
+            <h3>Product is running out soon</h3>
             <p>
                 <%= stats.lowStockProducts || 0 %>
             </p>
         </div>
         <div class="stat-card">
-            <h3>Báo cáo hôm nay</h3>
+            <h3>Report today</h3>
             <p>
                 <%= stats.todayReports || 0 %>
             </p>

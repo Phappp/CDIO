@@ -10,7 +10,7 @@
                 <select class="form-control" id="yearFilter">
                     <% stats.availableYears.forEach(year=> { %>
                         <option value="<%= year %>" <%=year==stats.currentYear ? 'selected' : '' %>>
-                            Năm <%= year %>
+                            Year <%= year %>
                         </option>
                         <% }) %>
                 </select>
