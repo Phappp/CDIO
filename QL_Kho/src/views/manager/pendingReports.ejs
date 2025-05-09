@@ -1,64 +1,64 @@
 <%- include('../partials/manager/header') %>
 <link rel="stylesheet" href="/css/admin/pendingReports.css">
 
-    <h1 class="pendingReports-heading" >Báo cáo chờ duyệt</h1>
-    <div class="container">
-        <% if (reports.length===0) { %>
-            <div class="alert alert-info">Không có báo cáo nào chờ duyệt</div>
-            <% } else { %>
-                <table class="pendingReports-table">
-                    <thead>
-                        <tr>
-                            <th>Mã BC</th>
-                            <th>Loại</th>
-                            <th>Sản phẩm</th>
-                            <th>Số lượng</th>
-                            <th>Giá trị</th>
-                            <th>Người tạo</th>
-                            <th>Ngày tạo</th>
-                            <th>Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% reports.forEach(report=> { %>
-                            <tr>
-                                <td>
-                                    <%= report.id %>
-                                </td>
-                                <td>
-                                    <%= report.type==='import' ? 'Nhập' : 'Xuất' %>
-                                </td>
-                                <td>
-                                    <%= report.product_name %>
-                                </td>
-                                <td>
-                                    <%= report.quantity %>
-                                </td>
-                                <td>
-                                    <%= (report.quantity * report.price).toLocaleString() %> VNĐ
-                                </td>
-                                <td>
-                                    <%= report.created_by_name %>
-                                </td>
-                                <td>
-                                    <%= new Date(report.created_at).toLocaleString() %>
-                                </td>
-                                <td>
-                                    <form method="POST" action="/manager/reports/<%= report.id %>/process" class="">
-                                        <input type="hidden" name="action" value="approve">
-                                        <button type="submit" class="btn btn-sm btn-success">Duyệt</button>
-                                    </form>
-                                    <form method="POST" action="/manager/reports/<%= report.id %>/process" class="">
-                                        <input type="hidden" name="action" value="reject">
-                                        <button type="submit" class="btn btn-sm btn-danger">Từ chối</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <% }) %>
-                    </tbody>
-                </table>
-                <% } %>
-    </div>
-    <script src="/js/darkmode/share/pendingReports.js"></script>
+<h1 class="pendingReports-heading">Pending Reports</h1>
+<div class="container">
+    <% if (reports.length === 0) { %>
+        <div class="alert alert-info">No pending reports for approval</div>
+    <% } else { %>
+        <table class="pendingReports-table">
+            <thead>
+                <tr>
+                    <th>Report ID</th>
+                    <th>Type</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Value</th>
+                    <th>Created By</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% reports.forEach(report => { %>
+                    <tr>
+                        <td>
+                            <%= report.id %>
+                        </td>
+                        <td>
+                            <%= report.type === 'import' ? 'Import' : 'Export' %>
+                        </td>
+                        <td>
+                            <%= report.product_name %>
+                        </td>
+                        <td>
+                            <%= report.quantity %>
+                        </td>
+                        <td>
+                            <%= (report.quantity * report.price).toLocaleString() %> VND
+                        </td>
+                        <td>
+                            <%= report.created_by_name %>
+                        </td>
+                        <td>
+                            <%= new Date(report.created_at).toLocaleString() %>
+                        </td>
+                        <td>
+                            <form method="POST" action="/manager/reports/<%= report.id %>/process" class="">
+                                <input type="hidden" name="action" value="approve">
+                                <button type="submit" class="btn btn-sm btn-success">Success</button>
+                            </form>
+                            <form method="POST" action="/manager/reports/<%= report.id %>/process" class="">
+                                <input type="hidden" name="action" value="reject">
+                                <button type="submit" class="btn btn-sm btn-danger">Submit</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</div>
+<script src="/js/darkmode/share/pendingReports.js"></script>
 
-    <%- include('../partials/manager/footer') %>
+<%- include('../partials/manager/footer') %>
