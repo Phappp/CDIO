@@ -23,7 +23,7 @@
                         <th>Unit</th>
                         <th>Quantity</th>
                         <th>Price</th>
-                        <th>Warehouse</th>
+                        <!-- <th>Warehouse</th> -->
                         <!-- <th>Người tạo</th> -->
                         <th>Act</th>
                     </tr>
@@ -46,15 +46,15 @@
                             <td>
                                 <%= product.unit %>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 <%= product.quantity %>
                             </td>
                             <td>
                                 <%= product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ," ) %> VND
                             </td>
-                            <td>
+                            <!-- <td>
                                 <%= product.warehouse %>
-                            </td>
+                            </td> -->
                             <td class="action">
                                 <a href="/admin/products/<%= product.id %>/edit" class="edit-product-button">edit</a>
                                 <a href="/admin/products/<%= product.id %>/delete"
@@ -100,15 +100,15 @@
                             <td>
                                 <%= product.unit %>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 <%= product.quantity %>
                             </td>
                             <td>
                                 <%= product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ," ) %> VND
                             </td>
-                            <td>
+                            <!-- <td>
                                 <%= product.warehouse %>
-                            </td>
+                            </td> -->
                             <td class="action">
                                 <a href="/admin/products/<%= product.id %>/edit" class="edit-product-button">edit</a>
                                 <a href="/admin/products/<%= product.id %>/delete"
@@ -154,15 +154,15 @@
                             <td>
                                 <%= product.unit %>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                 <%= product.quantity %>
                             </td>
                             <td>
                                 <%= product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ," ) %> VND
                             </td>
-                            <td>
+                            <!-- <td>
                                 <%= product.warehouse %>
-                            </td>
+                            </td> -->
                             <td class="action">
                                 <a href="/admin/products/<%= product.id %>/edit" class="edit-product-button">Edit</a>
                                 <a href="/admin/products/<%= product.id %>/delete"

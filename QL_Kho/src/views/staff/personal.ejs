@@ -1,0 +1,34 @@
+<%- include('../partials/staff/header') %>
+    <link rel="stylesheet" href="/css/admin/personal.css">
+
+    <div class="card">
+        <% if (personal) { %>
+            <div style="text-align: center;">
+                <% if (personal.avatar) { %>
+                    <img src="<%= personal.avatar %>" alt="Avatar" class="avatar">
+                    <% } else { %>
+                        <div class="avatar" style="background: #ddd; line-height: 100px;">No Image</div>
+                        <% } %>
+            </div>
+
+            <div class="info">
+                <p><strong>Họ tên:</strong>
+                    <%= personal.full_name %>
+                </p>
+                <p><strong>Email:</strong>
+                    <%= personal.email %>
+                </p>
+                <p><strong>Điện thoại:</strong>
+                    <%= personal.phone %>
+                </p>
+                <p><strong>Địa chỉ:</strong>
+                    <%= personal.address %>
+                </p>
+            </div>
+            <% } else { %>
+                <div class="alert">Không tìm thấy thông tin người dùng.</div>
+                <% } %>
+    </div>
+    <script src="/js/darkmode/share/personal.js"></script>
+
+    <%- include('../partials/staff/footer') %>

@@ -5,10 +5,13 @@ const reportController = require('../controllers/staff/reportController');
 const dashboardController = require('../controllers/staff/dashboardController');
 const passwordController = require('../controllers/staff/passwordController');
 const inventoryAlertController = require('../controllers/staff/inventoryAlertController');
+const personalController = require('../controllers/admin/personalController');
 
 // Middleware kiểm tra quyền staff
 router.use(authMiddleware.isStaff);
 
+// Personal information
+router.get('/personal', personalController.getPersonal);
 
 // Thêm các route sau vào staffRoutes.js
 router.get('/change-password', passwordController.showChangePasswordForm);
