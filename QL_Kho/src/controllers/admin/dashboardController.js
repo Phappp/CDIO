@@ -31,7 +31,7 @@ const dashboardController = {
                 pool.query(`
                     SELECT COUNT(*) as count 
                     FROM products 
-                    WHERE (quantity * price) > 3000000000
+                    WHERE (quantity * price) > 300000000
                 `)
             ]);
 

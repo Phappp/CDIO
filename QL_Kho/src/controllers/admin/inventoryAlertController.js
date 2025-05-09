@@ -65,7 +65,7 @@ const inventoryAlertController = {
     getInventoryAlerts: async (req, res) => {
         try {
             // Lấy giá trị threshold từ query parameters, mặc định là 3000000000 nếu không có
-            const threshold = req.query.threshold ? Number(req.query.threshold) : 3000000000;
+            const threshold = req.query.threshold ? Number(req.query.threshold) : 300000000;
 
             const [products] = await pool.query(`
                 SELECT 
@@ -95,7 +95,7 @@ const inventoryAlertController = {
             console.error('Error fetching inventory alerts list:', error);
             res.render('admin/inventoryAlerts', {
                 products: [],
-                threshold: req.query.threshold || 3000000000,
+                threshold: req.query.threshold || 300000000,
                 convertNumberToWords: () => ''
             });
         }
