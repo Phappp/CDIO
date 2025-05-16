@@ -5,7 +5,7 @@ const reportController = require('../controllers/staff/reportController');
 const dashboardController = require('../controllers/staff/dashboardController');
 const passwordController = require('../controllers/staff/passwordController');
 const inventoryAlertController = require('../controllers/staff/inventoryAlertController');
-const personalController = require('../controllers/admin/personalController');
+const personalController = require('../controllers/staff/personalController');
 
 // Middleware kiểm tra quyền staff
 router.use(authMiddleware.isStaff);

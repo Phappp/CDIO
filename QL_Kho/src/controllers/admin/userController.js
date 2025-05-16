@@ -26,7 +26,7 @@ const userController = {
     },
 
     createUser: async (req, res) => {
-        const { username, password, role, full_name, email, phone, address } = req.body;
+        const { username, password, role, full_name, email, phone, address, avatar } = req.body;
 
         try {
             const hashedPassword = await hashPassword(password);
@@ -44,8 +44,8 @@ const userController = {
 
                 // Insert personal info
                 await conn.query(
-                    'INSERT INTO personal (user_id, full_name, email, phone, address) VALUES (?, ?, ?, ?, ?)',
-                    [userResult.insertId, full_name, email, phone, address]
+                    'INSERT INTO personal (user_id, full_name, email, phone, address, avatar) VALUES (?, ?, ?, ?, ?, ?)',
+                    [userResult.insertId, full_name, email, phone, address, avatar]
                 );
 
                 await conn.commit();
@@ -71,7 +71,7 @@ const userController = {
 
         try {
             const [users] = await pool.query(`
-        SELECT u.id, u.username, u.role, u.is_active, p.full_name, p.email, p.phone, p.address
+        SELECT u.id, u.username, u.role, u.is_active, p.full_name, p.email, p.phone, p.address, p.avatar
         FROM users u
         LEFT JOIN personal p ON u.id = p.user_id
         WHERE u.id = ?
@@ -94,7 +94,7 @@ const userController = {
 
     updateUser: async (req, res) => {
         const { id } = req.params;
-        const { username, role, is_active, full_name, email, phone, address } = req.body;
+        const { username, role, is_active, full_name, email, phone, address, avatar } = req.body;
 
         try {
             // Start transaction
@@ -110,14 +110,15 @@ const userController = {
 
                 // Update personal info
                 await conn.query(
-                    `INSERT INTO personal (user_id, full_name, email, phone, address) 
-           VALUES (?, ?, ?, ?, ?) 
+                    `INSERT INTO personal (user_id, full_name, email, phone, address, avatar) 
+           VALUES (?, ?, ?, ?, ?, ?) 
            ON DUPLICATE KEY UPDATE 
            full_name = VALUES(full_name), 
            email = VALUES(email), 
            phone = VALUES(phone), 
-           address = VALUES(address)`,
-                    [id, full_name, email, phone, address]
+           address = VALUES(address),
+           avatar = VALUES(avatar)`,
+                    [id, full_name, email, phone, address, avatar]
                 );
 
                 await conn.commit();

@@ -49,6 +49,11 @@
             <textarea class="form-textarea" id="address" name="address" rows="3"><%= user.address || '' %></textarea>
           </div>
 
+          <div class="form-item">
+            <label for="avatar" class="form-label">Avatar</label>
+            <textarea class="form-textarea" id="avatar" name="avatar" rows="3"><%= user.avatar || '' %></textarea>
+          </div>
+
           <div class="form-item form-checkbox">
             <input type="checkbox" class="checkbox-input" id="is_active" name="is_active" <%=user.is_active ? 'checked'
               : '' %>>

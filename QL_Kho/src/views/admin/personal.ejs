@@ -3,12 +3,12 @@
 
     <div class="card">
         <% if (personal) { %>
-            <div
-                style="text-align: center; border-radius: 50%;width: 200px;height: 200px; display: flex;justify-content: center; align-items: center; box-shadow: 0px 2px 4px 6px #0000001a;">
+            <div>
                 <% if (personal.avatar) { %>
-                    <img src="<%= personal.avatar || '/images/default-product.png' %>" class="avatar">
+                    <img style="border: 2px solid #000" src="<%= personal.avatar || '/images/default-product.png' %>"
+                        class="avatar" alt="No Image">
                     <% } else { %>
-                        <div class="avatar" style="background: #ddd; line-height: 100px;">No Image</div>
+                        <div class="avatar" style="background: transparent; line-height: 100px;">No Image</div>
                         <% } %>
             </div>
 
